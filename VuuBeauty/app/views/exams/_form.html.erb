@@ -1,7 +1,0 @@
-<%= form_for(@exam, remote: true, authenticity_token: true) do |f| %>
-  <%= f.label :lesson %>
-  <%= f.collection_select(:lesson_id, @lessons, :id, :l_name) %>
-  <%= f.label :document_name, "Select HTML doc to upload:" %>
-  <%= f.file_field(:document_name, accept: 'text') %>
-  <%= f.submit "Save", class: "btn btn-lg btn-primary" %>
-<% end %>
