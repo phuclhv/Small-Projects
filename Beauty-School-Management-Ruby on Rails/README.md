@@ -1,5 +1,5 @@
 # Description
-An application to manage a beauty school enrollment
+An application to manage a beauty school.
 
 # Ruby on Rails Tutorial sample application
 
