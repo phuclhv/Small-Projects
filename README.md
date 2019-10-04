@@ -1,2 +1,2 @@
 # Small-Projects
-List of small, non-commercial I made for fun or practices. 
+List of small I made for fun or practices. 
