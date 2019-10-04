@@ -1,2 +1,2 @@
 # Small-Projects
-List of small I made for fun or practices. 
+List of small applications I made for fun or practices. 
