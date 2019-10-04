@@ -1,0 +1,17 @@
+<%= form_for(@question, remote: true, authenticity_token: true) do |f| %>
+  <%= f.label :exam %>
+  <%= f.collection_select(:exam_id, @exams, :id, :l_name) %>
+  <%= f.label :question_number %>
+  <%= f.text_field :question_number %>
+  <%= f.label :question_name, "Question name/prefix" %>
+  <%= f.text_field :question_name %>
+  <%= f.label :answer_key %>
+  <%= f.text_field :answer_key %>
+  <!-- Pseudo column to count total number of questions to be automatically generated -->
+  <%= label_tag "questions_count" %>
+  <%= text_field_tag(:questions_count) %>
+  <!-- Pseudo column to hold the answer keys to be automatically generated -->
+  <%= label_tag "answer_keys" %>
+  <%= text_field_tag(:answer_keys) %>
+  <%= f.submit "Save", class: "btn btn-lg btn-primary" %>
+<% end %>

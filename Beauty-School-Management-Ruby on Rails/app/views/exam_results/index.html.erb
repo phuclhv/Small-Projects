@@ -1,0 +1,22 @@
+<% provide(:title, 'Exam Results') %>
+
+<h1>Exam Results</h1>
+
+<table class="table table-striped">
+  <th>Exam ID</th>
+  <th>Score</th>
+  <th>Date Taken</th>
+  <% @exam_results.each do |er| %>
+    <tr>
+      <td>
+        <%= er.exam_id %>
+      </td>
+      <td>
+        <%= er.score %> %
+      </td>
+      <td>
+        <%= er.created_at %>
+      </td>
+    </tr>
+  <% end %>
+</table>

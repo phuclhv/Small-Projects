@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 7 -- Skin Structure, Growth, And Nutrition</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  A physician engaged in the science of treating the skin, its structures, functions, and diseases is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a podiatrist</td><td><input type="radio" name="nails_7_1" value="a"></td></tr>
+  		  <tr><td>b)  a dermatologist</td><td><input type="radio" name="nails_7_1" value="b"></td></tr>
+  		  <tr><td>c)  an oncologist</td><td><input type="radio" name="nails_7_1" value="c"></td></tr>
+  		  <tr><td>d)  an endocrinologist</td><td><input type="radio" name="nails_7_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  The _____ is the largest organ of the body.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  heart</td><td><input type="radio" name="nails_7_2" value="a"></td></tr>
+  		  <tr><td>b)  liver</td><td><input type="radio" name="nails_7_2" value="b"></td></tr>
+  		  <tr><td>c)  skin</td><td><input type="radio" name="nails_7_2" value="c"></td></tr>
+  		  <tr><td>d)  large intestine</td><td><input type="radio" name="nails_7_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  The skin _____ is the thinnest of the body.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  on the cheeks</td><td><input type="radio" name="nails_7_3" value="a"></td></tr>
+  		  <tr><td>b)  around the eyelids</td><td><input type="radio" name="nails_7_3" value="b"></td></tr>
+  		  <tr><td>c)  on the scalp</td><td><input type="radio" name="nails_7_3" value="c"></td></tr>
+  		  <tr><td>d)  between the fingers</td><td><input type="radio" name="nails_7_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Which layer of the skin is thinnest?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The epidermis</td><td><input type="radio" name="nails_7_4" value="a"></td></tr>
+  		  <tr><td>b)  The dermis</td><td><input type="radio" name="nails_7_4" value="b"></td></tr>
+  		  <tr><td>c)  The subcutaneous</td><td><input type="radio" name="nails_7_4" value="c"></td></tr>
+  		  <tr><td>d)  The corium</td><td><input type="radio" name="nails_7_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  Which layer of the skin is known as the spiny layer?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Stratum lucidum</td><td><input type="radio" name="nails_7_5" value="a"></td></tr>
+  		  <tr><td>b)  Stratum granulosum</td><td><input type="radio" name="nails_7_5" value="b"></td></tr>
+  		  <tr><td>c)  Stratum spinosum</td><td><input type="radio" name="nails_7_5" value="c"></td></tr>
+  		  <tr><td>d)  Stratum germinativum</td><td><input type="radio" name="nails_7_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  The _____ has special column-shaped cells that produce melanocytes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  stratum corneum</td><td><input type="radio" name="nails_7_6" value="a"></td></tr>
+  		  <tr><td>b)  stratum lucidum</td><td><input type="radio" name="nails_7_6" value="b"></td></tr>
+  		  <tr><td>c)  stratum granulosum</td><td><input type="radio" name="nails_7_6" value="c"></td></tr>
+  		  <tr><td>d)  stratum germinativum</td><td><input type="radio" name="nails_7_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  The dermis is the underlying or inner layer of the skin, which is also called the derma, corium, or _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lucidum</td><td><input type="radio" name="nails_7_7" value="a"></td></tr>
+  		  <tr><td>b)  stratus</td><td><input type="radio" name="nails_7_7" value="b"></td></tr>
+  		  <tr><td>c)  cutis</td><td><input type="radio" name="nails_7_7" value="c"></td></tr>
+  		  <tr><td>d)  medulla</td><td><input type="radio" name="nails_7_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  The subcutaneous tissue is a fatty layer found below the dermis, which is also called _____ tissue.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  derma</td><td><input type="radio" name="nails_7_8" value="a"></td></tr>
+  		  <tr><td>b)  adipose</td><td><input type="radio" name="nails_7_8" value="b"></td></tr>
+  		  <tr><td>c)  corium</td><td><input type="radio" name="nails_7_8" value="c"></td></tr>
+  		  <tr><td>d)  cutis</td><td><input type="radio" name="nails_7_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  What are the two layers of the dermis?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Papillary and reticular</td><td><input type="radio" name="nails_7_9" value="a"></td></tr>
+  		  <tr><td>b)  Superficial and papillary</td><td><input type="radio" name="nails_7_9" value="b"></td></tr>
+  		  <tr><td>c)  Reticular and deeper</td><td><input type="radio" name="nails_7_9" value="c"></td></tr>
+  		  <tr><td>d)  Tectile and superficial</td><td><input type="radio" name="nails_7_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  Lymph, the clear fluids of the body that resumble blood plasma but contains only water and other _____, bathe the skin cells, remove toxins, and have immune functions.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  red blood cells</td><td><input type="radio" name="nails_7_10" value="a"></td></tr>
+  		  <tr><td>b)  platelets</td><td><input type="radio" name="nails_7_10" value="b"></td></tr>
+  		  <tr><td>c)  white blood cells</td><td><input type="radio" name="nails_7_10" value="c"></td></tr>
+  		  <tr><td>d)  colorless substances</td><td><input type="radio" name="nails_7_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  Sensory nerve fibers react to heat, cold, pressure, and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  vibration</td><td><input type="radio" name="nails_7_11" value="a"></td></tr>
+  		  <tr><td>b)  noise</td><td><input type="radio" name="nails_7_11" value="b"></td></tr>
+  		  <tr><td>c)  pain</td><td><input type="radio" name="nails_7_11" value="c"></td></tr>
+  		  <tr><td>d)  sleep</td><td><input type="radio" name="nails_7_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  The color of the skin depends primarily on _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  melanin</td><td><input type="radio" name="nails_7_12" value="a"></td></tr>
+  		  <tr><td>b)  phenol</td><td><input type="radio" name="nails_7_12" value="b"></td></tr>
+  		  <tr><td>c)  keloids</td><td><input type="radio" name="nails_7_12" value="c"></td></tr>
+  		  <tr><td>d)  sebum</td><td><input type="radio" name="nails_7_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  Eumelanin is _____ in color.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  red to yellow</td><td><input type="radio" name="nails_7_13" value="a"></td></tr>
+  		  <tr><td>b)  yellow to orange</td><td><input type="radio" name="nails_7_13" value="b"></td></tr>
+  		  <tr><td>c)  brown to black</td><td><input type="radio" name="nails_7_13" value="c"></td></tr>
+  		  <tr><td>d)  blue to brown</td><td><input type="radio" name="nails_7_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  Daily use on sunscreen with a sun protection factor of at least _____ is recommended.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  50</td><td><input type="radio" name="nails_7_14" value="a"></td></tr>
+  		  <tr><td>b)  45</td><td><input type="radio" name="nails_7_14" value="b"></td></tr>
+  		  <tr><td>c)  8</td><td><input type="radio" name="nails_7_14" value="c"></td></tr>
+  		  <tr><td>d)  15</td><td><input type="radio" name="nails_7_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  Collagen fibers are interwoven with _____, a protein base similar to collagen that forms elastic tissue.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  elastin</td><td><input type="radio" name="nails_7_15" value="a"></td></tr>
+  		  <tr><td>b)  sebum</td><td><input type="radio" name="nails_7_15" value="b"></td></tr>
+  		  <tr><td>c)  wheal</td><td><input type="radio" name="nails_7_15" value="c"></td></tr>
+  		  <tr><td>d)  melanocytes</td><td><input type="radio" name="nails_7_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  The sudoriferous glands are also known as _____ glands.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  sebaceous</td><td><input type="radio" name="nails_7_16" value="a"></td></tr>
+  		  <tr><td>b)  sweat</td><td><input type="radio" name="nails_7_16" value="b"></td></tr>
+  		  <tr><td>c)  oil</td><td><input type="radio" name="nails_7_16" value="c"></td></tr>
+  		  <tr><td>d)  lymph</td><td><input type="radio" name="nails_7_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  Normally, 1 to 2 _____ of liquids containing salts are eliminated daily through sweat pores in the skin.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  ounces</td><td><input type="radio" name="nails_7_17" value="a"></td></tr>
+  		  <tr><td>b)  quarts</td><td><input type="radio" name="nails_7_17" value="b"></td></tr>
+  		  <tr><td>c)  pints</td><td><input type="radio" name="nails_7_17" value="c"></td></tr>
+  		  <tr><td>d)  liters</td><td><input type="radio" name="nails_7_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  Sebaceous glands are not found on which part of the body?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Face</td><td><input type="radio" name="nails_7_18" value="a"></td></tr>
+  		  <tr><td>b)  Scalp</td><td><input type="radio" name="nails_7_18" value="b"></td></tr>
+  		  <tr><td>c)  Forearms</td><td><input type="radio" name="nails_7_18" value="c"></td></tr>
+  		  <tr><td>d)  Palms</td><td><input type="radio" name="nails_7_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  A comedo is a hair follicle filled with _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  pus and lymph</td><td><input type="radio" name="nails_7_19" value="a"></td></tr>
+  		  <tr><td>b)  keratin and lymph</td><td><input type="radio" name="nails_7_19" value="b"></td></tr>
+  		  <tr><td>c)  keratin and sebum</td><td><input type="radio" name="nails_7_19" value="c"></td></tr>
+  		  <tr><td>d)  pus and sebum</td><td><input type="radio" name="nails_7_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  An exellent moisturizer and lubricant that replenishes skin lipids while softening and smoothing is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  squalene</td><td><input type="radio" name="nails_7_20" value="a"></td></tr>
+  		  <tr><td>b)  glycerin</td><td><input type="radio" name="nails_7_20" value="b"></td></tr>
+  		  <tr><td>c)  lanolin</td><td><input type="radio" name="nails_7_20" value="c"></td></tr>
+  		  <tr><td>d)  allantoin</td><td><input type="radio" name="nails_7_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  Sebum is secreted by the _____ glands and lubricates the skin, keeping it soft and pliable.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  sudoriferous</td><td><input type="radio" name="nails_7_21" value="a"></td></tr>
+  		  <tr><td>b)  sebaceous</td><td><input type="radio" name="nails_7_21" value="b"></td></tr>
+  		  <tr><td>c)  secretory</td><td><input type="radio" name="nails_7_21" value="c"></td></tr>
+  		  <tr><td>d)  pituitary</td><td><input type="radio" name="nails_7_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  Water composes approximately _____ of body weight.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  40 percent</td><td><input type="radio" name="nails_7_22" value="a"></td></tr>
+  		  <tr><td>b)  50 percent</td><td><input type="radio" name="nails_7_22" value="b"></td></tr>
+  		  <tr><td>c)  60 percent</td><td><input type="radio" name="nails_7_22" value="c"></td></tr>
+  		  <tr><td>d)  70 percent</td><td><input type="radio" name="nails_7_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  The amount of water needed by an individual varies, depending on _____ and the level of daily physical activity.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  age</td><td><input type="radio" name="nails_7_23" value="a"></td></tr>
+  		  <tr><td>b)  body height</td><td><input type="radio" name="nails_7_23" value="b"></td></tr>
+  		  <tr><td>c)  overall health</td><td><input type="radio" name="nails_7_23" value="c"></td></tr>
+  		  <tr><td>d)  body weight</td><td><input type="radio" name="nails_7_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  it is recommended that men in general should drink _____ cups of water daily.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  8</td><td><input type="radio" name="nails_7_24" value="a"></td></tr>
+  		  <tr><td>b)  10</td><td><input type="radio" name="nails_7_24" value="b"></td></tr>
+  		  <tr><td>c)  11</td><td><input type="radio" name="nails_7_24" value="c"></td></tr>
+  		  <tr><td>d)  12</td><td><input type="radio" name="nails_7_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  Which of the following has the greatest negative impact on how our skin ages?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  health habits</td><td><input type="radio" name="nails_7_25" value="a"></td></tr>
+  		  <tr><td>b)  sun exposure</td><td><input type="radio" name="nails_7_25" value="b"></td></tr>
+  		  <tr><td>c)  general lifestyle</td><td><input type="radio" name="nails_7_25" value="c"></td></tr>
+  		  <tr><td>d)  disease</td><td><input type="radio" name="nails_7_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  _____ energy contributes to the body's synthesis of vitamin D and other important minerals.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  UVB</td><td><input type="radio" name="nails_7_26" value="a"></td></tr>
+  		  <tr><td>b)  Solar</td><td><input type="radio" name="nails_7_26" value="b"></td></tr>
+  		  <tr><td>c)  UVA</td><td><input type="radio" name="nails_7_26" value="c"></td></tr>
+  		  <tr><td>d)  Artificial</td><td><input type="radio" name="nails_7_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  UVA energy is deeper penetrating than _____ and causes the skin to tan by affecting the skin pigment.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  invisible light</td><td><input type="radio" name="nails_7_27" value="a"></td></tr>
+  		  <tr><td>b)  solar light</td><td><input type="radio" name="nails_7_27" value="b"></td></tr>
+  		  <tr><td>c)  visible light</td><td><input type="radio" name="nails_7_27" value="c"></td></tr>
+  		  <tr><td>d)  artificial light</td><td><input type="radio" name="nails_7_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  For the best protection when UV exposure is the highest, an individual should avoid prolonged exposure to the sun during peak hours, which usually occurs between _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  8:00 a.m. and 10:00 a.m.</td><td><input type="radio" name="nails_7_28" value="a"></td></tr>
+  		  <tr><td>b)  10:00 a.m. and 3:00 p.m.</td><td><input type="radio" name="nails_7_28" value="b"></td></tr>
+  		  <tr><td>c)  3:00 p.m. and 4:00 p.m.</td><td><input type="radio" name="nails_7_28" value="c"></td></tr>
+  		  <tr><td>d)  4:00 p.m. and 5:00 p.m.</td><td><input type="radio" name="nails_7_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  A protein similar to collagen that forms elastic tissue is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  keratin</td><td><input type="radio" name="nails_7_29" value="a"></td></tr>
+  		  <tr><td>b)  melanin</td><td><input type="radio" name="nails_7_29" value="b"></td></tr>
+  		  <tr><td>c)  eumelanin</td><td><input type="radio" name="nails_7_29" value="c"></td></tr>
+  		  <tr><td>d)  elastin</td><td><input type="radio" name="nails_7_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  Which of the following people are most susceptible to sun damage?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Redheads and brunettes</td><td><input type="radio" name="nails_7_30" value="a"></td></tr>
+  		  <tr><td>b)  Redheads and blue-eyed blondes</td><td><input type="radio" name="nails_7_30" value="b"></td></tr>
+  		  <tr><td>c)  Blue-eyed and brown-eyed brunettes</td><td><input type="radio" name="nails_7_30" value="c"></td></tr>
+  		  <tr><td>d)  Blue-eyed and green-eyed brunettes</td><td><input type="radio" name="nails_7_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  Changes in the size, shape, or coloration of a mole are cause _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  to have it removed</td><td><input type="radio" name="nails_7_31" value="a"></td></tr>
+  		  <tr><td>b)  to monitor it closely</td><td><input type="radio" name="nails_7_31" value="b"></td></tr>
+  		  <tr><td>c)  to apply moisturizer</td><td><input type="radio" name="nails_7_31" value="c"></td></tr>
+  		  <tr><td>d)  to see a physician</td><td><input type="radio" name="nails_7_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  Inhaling nicotine in tobacco causes the _____ and weakening of blood vessels that supply blood to the skin tissues.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dilation</td><td><input type="radio" name="nails_7_32" value="a"></td></tr>
+  		  <tr><td>b)  thickening</td><td><input type="radio" name="nails_7_32" value="b"></td></tr>
+  		  <tr><td>c)  contraction</td><td><input type="radio" name="nails_7_32" value="c"></td></tr>
+  		  <tr><td>d)  expansion</td><td><input type="radio" name="nails_7_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  A condition caused by heavy or excessive intake of alcohol, tobacco use, sun exposure, or other environmental factors is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  telangiectasias</td><td><input type="radio" name="nails_7_33" value="a"></td></tr>
+  		  <tr><td>b)  eczema</td><td><input type="radio" name="nails_7_33" value="b"></td></tr>
+  		  <tr><td>c)  rosacea</td><td><input type="radio" name="nails_7_33" value="c"></td></tr>
+  		  <tr><td>d)  acne</td><td><input type="radio" name="nails_7_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  Which type of lesions are nail technicians concerned with?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  primary and tertiary</td><td><input type="radio" name="nails_7_34" value="a"></td></tr>
+  		  <tr><td>b)  tertiary and secondary</td><td><input type="radio" name="nails_7_34" value="b"></td></tr>
+  		  <tr><td>c)  primary and secondary</td><td><input type="radio" name="nails_7_34" value="c"></td></tr>
+  		  <tr><td>d)  primary, secondary, and tertiary</td><td><input type="radio" name="nails_7_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  A _____ is a large blister containing a watery fluid.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  cyst</td><td><input type="radio" name="nails_7_35" value="a"></td></tr>
+  		  <tr><td>b)  bulla</td><td><input type="radio" name="nails_7_35" value="b"></td></tr>
+  		  <tr><td>c)  papule</td><td><input type="radio" name="nails_7_35" value="c"></td></tr>
+  		  <tr><td>d)  macule</td><td><input type="radio" name="nails_7_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  A spot or discoloration on the skin, such as a freckle, is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  cyst</td><td><input type="radio" name="nails_7_36" value="a"></td></tr>
+  		  <tr><td>b)  vesicle</td><td><input type="radio" name="nails_7_36" value="b"></td></tr>
+  		  <tr><td>c)  tumor</td><td><input type="radio" name="nails_7_36" value="c"></td></tr>
+  		  <tr><td>d)  macule</td><td><input type="radio" name="nails_7_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  An inflamed imple containing pus is called a _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  pustule</td><td><input type="radio" name="nails_7_37" value="a"></td></tr>
+  		  <tr><td>b)  tubercle</td><td><input type="radio" name="nails_7_37" value="b"></td></tr>
+  		  <tr><td>c)  vesicle</td><td><input type="radio" name="nails_7_37" value="c"></td></tr>
+  		  <tr><td>d)  cyst</td><td><input type="radio" name="nails_7_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  A thick scar resulting from excessive growth of fibrous tissue is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a scale</td><td><input type="radio" name="nails_7_38" value="a"></td></tr>
+  		  <tr><td>b)  a crust</td><td><input type="radio" name="nails_7_38" value="b"></td></tr>
+  		  <tr><td>c)  a keloid</td><td><input type="radio" name="nails_7_38" value="c"></td></tr>
+  		  <tr><td>d)  an excoriation</td><td><input type="radio" name="nails_7_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  A collection of blood trapped underneath the nail is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a hematoma</td><td><input type="radio" name="nails_7_39" value="a"></td></tr>
+  		  <tr><td>b)  a cicatrix</td><td><input type="radio" name="nails_7_39" value="b"></td></tr>
+  		  <tr><td>c)  an ulcer</td><td><input type="radio" name="nails_7_39" value="c"></td></tr>
+  		  <tr><td>d)  a fissure</td><td><input type="radio" name="nails_7_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  Which of the following terms refers to a deficiency in perspiration?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Miliaria rubra</td><td><input type="radio" name="nails_7_40" value="a"></td></tr>
+  		  <tr><td>b)  Anhidrosis</td><td><input type="radio" name="nails_7_40" value="b"></td></tr>
+  		  <tr><td>c)  Hyperhidrosis</td><td><input type="radio" name="nails_7_40" value="c"></td></tr>
+  		  <tr><td>d)  Bromhidrosis</td><td><input type="radio" name="nails_7_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  What is the least severe and most common type of skin cancer?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Basal cell carcinoma</td><td><input type="radio" name="nails_7_41" value="a"></td></tr>
+  		  <tr><td>b)  Squamous cell carcinoma</td><td><input type="radio" name="nails_7_41" value="b"></td></tr>
+  		  <tr><td>c)  Malignant melanoma</td><td><input type="radio" name="nails_7_41" value="c"></td></tr>
+  		  <tr><td>d)  Benign melanoma</td><td><input type="radio" name="nails_7_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  Prolonged and repeated contact with many _____ will strip away skin oils, leaving the skin dry or damaged.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  solutions</td><td><input type="radio" name="nails_7_42" value="a"></td></tr>
+  		  <tr><td>b)  creams</td><td><input type="radio" name="nails_7_42" value="b"></td></tr>
+  		  <tr><td>c)  solvents</td><td><input type="radio" name="nails_7_42" value="c"></td></tr>
+  		  <tr><td>d)  antiseptics</td><td><input type="radio" name="nails_7_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  To avoid allergies when working with monomer liquids or UV gels, you should never _____ your own product blends.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  use</td><td><input type="radio" name="nails_7_43" value="a"></td></tr>
+  		  <tr><td>b)  touch</td><td><input type="radio" name="nails_7_43" value="b"></td></tr>
+  		  <tr><td>c)  smooth</td><td><input type="radio" name="nails_7_43" value="c"></td></tr>
+  		  <tr><td>d)  mix</td><td><input type="radio" name="nails_7_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  The _____ prevents absorption of a very large majority of what comes in contact with the surface of the skin, including cosmetic ingredients.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dermis</td><td><input type="radio" name="nails_7_44" value="a"></td></tr>
+  		  <tr><td>b)  epidermis</td><td><input type="radio" name="nails_7_44" value="b"></td></tr>
+  		  <tr><td>c)  sweat glands</td><td><input type="radio" name="nails_7_44" value="c"></td></tr>
+  		  <tr><td>d)  cutis</td><td><input type="radio" name="nails_7_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  A substance that is needed for proper repair of the skin and various tissues, which also speeds up the healing processes of the body, is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  vitamin C</td><td><input type="radio" name="nails_7_45" value="a"></td></tr>
+  		  <tr><td>b)  vitamin A</td><td><input type="radio" name="nails_7_45" value="b"></td></tr>
+  		  <tr><td>c)  vitamin D</td><td><input type="radio" name="nails_7_45" value="c"></td></tr>
+  		  <tr><td>d)  vitamin E</td><td><input type="radio" name="nails_7_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

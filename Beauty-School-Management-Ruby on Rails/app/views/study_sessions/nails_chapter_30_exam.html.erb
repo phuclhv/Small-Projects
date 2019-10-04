@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+                  questionAnswerObj[this.name] = this.value;
+          });
+
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number +
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>State Board Exam -- General Supplies Setup (Part 1)</h2>
+  <p>Please watch the video.  There is no exam for this lesson.</p>
+</body>
+</html>

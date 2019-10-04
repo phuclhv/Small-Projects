@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 19: Advanced Topics And Treatments </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What effect does sclerotherapy have on varicose veins?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_19_1" value="a"></td><td>a) minimizes them </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_1" value="b"></td><td>b) enlarges them </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_1" value="c"></td><td>c) destroys them </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_1" value="d"></td><td>d) reroutes them </td></tr>
+		</table>
+    </p>
+
+    <p>2. What parts of the face are affected by the procedure transconjuctival blepharoplasty?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_2" value="a"></td><td>a) nostrils </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_2" value="b"></td><td>b) lower lips </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_2" value="c"></td><td>c) cheeks </td></tr>
+		  <tr><td><input type="radio" name="esthetics_19_2" value="d"></td><td>d) lower eyelids </td></tr>
+  		</table>
+    </p>
+
+    <p>3. What is a TCA peel used for? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_3" value="a"></td><td>a) lightening highly pigmented skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_3" value="b"></td><td>b) darkening lighly pigmented skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_3" value="c"></td><td>c) diminishing sun damage and wrinkles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_3" value="d"></td><td>d) preventing collagen and elastin production </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What happens to our cell renewal factor (CRF) as we age? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_4" value="a"></td><td>a) becomes more intense </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_4" value="b"></td><td>b) goes away completely </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_4" value="c"></td><td>c) speeds up </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_4" value="d"></td><td>d) slows down </td></tr>
+  		</table>
+    </p>
+
+    <p>5. What is a procedure that only physicians can administer? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_5" value="a"></td><td>a) deep peels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_5" value="b"></td><td>b) chemical peels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_5" value="c"></td><td>c) clay masks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_5" value="d"></td><td>d) paraffin masks </td></tr>
+  		</table>
+    </p>
+
+    <p>6. What is an acceptable pH level for salon peels based on professional recommendations and, in most states, legal restrictions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_6" value="a"></td><td>a) 1.5 or higher </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_6" value="b"></td><td>b) 2.0 or higher </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_6" value="c"></td><td>c) 2.5 or higher </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_6" value="d"></td><td>d) 3.0 or higher </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What is true of open sores and suspicious lesions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_7" value="a"></td><td>a) they have no bearing on the coice to perform chemical exfoliation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_7" value="b"></td><td>b) their presence requires extra care during chemical exfoliation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_7" value="c"></td><td>c) these conditions sometimes contraindicate chemical exfoliation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_7" value="d"></td><td>d) these conditions always contraindicate chemical exfoliation </td></tr>
+  		</table>
+    </p>
+
+    <p>8. What is NOT something that clients should be advised to avoid fr at least 24 to 48 hours in advance of a chemical exfoliation procedure? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_8" value="a"></td><td>a) soap-and-water cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_8" value="b"></td><td>b) sun exposure </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_8" value="c"></td><td>c) benzoyl peroxide applications </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_8" value="d"></td><td>d) waxing </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. A person with what condition would benefit more from microdermabration than other forms of exfoliation?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_9" value="a"></td><td>a) oily skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_9" value="b"></td><td>b) dry skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_9" value="c"></td><td>c) inability to tolerate alkalis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_9" value="d"></td><td>d) inability to tolerate acids </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What treatment can have the effects of hyperpigmentation, hypopigmentation, and/or sensitivity if adminitered improperly? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_10" value="a"></td><td>a) paraffin masks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_10" value="b"></td><td>b) clay masks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_10" value="c"></td><td>c) extraction </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_10" value="d"></td><td>d) micromabrasion </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What does an abdominoplasty involve?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_11" value="a"></td><td>a) removing excess fat and loose sin from the abdomen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_11" value="b"></td><td>b) exfoliating the skin along the abdomen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_11" value="c"></td><td>c) removing hair along the abdomen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_11" value="d"></td><td>d) massaging the abdominal muscles to stimulate muscle growth </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What spa treatment is based on the concept of three doshas? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_12" value="a"></td><td>a) foot reflexology </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_12" value="b"></td><td>b) stone massage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_12" value="c"></td><td>c) Ayurvedic treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_12" value="d"></td><td>d) Reiki </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What are commonly used in balneotehrapy body treatments? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_13" value="a"></td><td>a) powerful water jets </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_13" value="b"></td><td>b) Dead Sea salts </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_13" value="c"></td><td>c) hot stones </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_13" value="d"></td><td>d) cold stones </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What is NOT a benefit of body scrubs? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_14" value="a"></td><td>a) detoxifying the body </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_14" value="b"></td><td>b) increasing circulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_14" value="c"></td><td>c) exfoliation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_14" value="d"></td><td>d) hydration </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What PRIMARILY determines the effect of a body wrap? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_15" value="a"></td><td>a) material used to wrap the client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_15" value="b"></td><td>b) type of product used </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_15" value="c"></td><td>c) length of time the client is wrapped </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_15" value="d"></td><td>d) positioning of the client while wrapped </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What is Botox?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_16" value="a"></td><td>a) highly acidic cream </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_16" value="b"></td><td>b) neuromuscularcloing serum </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_16" value="c"></td><td>c) type of acne medication </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_16" value="d"></td><td>d) surgical procedure for removing fat from the abdomen </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What is a characteristic of the people whose hips are MOST liely to contain cellulite?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_17" value="a"></td><td>a) they have oily skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_17" value="b"></td><td>b) they have dry skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_17" value="c"></td><td>c) they are overweight </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_17" value="d"></td><td>d) they are underweight </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What is NOT something that dermal fillers are used to fill? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_18" value="a"></td><td>a) facial imperfections </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_18" value="b"></td><td>b) pores </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_18" value="c"></td><td>c) lines </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_18" value="d"></td><td>d) wrinkles </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is mammoplasty? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_19" value="a"></td><td>a) abdominal surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_19" value="b"></td><td>b) breast surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_19" value="c"></td><td>c) facial surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_19" value="d"></td><td>d) a type of lipsuction </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What does the esthetician usse to move congestion, water, and waste in the lymphatic vessels out of teh body when performing MLD? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_21" value="a"></td><td>a) massage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_21" value="b"></td><td>b) microcurrent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_21" value="c"></td><td>c) galvanic current</td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_21" value="d"></td><td>d) reiki </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What device mimics the body's natural electrical energy to reeducate and tone facial muscles?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="a"></td><td>a) laser machine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="b"></td><td>b) steamer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="c"></td><td>c) microcurrent machine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="d"></td><td>d) microdermabrasion machine </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What is a form of machanical exfoliation? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="a"></td><td>a) mammoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="b"></td><td>b) microdermabrasion </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="c"></td><td>c) manual lymph drainage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_22" value="d"></td><td>d) microcurrent </td></tr>
+  		</table>
+    </p>
+
+    <p>23. What type pf treatments does the term "nonablative" refer to? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_23" value="a"></td><td>a) acne </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_23" value="b"></td><td>b) wrinkle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_23" value="c"></td><td>c) cellulite </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_23" value="d"></td><td>d) hypopigmentation </td></tr>
+  		</table>
+    </p>
+
+    <p>24.  What treatments employ the use of phenol (carbolic acid)?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_24" value="a"></td><td>a) peels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_24" value="b"></td><td>b) extractions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_24" value="c"></td><td>c) exfoliations </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_24" value="d"></td><td>d) massages </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What is NOT true of reconstructive surgery? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_25" value="a"></td><td>a) it restores a bodily function </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_25" value="b"></td><td>b) it is performed on accident survivors </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_25" value="c"></td><td>c) it is performed on those with congential defects </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_25" value="d"></td><td>d) it is a form of cosmetic surgery </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What is a rhytidectomy?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_26" value="a"></td><td>a) tummy tuck </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_26" value="b"></td><td>b) breast enhancement </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_26" value="c"></td><td>c) face lift </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_26" value="d"></td><td>d) nose job </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What is the technical term for nose surgery that makes a nose smaller or changes its appearance? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_27" value="a"></td><td>a) rhinoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_27" value="b"></td><td>b) rhytidectomy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_27" value="c"></td><td>c) blepharoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_27" value="d"></td><td>d) proboscistomy </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What condition does endermology treat?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_28" value="a"></td><td>a) acne </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_28" value="b"></td><td>b) albinism </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_28" value="c"></td><td>c) sensitive skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_28" value="d"></td><td>d) cellulite </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What is the technical term for an eye lift? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_29" value="a"></td><td>a) rhinoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_29" value="b"></td><td>b) blepharoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_29" value="c"></td><td>c) oculoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_29" value="d"></td><td>d) hippoplasty </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What is the term for spa treatments that use water? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_30" value="a"></td><td>a) aquatherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_30" value="b"></td><td>b) hydrotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_30" value="c"></td><td>c) liquid therapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_30" value="d"></td><td>d) immersion therapy </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What purpose do injectable fillers serve? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_31" value="a"></td><td>a) pain relief </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_31" value="b"></td><td>b) stress relief </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_31" value="c"></td><td>c) skin darkening </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_31" value="d"></td><td>d) skin plumming </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What is the term for the application of light rays to the skin for the treatment of wrinkles, capillaries, pigmentation, and hair removal? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_32" value="a"></td><td>a) sclerotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_32" value="b"></td><td>b) endotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_32" value="c"></td><td>c) ultrasonic therapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_32" value="d"></td><td>d) light therapy </td></tr>
+  		</table>
+    </p>
+
+    <p>33. What is a procedure that surgically removes pocets of fat?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_33" value="a"></td><td>a) liposuction </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_33" value="b"></td><td>b) rhinoplasty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_33" value="c"></td><td>c) sclerotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_33" value="d"></td><td>d) laser resurfacing </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What tool is used to physically remove tissue down to the dermis during mechanical dermabrasion? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_34" value="a"></td><td>a) brush </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_34" value="b"></td><td>b) blade </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_34" value="c"></td><td>c) file </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_34" value="d"></td><td>d) sponge </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What is NOT an ingredient of a Jessner's peel? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_19_35" value="a"></td><td>a) citric acid </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_35" value="b"></td><td>b) lactic acid </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_35" value="c"></td><td>c) salicylic acid </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_19_35" value="d"></td><td>d) resorcinol </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

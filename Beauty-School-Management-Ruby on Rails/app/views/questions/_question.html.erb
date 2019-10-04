@@ -1,0 +1,35 @@
+<!-- Show header only @head is 1 -->
+<% @head = @head + 1 %>
+<% if @head == 1 %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tr>
+        <th>Exam ID</th>
+        <th>Question #</th>
+        <th>Question Name</th>
+        <th>Answer Key</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+<% end %>
+      <tr>
+        <td><%= question.exam_id %></td>
+        <td><%= question.question_number %></td>
+        <td><%= question.question_name %></td>
+        <td><%= question.answer_key %></td>
+        <td>
+          <%= link_to edit_question_path(question), remote: true do %>
+            <button class="class: "btn btn-lg btn-primary"">Edit</button>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to question, remote: true, method: :delete,
+              data: { confirm: 'Are you sure?' } do %>
+            <button class="class: "btn btn-lg btn-primary"">Delete!</button>
+          <% end %>
+        </td>
+      </tr>
+<% if @tail == @head %>
+  </table>
+</div>
+<% end %>

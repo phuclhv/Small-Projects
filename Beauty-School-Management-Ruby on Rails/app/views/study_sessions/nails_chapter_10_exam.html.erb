@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 10 -- The Basics Of Chemistry</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  Which branch of science focuses on the study of substances that contain the element carbon?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Inorganic chemistry</td><td><input type="radio" name="nails_10_1" value="a"></td></tr>
+  		  <tr><td>b)  Chemistry</td><td><input type="radio" name="nails_10_1" value="b"></td></tr>
+  		  <tr><td>c)  Organic chemistry</td><td><input type="radio" name="nails_10_1" value="c"></td></tr>
+  		  <tr><td>d)  Geology</td><td><input type="radio" name="nails_10_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  All living things, or things that were once alive, contain _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  oxygen</td><td><input type="radio" name="nails_10_2" value="a"></td></tr>
+  		  <tr><td>b)  carbon</td><td><input type="radio" name="nails_10_2" value="b"></td></tr>
+  		  <tr><td>c)  hydrogen</td><td><input type="radio" name="nails_10_2" value="c"></td></tr>
+  		  <tr><td>d)  nitrogen</td><td><input type="radio" name="nails_10_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  Which of the following is not an organic substance?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Air</td><td><input type="radio" name="nails_10_3" value="a"></td></tr>
+  		  <tr><td>b)  Poison ivy</td><td><input type="radio" name="nails_10_3" value="b"></td></tr>
+  		  <tr><td>c)  Motor oil</td><td><input type="radio" name="nails_10_3" value="c"></td></tr>
+  		  <tr><td>d)  Nail enhancements</td><td><input type="radio" name="nails_10_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  The study of substances that do not contain carbon but may contain hydrogen is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  biology</td><td><input type="radio" name="nails_10_4" value="a"></td></tr>
+  		  <tr><td>b)  organic chemistry</td><td><input type="radio" name="nails_10_4" value="b"></td></tr>
+  		  <tr><td>c)  inorganic chemistry</td><td><input type="radio" name="nails_10_4" value="c"></td></tr>
+  		  <tr><td>d)  geology</td><td><input type="radio" name="nails_10_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  Matter is any substance that occupies space and has _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  shape</td><td><input type="radio" name="nails_10_5" value="a"></td></tr>
+  		  <tr><td>b)  texture</td><td><input type="radio" name="nails_10_5" value="b"></td></tr>
+  		  <tr><td>c)  size</td><td><input type="radio" name="nails_10_5" value="c"></td></tr>
+  		  <tr><td>d)  mass</td><td><input type="radio" name="nails_10_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  Which of the following is not a chemical?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Light</td><td><input type="radio" name="nails_10_6" value="a"></td></tr>
+  		  <tr><td>b)  Granite</td><td><input type="radio" name="nails_10_6" value="b"></td></tr>
+  		  <tr><td>c)  Water</td><td><input type="radio" name="nails_10_6" value="c"></td></tr>
+  		  <tr><td>d)  Sand</td><td><input type="radio" name="nails_10_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  Energy _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  occupies space</td><td><input type="radio" name="nails_10_7" value="a"></td></tr>
+  		  <tr><td>b)  has mass</td><td><input type="radio" name="nails_10_7" value="b"></td></tr>
+  		  <tr><td>c)  has chemical properties</td><td><input type="radio" name="nails_10_7" value="c"></td></tr>
+  		  <tr><td>d)  is not matter</td><td><input type="radio" name="nails_10_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  What is the letter symbol for carbon?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  cn</td><td><input type="radio" name="nails_10_8" value="a"></td></tr>
+  		  <tr><td>b)  C</td><td><input type="radio" name="nails_10_8" value="b"></td></tr>
+  		  <tr><td>c)  Ca</td><td><input type="radio" name="nails_10_8" value="c"></td></tr>
+  		  <tr><td>d)  ca</td><td><input type="radio" name="nails_10_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  The smallest chemical particle of an element that retains the properties of that element is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an atom</td><td><input type="radio" name="nails_10_9" value="a"></td></tr>
+  		  <tr><td>b)  a molecule</td><td><input type="radio" name="nails_10_9" value="b"></td></tr>
+  		  <tr><td>c)  a cell</td><td><input type="radio" name="nails_10_9" value="c"></td></tr>
+  		  <tr><td>d)  a nucleus</td><td><input type="radio" name="nails_10_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  What is the symbol for atmospheric oxygen?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  O</td><td><input type="radio" name="nails_10_10" value="a"></td></tr>
+  		  <tr><td>b)  O<sub>2</sub></td><td><input type="radio" name="nails_10_10" value="b"></td></tr>
+  		  <tr><td>c)  O<sub>3</sub></td><td><input type="radio" name="nails_10_10" value="c"></td></tr>
+  		  <tr><td>d)  CO<sub>2</sub></td><td><input type="radio" name="nails_10_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  How many atoms are in a molecule?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  None</td><td><input type="radio" name="nails_10_11" value="a"></td></tr>
+  		  <tr><td>b)  Only one</td><td><input type="radio" name="nails_10_11" value="b"></td></tr>
+  		  <tr><td>c)  Two or more</td><td><input type="radio" name="nails_10_11" value="c"></td></tr>
+  		  <tr><td>d)  No more than two</td><td><input type="radio" name="nails_10_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  Millions of chemical reactions occur in the body every _____, which is what keeps us alive.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  day</td><td><input type="radio" name="nails_10_12" value="a"></td></tr>
+  		  <tr><td>b)  hour</td><td><input type="radio" name="nails_10_12" value="b"></td></tr>
+  		  <tr><td>c)  minute</td><td><input type="radio" name="nails_10_12" value="c"></td></tr>
+  		  <tr><td>d)  second</td><td><input type="radio" name="nails_10_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  Common table salt is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a compound element</td><td><input type="radio" name="nails_10_13" value="a"></td></tr>
+  		  <tr><td>b)  a common atom</td><td><input type="radio" name="nails_10_13" value="b"></td></tr>
+  		  <tr><td>c)  a compound molecule</td><td><input type="radio" name="nails_10_13" value="c"></td></tr>
+  		  <tr><td>d)  an emulsion</td><td><input type="radio" name="nails_10_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  When water boils it _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  changes its physical form to a gas</td><td><input type="radio" name="nails_10_14" value="a"></td></tr>
+  		  <tr><td>b)  changes its physical form to a liquid</td><td><input type="radio" name="nails_10_14" value="b"></td></tr>
+  		  <tr><td>c)  is no longer H<sub>2</sub>O</td><td><input type="radio" name="nails_10_14" value="c"></td></tr>
+  		  <tr><td>d)  undergoes a chemical change</td><td><input type="radio" name="nails_10_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  Which of the following has a definite volume, but not a definite shape?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Solids</td><td><input type="radio" name="nails_10_15" value="a"></td></tr>
+  		  <tr><td>b)  Liquids</td><td><input type="radio" name="nails_10_15" value="b"></td></tr>
+  		  <tr><td>c)  Gases</td><td><input type="radio" name="nails_10_15" value="c"></td></tr>
+  		  <tr><td>d)  Vapors</td><td><input type="radio" name="nails_10_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  Weight is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a physical property</td><td><input type="radio" name="nails_10_16" value="a"></td></tr>
+  		  <tr><td>b)  a chemical property</td><td><input type="radio" name="nails_10_16" value="b"></td></tr>
+  		  <tr><td>c)  a substantive property</td><td><input type="radio" name="nails_10_16" value="c"></td></tr>
+  		  <tr><td>d)  a solid property</td><td><input type="radio" name="nails_10_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  When an abrasive file is used on the nail plate and both the nail plate and file are changed, _____ occurs.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a chemical reaction</td><td><input type="radio" name="nails_10_17" value="a"></td></tr>
+  		  <tr><td>b)  an endothermic reaction</td><td><input type="radio" name="nails_10_17" value="b"></td></tr>
+  		  <tr><td>c)  a chemical change</td><td><input type="radio" name="nails_10_17" value="c"></td></tr>
+  		  <tr><td>d)  a physical change</td><td><input type="radio" name="nails_10_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  All atoms, elements, elemental molecules, and _____ are pure substances.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  matter</td><td><input type="radio" name="nails_10_18" value="a"></td></tr>
+  		  <tr><td>b)  compound molecules</td><td><input type="radio" name="nails_10_18" value="b"></td></tr>
+  		  <tr><td>c)  liquids</td><td><input type="radio" name="nails_10_18" value="c"></td></tr>
+  		  <tr><td>d)  compound atoms</td><td><input type="radio" name="nails_10_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  Salt water is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an emulsion</td><td><input type="radio" name="nails_10_19" value="a"></td></tr>
+  		  <tr><td>b)  a suspension</td><td><input type="radio" name="nails_10_19" value="b"></td></tr>
+  		  <tr><td>c)  a physical mixture</td><td><input type="radio" name="nails_10_19" value="c"></td></tr>
+  		  <tr><td>d)  a pure substance</td><td><input type="radio" name="nails_10_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  A _____ is a stable, uniform blend of two or more substances.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  solute</td><td><input type="radio" name="nails_10_20" value="a"></td></tr>
+  		  <tr><td>b)  solution</td><td><input type="radio" name="nails_10_20" value="b"></td></tr>
+  		  <tr><td>c)  solvent</td><td><input type="radio" name="nails_10_20" value="c"></td></tr>
+  		  <tr><td>d)  suspension</td><td><input type="radio" name="nails_10_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  Water and oil are _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  immiscible liquids</td><td><input type="radio" name="nails_10_21" value="a"></td></tr>
+  		  <tr><td>b)  miscible liquids</td><td><input type="radio" name="nails_10_21" value="b"></td></tr>
+  		  <tr><td>c)  mutually soluble</td><td><input type="radio" name="nails_10_21" value="c"></td></tr>
+  		  <tr><td>d)  easily mixed</td><td><input type="radio" name="nails_10_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  All matter exists in one of five different physical forms, including solid, liquid, gas, vapor, and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lymph</td><td><input type="radio" name="nails_10_22" value="a"></td></tr>
+  		  <tr><td>b)  milk</td><td><input type="radio" name="nails_10_22" value="b"></td></tr>
+  		  <tr><td>c)  blood</td><td><input type="radio" name="nails_10_22" value="c"></td></tr>
+  		  <tr><td>d)  plasma</td><td><input type="radio" name="nails_10_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  The binding agent that allows immiscible liquids to join together in an emulsion is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a conjoiner</td><td><input type="radio" name="nails_10_23" value="a"></td></tr>
+  		  <tr><td>b)  an emulsifier</td><td><input type="radio" name="nails_10_23" value="b"></td></tr>
+  		  <tr><td>c)  a solvent</td><td><input type="radio" name="nails_10_23" value="c"></td></tr>
+  		  <tr><td>d)  an ion</td><td><input type="radio" name="nails_10_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  A properly formulated emulsion, stored under ideal conditions, can be stable for up to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  6 months</td><td><input type="radio" name="nails_10_24" value="a"></td></tr>
+  		  <tr><td>b)  1 year</td><td><input type="radio" name="nails_10_24" value="b"></td></tr>
+  		  <tr><td>c)  3 years</td><td><input type="radio" name="nails_10_24" value="c"></td></tr>
+  		  <tr><td>d)  10 years</td><td><input type="radio" name="nails_10_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  The tail of a surfactant molecule is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  hydrophilic</td><td><input type="radio" name="nails_10_25" value="a"></td></tr>
+  		  <tr><td>b)  lipophilic</td><td><input type="radio" name="nails_10_25" value="b"></td></tr>
+  		  <tr><td>c)  exothermic</td><td><input type="radio" name="nails_10_25" value="c"></td></tr>
+  		  <tr><td>d)  endothermic</td><td><input type="radio" name="nails_10_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  Mayonnaise is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an oil-in-water emulsion</td><td><input type="radio" name="nails_10_26" value="a"></td></tr>
+  		  <tr><td>b)  a water-in-oil emulsion</td><td><input type="radio" name="nails_10_26" value="b"></td></tr>
+  		  <tr><td>c)  a solution</td><td><input type="radio" name="nails_10_26" value="c"></td></tr>
+  		  <tr><td>d)  a suspension</td><td><input type="radio" name="nails_10_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  Foot balm is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an oil-in-water emulsion</td><td><input type="radio" name="nails_10_27" value="a"></td></tr>
+  		  <tr><td>b)  a water-in-oil emulsion</td><td><input type="radio" name="nails_10_27" value="b"></td></tr>
+  		  <tr><td>c)  a solution</td><td><input type="radio" name="nails_10_27" value="c"></td></tr>
+  		  <tr><td>d)  a suspension</td><td><input type="radio" name="nails_10_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  Pomades and pastes are made with a combination of petrolatum and what two other substances?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Calcium and talc</td><td><input type="radio" name="nails_10_28" value="a"></td></tr>
+  		  <tr><td>b)  Oil and talc</td><td><input type="radio" name="nails_10_28" value="b"></td></tr>
+  		  <tr><td>c)  Oil and wax</td><td><input type="radio" name="nails_10_28" value="c"></td></tr>
+  		  <tr><td>d)  Wax and calcium</td><td><input type="radio" name="nails_10_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  Volatile alcohol is alcohol that _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  evaporates easily</td><td><input type="radio" name="nails_10_29" value="a"></td></tr>
+  		  <tr><td>b)  does not evaporate easily</td><td><input type="radio" name="nails_10_29" value="b"></td></tr>
+  		  <tr><td>c)  is flammable</td><td><input type="radio" name="nails_10_29" value="c"></td></tr>
+  		  <tr><td>d)  is inflammable</td><td><input type="radio" name="nails_10_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  Glycerin is _____ substance.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a bitter</td><td><input type="radio" name="nails_10_30" value="a"></td></tr>
+  		  <tr><td>b)  a brown</td><td><input type="radio" name="nails_10_30" value="b"></td></tr>
+  		  <tr><td>c)  an oily</td><td><input type="radio" name="nails_10_30" value="c"></td></tr>
+  		  <tr><td>d)  a colorful</td><td><input type="radio" name="nails_10_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  A volatile organic compound contains which of the following?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Nitrogen</td><td><input type="radio" name="nails_10_31" value="a"></td></tr>
+  		  <tr><td>b)  Talc</td><td><input type="radio" name="nails_10_31" value="b"></td></tr>
+  		  <tr><td>c)  Silicon</td><td><input type="radio" name="nails_10_31" value="c"></td></tr>
+  		  <tr><td>d)  Carbon</td><td><input type="radio" name="nails_10_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  An atom or molecule that carries an anbalanced electrical charge is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an anion</td><td><input type="radio" name="nails_10_32" value="a"></td></tr>
+  		  <tr><td>b)  an ion</td><td><input type="radio" name="nails_10_32" value="b"></td></tr>
+  		  <tr><td>c)  a cation</td><td><input type="radio" name="nails_10_32" value="c"></td></tr>
+  		  <tr><td>d)  ab electron</td><td><input type="radio" name="nails_10_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  When ionization occurs, the resulting ions _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  have opposite electrical charges</td><td><input type="radio" name="nails_10_33" value="a"></td></tr>
+  		  <tr><td>b)  have the same electrical charges</td><td><input type="radio" name="nails_10_33" value="b"></td></tr>
+  		  <tr><td>c)  have no electrical charge</td><td><input type="radio" name="nails_10_33" value="c"></td></tr>
+  		  <tr><td>d)  a negative electrical charge</td><td><input type="radio" name="nails_10_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  The more _____ ions a substance has, the more acidic it will be.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  carbon</td><td><input type="radio" name="nails_10_34" value="a"></td></tr>
+  		  <tr><td>b)  nitrogen</td><td><input type="radio" name="nails_10_34" value="b"></td></tr>
+  		  <tr><td>c)  hydroxide</td><td><input type="radio" name="nails_10_34" value="c"></td></tr>
+  		  <tr><td>d)  hydrogen</td><td><input type="radio" name="nails_10_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  A product must contain _____ to have a pH.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  silicon</td><td><input type="radio" name="nails_10_35" value="a"></td></tr>
+  		  <tr><td>b)  oxygen</td><td><input type="radio" name="nails_10_35" value="b"></td></tr>
+  		  <tr><td>c)  water</td><td><input type="radio" name="nails_10_35" value="c"></td></tr>
+  		  <tr><td>d)  alcohol</td><td><input type="radio" name="nails_10_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  Pure water has a _____ pH.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  neutral</td><td><input type="radio" name="nails_10_36" value="a"></td></tr>
+  		  <tr><td>b)  acidic</td><td><input type="radio" name="nails_10_36" value="b"></td></tr>
+  		  <tr><td>c)  alkaline</td><td><input type="radio" name="nails_10_36" value="c"></td></tr>
+  		  <tr><td>d)  ionized</td><td><input type="radio" name="nails_10_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  A solution is neutralif its pH is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  0.0</td><td><input type="radio" name="nails_10_37" value="a"></td></tr>
+  		  <tr><td>b)  1.0</td><td><input type="radio" name="nails_10_37" value="b"></td></tr>
+  		  <tr><td>c)  7.0</td><td><input type="radio" name="nails_10_37" value="c"></td></tr>
+  		  <tr><td>d)  10.0</td><td><input type="radio" name="nails_10_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  The pH scale ranges from _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  1-10</td><td><input type="radio" name="nails_10_38" value="a"></td></tr>
+  		  <tr><td>b)  0-14</td><td><input type="radio" name="nails_10_38" value="b"></td></tr>
+  		  <tr><td>c)  1-14</td><td><input type="radio" name="nails_10_38" value="c"></td></tr>
+  		  <tr><td>d)  0-10</td><td><input type="radio" name="nails_10_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  A pH of 8 is _____ than a pH of 7.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  100 times more acidic</td><td><input type="radio" name="nails_10_39" value="a"></td></tr>
+  		  <tr><td>b)  10 times more alkaline</td><td><input type="radio" name="nails_10_39" value="b"></td></tr>
+  		  <tr><td>c)  20 times more alkaline</td><td><input type="radio" name="nails_10_39" value="c"></td></tr>
+  		  <tr><td>d)  100 times more alkaline</td><td><input type="radio" name="nails_10_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  An acidic solution will tern litmus paper from _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  white to black</td><td><input type="radio" name="nails_10_40" value="a"></td></tr>
+  		  <tr><td>b)  black to white</td><td><input type="radio" name="nails_10_40" value="b"></td></tr>
+  		  <tr><td>c)  red to blue</td><td><input type="radio" name="nails_10_40" value="c"></td></tr>
+  		  <tr><td>d)  blue to red</td><td><input type="radio" name="nails_10_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  An alkali _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  has a pH less than 7.0</td><td><input type="radio" name="nails_10_41" value="a"></td></tr>
+  		  <tr><td>b)  has a pH more than 7.0</td><td><input type="radio" name="nails_10_41" value="b"></td></tr>
+  		  <tr><td>c)  turn litmus paper from blue to red</td><td><input type="radio" name="nails_10_41" value="c"></td></tr>
+  		  <tr><td>d)  is safe in the eyes</td><td><input type="radio" name="nails_10_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  Nail polish is an example of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an inorganic substance</td><td><input type="radio" name="nails_10_42" value="a"></td></tr>
+  		  <tr><td>b)  an organic substance</td><td><input type="radio" name="nails_10_42" value="b"></td></tr>
+  		  <tr><td>c)  a volatile compound</td><td><input type="radio" name="nails_10_42" value="c"></td></tr>
+  		  <tr><td>d)  a solution</td><td><input type="radio" name="nails_10_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  Electricity is considered to be _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  matter</td><td><input type="radio" name="nails_10_43" value="a"></td></tr>
+  		  <tr><td>b)  energy</td><td><input type="radio" name="nails_10_43" value="b"></td></tr>
+  		  <tr><td>c)  a chemical</td><td><input type="radio" name="nails_10_43" value="c"></td></tr>
+  		  <tr><td>d)  a mineral</td><td><input type="radio" name="nails_10_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  How many naturally occurring elements are there?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  67</td><td><input type="radio" name="nails_10_44" value="a"></td></tr>
+  		  <tr><td>b)  90</td><td><input type="radio" name="nails_10_44" value="b"></td></tr>
+  		  <tr><td>c)  109</td><td><input type="radio" name="nails_10_44" value="c"></td></tr>
+  		  <tr><td>d)  117</td><td><input type="radio" name="nails_10_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  A special type of ingredient used in nail polish dryers and skin protectants is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  alcohol</td><td><input type="radio" name="nails_10_45" value="a"></td></tr>
+  		  <tr><td>b)  glycerin</td><td><input type="radio" name="nails_10_45" value="b"></td></tr>
+  		  <tr><td>c)  silicone</td><td><input type="radio" name="nails_10_45" value="c"></td></tr>
+  		  <tr><td>d)  antiseptic</td><td><input type="radio" name="nails_10_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

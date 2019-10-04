@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 14: Pedicuring</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. Cosmetic service performed on the feet by a licensed nail technician or cosmetologist that include trimming, shaping, exfoliating, polishing toenails, and massage are called</p>
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="nails_14_1" value="a"></td><td>a) manicures </td></tr>
+		  <tr><td><input type="radio" name="nails_14_1" value="b"></td><td>b) pedicures </td></tr>
+		  <tr><td><input type="radio" name="nails_14_1" value="c"></td><td>c) aromatherapy </td></tr>
+		  <tr><td><input type="radio" name="nails_14_1" value="d"></td><td>d) reflexology </td></tr>
+		</table>
+    </p>
+
+    <p>2. Pedicures create client loyalty, produce considerable income, and can be important _________for many clients.  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_2" value="a"></td><td>a) medical treatment </td></tr>
+		  <tr><td><input type="radio" name="nails_14_2" value="b"></td><td>b) self-esteem building treatment </td></tr>
+		  <tr><td><input type="radio" name="nails_14_2" value="c"></td><td>c) emotional therapy </td></tr>
+		  <tr><td><input type="radio" name="nails_14_2" value="d"></td><td>d) preventive health services </td></tr>
+  		</table>
+    </p>
+
+    <p>3. Shaving the legs within 24 hours of having a pedicure increases the risk of _________, which causes tiny unseen openings in the skin that may allow entry by pathogenic microbes. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_3" value="a"></td><td>a) macro-trauma </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_3" value="b"></td><td>b) irritation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_3" value="c"></td><td>c) micro-trauma </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_3" value="d"></td><td>d) infection </td></tr>
+  		</table>
+    </p>
+
+    <p>4. Which term refers to all of the permanent tools used to perform nail services that are not implements? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_4" value="a"></td><td>a) Equipment </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_4" value="b"></td><td>b) Materials </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_4" value="c"></td><td>c) Supplies </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_4" value="d"></td><td>d) Pedicure products </td></tr>
+  		</table>
+    </p>
+
+    <p>5. When preparing the pedicure foot bath, it is recommended that you fill it with _____ water. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_5" value="a"></td><td>a) cold </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_5" value="b"></td><td>b) cool </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_5" value="c"></td><td>c) hot </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_5" value="d"></td><td>d) warm </td></tr>
+  		</table>
+    </p>
+
+    <p>6. Some fully plumbed whirlpool baths are ______and connected to drain. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_6" value="a"></td><td>a) portable and flexible </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_6" value="b"></td><td>b) permanently plumbed to hot and cold water </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_6" value="c"></td><td>c) filled using a hose to run water into the bath </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_6" value="d"></td><td>d) manually filled </td></tr>
+  		</table>
+    </p>
+
+    <p>7. Electric foot mitts are designed to _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_7" value="a"></td><td>a) Add a special touch to a pedicure </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_7" value="b"></td><td>b) Slow the penetration of the conditioning ingredients </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_7" value="c"></td><td>c) help keep the client�s feet from feeling cool </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_7" value="d"></td><td>d) create a stimulating effect </td></tr>
+  		</table>
+    </p>
+
+    <p>8. Toenail clippers have a _______ space between the jaws, allowing them to cut thicker nails. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_8" value="a"></td><td>a) curved </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_8" value="b"></td><td>b) jagged </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_8" value="c"></td><td>c) wider </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_8" value="d"></td><td>d) narrower </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. Which implement has a small, scoop-shaped end? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_9" value="a"></td><td>a) Nail raps </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_9" value="b"></td><td>b) Toenail clipper </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_9" value="c"></td><td>c) Nipper </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_9" value="d"></td><td>d) Curette </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. Only curettes with ______ are safe and appreciate for nail technicians to use. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_10" value="a"></td><td>a) replaceable blades </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_10" value="b"></td><td>b) permanent blades </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_10" value="c"></td><td>c) dull edges </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_10" value="d"></td><td>d) sharp edges </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. For most clients, a _____ nail file is recommended for pedicures.
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_11" value="a"></td><td>a) medium-grit </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_11" value="b"></td><td>b) grit abrasive </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_11" value="c"></td><td>c) fine-grit </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_11" value="d"></td><td>d) grit-free </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. Foot files or paddles are designed to reduce and smooth ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_12" value="a"></td><td>a) warts </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_12" value="b"></td><td>b) lesions </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_12" value="c"></td><td>c) skin irritations </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_12" value="d"></td><td>d) thicker foot calluses </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. Which implement is used to trim tags of dead skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_13" value="a"></td><td>a) Toenail clipper </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_13" value="b"></td><td>b) Nipper </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_13" value="c"></td><td>c) Nail raps </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_13" value="d"></td><td>d) Foot paddle </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. You should not use metal pushers or sharp implements on clients who have _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_14" value="a"></td><td>a) skin irritation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_14" value="b"></td><td>b) had a recent illness </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_14" value="c"></td><td>c) any chronic disease </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_14" value="d"></td><td>d) edema </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. A spa pedicure usually lasts for about ______ minutes. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_15" value="a"></td><td>a) 20 � 30 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_15" value="b"></td><td>b) 30 � 45 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_15" value="c"></td><td>c) 45 � 60 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_15" value="d"></td><td>d) 60 � 90 </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. Toe separators are used when ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_16" value="a"></td><td>a) massaging the feet </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_16" value="b"></td><td>b) polishing the toenails </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_16" value="c"></td><td>c) exfoliating the feet </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_16" value="d"></td><td>d) clipping the toenails </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. The disposable slippers provided for clients who have not worn open-toe shoes and want to avoid smudging their newly applied toenail polish are typically made of _____.  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_17" value="a"></td><td>a) Rubber or cotton </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_17" value="b"></td><td>b) Paper or plastic </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_17" value="c"></td><td>c) Paper or foam </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_17" value="d"></td><td>d) Rubber or plastic </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. Which type of product is put into the water in a pedicure bath to soften the skin on the feet? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_18" value="a"></td><td>a) Foot soaks </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_18" value="b"></td><td>b) Essential oils </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_18" value="c"></td><td>c) Scrubs </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_18" value="d"></td><td>d) Masks </td></tr>
+  		</table>
+    </p>
+
+    <p>19. Exfoliating scrubs are usually ______ that contain an abrasive as the exfoliating agent. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_19" value="a"></td><td>a) Oil-base creams </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_19" value="b"></td><td>b) Water-base lotions </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_19" value="c"></td><td>c) Crystallized creams </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_19" value="d"></td><td>d) Oil-base breams </td></tr>
+  		</table>
+    </p>
+
+    <p>20. Masks are commonly made with mineral clays, moisturizing agents, skin softeners, aromatherapy oils, and _____. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_21" value="a"></td><td>a) Skin sloughers </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_21" value="b"></td><td>b) Skin scrubs </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_21" value="c"></td><td>c) Beneficial extracts </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_21" value="d"></td><td>d) Skin antiseptics </td></tr>
+  		</table>
+    </p>
+
+    <p>21. Callus softener products are applied ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_22" value="a"></td><td>a) Directly to the callus </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="b"></td><td>b) By mixing with water in a pedicure bath </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="c"></td><td>c) Spraying on entire foot with mister </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="d"></td><td>d) By mixing with a softening lotion </td></tr>
+  		</table>
+    </p>
+
+    <p>22. Which abbreviation refers to a licensed nail technician or cosmetologist who has taken advanced education to learn to perform safe pedicures on podiatry patients? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_22" value="a"></td><td>a) NMC </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="b"></td><td>b) INTA </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="c"></td><td>c) MNT </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_22" value="d"></td><td>d) EPA </td></tr>
+  		</table>
+    </p>
+
+    <p>23. Treatments that require multiple appointments are referred to as_________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_23" value="a"></td><td>a) a grouping </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_23" value="b"></td><td>b) a series </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_23" value="c"></td><td>c) successive services </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_23" value="d"></td><td>d) a collection </td></tr>
+  		</table>
+    </p>
+
+    <p>24. Appointment to ensure lower calluses should be scheduled. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_24" value="a"></td><td>a) weekly </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_24" value="b"></td><td>b) daily </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_24" value="c"></td><td>c) monthly </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_24" value="d"></td><td>d) biweekly </td></tr>
+  		</table>
+    </p>
+
+    <p>25. A typical callus reduction appointment includes a soak application, a reduction product application and treatment, _________, and dismissal. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_25" value="a"></td><td>a) nail polish application </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_25" value="b"></td><td>b) foot massage </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_25" value="c"></td><td>c) a lotion application </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_25" value="d"></td><td>d) an antiseptic application </td></tr>
+  		</table>
+    </p>
+
+    <p>26. A client going through a callus reduction process will typically require about _________ visits. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_26" value="a"></td><td>a) 2 � 3 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_26" value="b"></td><td>b) 4 � 6 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_26" value="c"></td><td>c) 8 � 10 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_26" value="d"></td><td>d) 12 � 15 </td></tr>
+  		</table>
+    </p>
+
+    <p>27. The typical method for applying paraffin from the bath is to dip and re-dip the hands or feet ______ times into larger paraffin bath. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_27" value="a"></td><td>a) 1 � 2 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_27" value="b"></td><td>b) 2 � 3 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_27" value="c"></td><td>c) 3 � 4 </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_27" value="d"></td><td>d) 4 � 6 </td></tr>
+  		</table>
+    </p>
+
+    <p>28. The massage performed during a pedicure service is predominantly ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_28" value="a"></td><td>a) effleurage </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_28" value="b"></td><td>b) petrissage </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_28" value="c"></td><td>c) tapotement </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_28" value="d"></td><td>d) vibration </td></tr>
+  		</table>
+    </p>
+
+    <p>29. Reflexology is a unique method of applying pressure with the thumb and index fingers to the hands and feet and demonstrates ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_29" value="a"></td><td>a) healing of chronic illness </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_29" value="b"></td><td>b) healing of back pain </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_29" value="c"></td><td>c) control of foot pain </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_29" value="d"></td><td>d) health benefits </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. Hot stones are used in pedicure to provide a deep, penetrating, and comforting heat that enhances relaxation and_________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_30" value="a"></td><td>a) ability to sleep </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_30" value="b"></td><td>b) circulation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_30" value="c"></td><td>c) stimulation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_30" value="d"></td><td>d) blood flow reduction </td></tr>
+  		</table>
+    </p>
+
+    <p>31. Salons must always use an EPA-registered hospital disinfectant that is labeled a broad spectrum _______, viricide, and fungicide. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_31" value="a"></td><td>a) bactericide </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_31" value="b"></td><td>b) tuberculocide </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_31" value="c"></td><td>c) germicide </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_31" value="d"></td><td>d) antibiotic </td></tr>
+  		</table>
+    </p>
+
+    <p>32. Ergonomics in pedicuring focuses on ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_32" value="a"></td><td>a) the technician�s body positioning </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_32" value="b"></td><td>b) the products used </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_32" value="c"></td><td>c) water temperature </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_32" value="d"></td><td>d) massage techniques </td></tr>
+  		</table>
+    </p>
+
+    <p>33. Generally when performing a foot massage the foot should be gently grapsed _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_33" value="a"></td><td>a) just aboe the ankle </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_33" value="b"></td><td>b) by the heal </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_33" value="c"></td><td>c) between the thumb and the fingers </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_33" value="d"></td><td>d) just below the toes </td></tr>
+  		</table>
+    </p>
+
+    <p>34. When performing a pedicure, a _____ is used to gently remove and loose and dead tissue. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_34" value="a"></td><td>a) nail brush </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_34" value="b"></td><td>b) wooden pusher </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_34" value="c"></td><td>c) nail clipper </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_34" value="d"></td><td>d) curette </td></tr>
+  		</table>
+    </p>
+
+
+    <p>35. Curettes must always be used with the bowl of the curette _____ the skin. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_35" value="a"></td><td>a) horizontal to </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_35" value="b"></td><td>b) toward the skin </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_35" value="c"></td><td>c) away from the skin </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_35" value="d"></td><td>d) directly opposite from </td></tr>
+  		</table>
+    </p>
+
+    <p>36. Nail technicians can ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_36" value="a"></td><td>a) prevent ingrown nails </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_36" value="b"></td><td>b) can treat ingrown nails </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_36" value="c"></td><td>c) cut and trim calluses </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_36" value="d"></td><td>d) cannot cut or trim calluses </td></tr>
+  		</table>
+    </p>
+
+    <p>37. _________ is a traditional release in massage. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_37" value="a"></td><td>a) feathering </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_37" value="b"></td><td>b) patting lightly </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_37" value="c"></td><td>c) reflexology </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_37" value="d"></td><td>d) gently squeeing </td></tr>
+  		</table>
+    </p>
+
+    <p>38. After a pedicure, what is the first step prior to applying the base coat? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_38" value="a"></td><td>a) Using the polish remover to remove oils and lotion from the nails </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_38" value="b"></td><td>b) Asking client to put on pedicure slippers </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_38" value="c"></td><td>c) Applying toe separators </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_38" value="d"></td><td>d) Applying moisturizer </td></tr>
+  		</table>
+    </p>
+
+    <p>39. What is the purpose of a callus? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_39" value="a"></td><td>a) a callus has no purpose </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_39" value="b"></td><td>b) to prevent foot dehydration </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_39" value="c"></td><td>c) to protect the uderying skin from irritation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_39" value="d"></td><td>d) to help reguate the foot temperature </td></tr>
+  		</table>
+    </p>
+
+    <p>40. When using a curette to remove loose debris from the nail plate, it is recommended that you use a ____ motion. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_40" value="a"></td><td>a) up-and-down </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_40" value="b"></td><td>b) scooping </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_40" value="c"></td><td>c) side-to-side </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_40" value="d"></td><td>d) circular </td></tr>
+  		</table>
+    </p>
+
+    <p>41. The ______ toenail is usually the most challenging to trim. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_41" value="a"></td><td>a) big </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_41" value="b"></td><td>b) middle </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_41" value="c"></td><td>c) little </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_41" value="d"></td><td>d) second </td></tr>
+  		</table>
+    </p>
+
+    <p>42. Massaging the leg is not recommended for clients with severe hypertension or circulatory problems because it ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_42" value="a"></td><td>a) Promotes inflammation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_42" value="b"></td><td>b) Inhibits inflammation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_42" value="c"></td><td>c) Increases circulation </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_42" value="d"></td><td>d) Decreases circulation </td></tr>
+  		</table>
+    </p>
+
+    <p>43. The basic pedicure includes a foot massage and not a leg massage due to time constraints and the fact that it is considered to be ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_43" value="a"></td><td>a) inappropriate </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_43" value="b"></td><td>b) excessive </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_43" value="c"></td><td>c) a special service addition </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_43" value="d"></td><td>d) inefficient an costly </td></tr>
+  		</table>
+    </p>
+
+ <p>44. Foot care mask ingredients are used to cleanse, exfoliate, tighten, tone, hydrate, and _____ the skin. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_44" value="a"></td><td>a) roughen </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_44" value="b"></td><td>b) nourish </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_44" value="c"></td><td>c) loosen </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_44" value="d"></td><td>d) circulate </td></tr>
+  		</table>
+    </p>
+
+ <p>45. When performing a pedicure, it is recommended that you ______ as you work. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_14_45" value="a"></td><td>a) lean forward toward client </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_45" value="b"></td><td>b) keep your body reaxed and unstrained </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_45" value="c"></td><td>c) stretch to reach your client's feet </td></tr>
+  		  <tr><td><input type="radio" name="nails_14_45" value="d"></td><td>d) keep your back rigid and firm </td></tr>
+  		</table>
+    </p>
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>
+

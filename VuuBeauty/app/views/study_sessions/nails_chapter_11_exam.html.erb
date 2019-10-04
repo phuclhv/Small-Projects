@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 11 -- Nail Product Chemistry Simplified</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  Which of the following is not a chemical?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Light</td><td><input type="radio" name="nails_11_1" value="a"></td></tr>
+  		  <tr><td>b)  Water</td><td><input type="radio" name="nails_11_1" value="b"></td></tr>
+  		  <tr><td>c)  Soil</td><td><input type="radio" name="nails_11_1" value="c"></td></tr>
+  		  <tr><td>d)  Oxygen</td><td><input type="radio" name="nails_11_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  Petroleum oil can be chemically converted into _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  sugar</td><td><input type="radio" name="nails_11_2" value="a"></td></tr>
+  		  <tr><td>b)  water</td><td><input type="radio" name="nails_11_2" value="b"></td></tr>
+  		  <tr><td>c)  acetone</td><td><input type="radio" name="nails_11_2" value="c"></td></tr>
+  		  <tr><td>d)  vitamin C</td><td><input type="radio" name="nails_11_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  In medieval times, alchemists searched in vain for ways to turn _____ into _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  water; wine</td><td><input type="radio" name="nails_11_3" value="a"></td></tr>
+  		  <tr><td>b)  wine; water</td><td><input type="radio" name="nails_11_3" value="b"></td></tr>
+  		  <tr><td>c)  gold; lead</td><td><input type="radio" name="nails_11_3" value="c"></td></tr>
+  		  <tr><td>d)  lead; gold</td><td><input type="radio" name="nails_11_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Vapors are formed when liquids _____ into the air.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  spray</td><td><input type="radio" name="nails_11_4" value="a"></td></tr>
+  		  <tr><td>b)  lift</td><td><input type="radio" name="nails_11_4" value="b"></td></tr>
+  		  <tr><td>c)  boil</td><td><input type="radio" name="nails_11_4" value="c"></td></tr>
+  		  <tr><td>d)  evaporate</td><td><input type="radio" name="nails_11_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  Which of the following are a blend of soot-like particles mixed with vapors?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Fumes</td><td><input type="radio" name="nails_11_5" value="a"></td></tr>
+  		  <tr><td>b)  Gases</td><td><input type="radio" name="nails_11_5" value="b"></td></tr>
+  		  <tr><td>c)  Solvents</td><td><input type="radio" name="nails_11_5" value="c"></td></tr>
+  		  <tr><td>d)  Emulsions</td><td><input type="radio" name="nails_11_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  A chemical that causes two surfaces to stick together is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a plasticizer</td><td><input type="radio" name="nails_11_6" value="a"></td></tr>
+  		  <tr><td>b)  an adhesive</td><td><input type="radio" name="nails_11_6" value="b"></td></tr>
+  		  <tr><td>c)  a monomer</td><td><input type="radio" name="nails_11_6" value="c"></td></tr>
+  		  <tr><td>d)  a polymer</td><td><input type="radio" name="nails_11_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  A nail polish base coat is a type of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  wrap</td><td><input type="radio" name="nails_11_7" value="a"></td></tr>
+  		  <tr><td>b)  oligomer</td><td><input type="radio" name="nails_11_7" value="b"></td></tr>
+  		  <tr><td>c)  primer</td><td><input type="radio" name="nails_11_7" value="c"></td></tr>
+  		  <tr><td>d)  initiator</td><td><input type="radio" name="nails_11_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  Which of the following is not a basic type of primer?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Acid-based</td><td><input type="radio" name="nails_11_8" value="a"></td></tr>
+  		  <tr><td>b)  Nonacid</td><td><input type="radio" name="nails_11_8" value="b"></td></tr>
+  		  <tr><td>c)  Acid-free</td><td><input type="radio" name="nails_11_8" value="c"></td></tr>
+  		  <tr><td>d)  Dual acid</td><td><input type="radio" name="nails_11_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  A substance that can cause visible and possibly permanent skin or eye damage is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a corrosive</td><td><input type="radio" name="nails_11_9" value="a"></td></tr>
+  		  <tr><td>b)  an adhesive</td><td><input type="radio" name="nails_11_9" value="b"></td></tr>
+  		  <tr><td>c)  a polymer</td><td><input type="radio" name="nails_11_9" value="c"></td></tr>
+  		  <tr><td>d)  a catalyst</td><td><input type="radio" name="nails_11_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  A corrosive acid-based primer can cause painful burns and _____ to soft tissue and eyes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  cuts</td><td><input type="radio" name="nails_11_10" value="a"></td></tr>
+  		  <tr><td>b)  nicks</td><td><input type="radio" name="nails_11_10" value="b"></td></tr>
+  		  <tr><td>c)  scars</td><td><input type="radio" name="nails_11_10" value="c"></td></tr>
+  		  <tr><td>d)  scalds</td><td><input type="radio" name="nails_11_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  How much primer is typically recommended for most clients?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  None</td><td><input type="radio" name="nails_11_11" value="a"></td></tr>
+  		  <tr><td>b)  1 coat</td><td><input type="radio" name="nails_11_11" value="b"></td></tr>
+  		  <tr><td>c)  2-3 coats</td><td><input type="radio" name="nails_11_11" value="c"></td></tr>
+  		  <tr><td>d)  Up to 10 coats</td><td><input type="radio" name="nails_11_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  Which type of primer contains methacrylic acid?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Acid-based primer</td><td><input type="radio" name="nails_11_12" value="a"></td></tr>
+  		  <tr><td>b)  Dual-acid primer</td><td><input type="radio" name="nails_11_12" value="b"></td></tr>
+  		  <tr><td>c)  Nonacid primer</td><td><input type="radio" name="nails_11_12" value="c"></td></tr>
+  		  <tr><td>d)  Acid-free primer</td><td><input type="radio" name="nails_11_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  Scrubbing the nail plate gets rid of the bacteria and _____ that cause fingernail infection.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  mold</td><td><input type="radio" name="nails_11_13" value="a"></td></tr>
+  		  <tr><td>b)  debris</td><td><input type="radio" name="nails_11_13" value="b"></td></tr>
+  		  <tr><td>c)  mildew</td><td><input type="radio" name="nails_11_13" value="c"></td></tr>
+  		  <tr><td>d)  fungi</td><td><input type="radio" name="nails_11_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  The effects of a nail dehydrator will typically wear off within _____ minutes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  15</td><td><input type="radio" name="nails_11_14" value="a"></td></tr>
+  		  <tr><td>b)  30</td><td><input type="radio" name="nails_11_14" value="b"></td></tr>
+  		  <tr><td>c)  45</td><td><input type="radio" name="nails_11_14" value="c"></td></tr>
+  		  <tr><td>d)  60</td><td><input type="radio" name="nails_11_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  An abrasive or buffer of _____ grit is recommended for preparing the nail plate for a nail enhancement product.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  80</td><td><input type="radio" name="nails_11_15" value="a"></td></tr>
+  		  <tr><td>b)  160</td><td><input type="radio" name="nails_11_15" value="b"></td></tr>
+  		  <tr><td>c)  240</td><td><input type="radio" name="nails_11_15" value="c"></td></tr>
+  		  <tr><td>d)  400</td><td><input type="radio" name="nails_11_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  The thinner the nail plate, the _____ it will be.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  weaker</td><td><input type="radio" name="nails_11_16" value="a"></td></tr>
+  		  <tr><td>b)  stronger</td><td><input type="radio" name="nails_11_16" value="b"></td></tr>
+  		  <tr><td>c)  wider</td><td><input type="radio" name="nails_11_16" value="c"></td></tr>
+  		  <tr><td>d)  longer</td><td><input type="radio" name="nails_11_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  Idealy, the nail plate should be _____ before you apply a nail enhancement product.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  thick and weak</td><td><input type="radio" name="nails_11_17" value="a"></td></tr>
+  		  <tr><td>b)  thin and weak</td><td><input type="radio" name="nails_11_17" value="b"></td></tr>
+  		  <tr><td>c)  thick and strong</td><td><input type="radio" name="nails_11_17" value="c"></td></tr>
+  		  <tr><td>d)  thin and strong</td><td><input type="radio" name="nails_11_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  _____ filing damages both the nail plate and the underlying sensitive tissues of the nail bed.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Routine</td><td><input type="radio" name="nails_11_18" value="a"></td></tr>
+  		  <tr><td>b)  Natural</td><td><input type="radio" name="nails_11_18" value="b"></td></tr>
+  		  <tr><td>c)  Strong</td><td><input type="radio" name="nails_11_18" value="c"></td></tr>
+  		  <tr><td>d)  Rough</td><td><input type="radio" name="nails_11_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  Overfiling the nail can lead to free-edge product separation, which is also known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  curling</td><td><input type="radio" name="nails_11_19" value="a"></td></tr>
+  		  <tr><td>b)  splintering</td><td><input type="radio" name="nails_11_19" value="b"></td></tr>
+  		  <tr><td>c)  chipping</td><td><input type="radio" name="nails_11_19" value="c"></td></tr>
+  		  <tr><td>d)  speckling</td><td><input type="radio" name="nails_11_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  Proper preparation of the nail plate for nail enhancements includes removing all dead tissue for the side walls and _____ as well as bacteria, fungi, oil, and moisture from the nail plate.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  eponychium</td><td><input type="radio" name="nails_11_20" value="a"></td></tr>
+  		  <tr><td>b)  cuticle</td><td><input type="radio" name="nails_11_20" value="b"></td></tr>
+  		  <tr><td>c)  nail bed</td><td><input type="radio" name="nails_11_20" value="c"></td></tr>
+  		  <tr><td>d)  free edge</td><td><input type="radio" name="nails_11_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  Soaking the nail plate in any liquid, including water and acetone, will temporarily soften the nail plate's surface for up to _____ minutes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  10</td><td><input type="radio" name="nails_11_21" value="a"></td></tr>
+  		  <tr><td>b)  20</td><td><input type="radio" name="nails_11_21" value="b"></td></tr>
+  		  <tr><td>c)  30</td><td><input type="radio" name="nails_11_21" value="c"></td></tr>
+  		  <tr><td>d)  60</td><td><input type="radio" name="nails_11_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  If a coating cures or polymerizes, it undergoes a _____ reaction.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  hydrophilic</td><td><input type="radio" name="nails_11_22" value="a"></td></tr>
+  		  <tr><td>b)  lipophilic</td><td><input type="radio" name="nails_11_22" value="b"></td></tr>
+  		  <tr><td>c)  chemical</td><td><input type="radio" name="nails_11_22" value="c"></td></tr>
+  		  <tr><td>d)  physical</td><td><input type="radio" name="nails_11_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  The gigantic chains of molecules that make up UV gels, wraps, and adhesives are called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  monomers</td><td><input type="radio" name="nails_11_23" value="a"></td></tr>
+  		  <tr><td>b)  polymers</td><td><input type="radio" name="nails_11_23" value="b"></td></tr>
+  		  <tr><td>c)  acrylates</td><td><input type="radio" name="nails_11_23" value="c"></td></tr>
+  		  <tr><td>d)  oligomers</td><td><input type="radio" name="nails_11_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  Polymers usually take which form?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Solid</td><td><input type="radio" name="nails_11_24" value="a"></td></tr>
+  		  <tr><td>b)  Liquid</td><td><input type="radio" name="nails_11_24" value="b"></td></tr>
+  		  <tr><td>c)  Gas</td><td><input type="radio" name="nails_11_24" value="c"></td></tr>
+  		  <tr><td>d)  Vapor</td><td><input type="radio" name="nails_11_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  The terms cure, curing, or _____ are sometimes used synonymously with polymerization.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  softening</td><td><input type="radio" name="nails_11_25" value="a"></td></tr>
+  		  <tr><td>b)  supporting</td><td><input type="radio" name="nails_11_25" value="b"></td></tr>
+  		  <tr><td>c)  strengthening</td><td><input type="radio" name="nails_11_25" value="c"></td></tr>
+  		  <tr><td>d)  hardening</td><td><input type="radio" name="nails_11_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  Because nail plates are made of a protein called _____ they are considered polymers.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  melanin</td><td><input type="radio" name="nails_11_26" value="a"></td></tr>
+  		  <tr><td>b)  corpuscle</td><td><input type="radio" name="nails_11_26" value="b"></td></tr>
+  		  <tr><td>c)  UV stabilizers</td><td><input type="radio" name="nails_11_26" value="c"></td></tr>
+  		  <tr><td>d)  plasticizers</td><td><input type="radio" name="nails_11_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  The individual molecules that make up polymers are called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  oligomers</td><td><input type="radio" name="nails_11_27" value="a"></td></tr>
+  		  <tr><td>b)  monomers</td><td><input type="radio" name="nails_11_27" value="b"></td></tr>
+  		  <tr><td>c)  UV stabilizers</td><td><input type="radio" name="nails_11_27" value="c"></td></tr>
+  		  <tr><td>d)  plasticizers</td><td><input type="radio" name="nails_11_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  What special ingredient triggers polymerization?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The catalyst</td><td><input type="radio" name="nails_11_28" value="a"></td></tr>
+  		  <tr><td>b)  The initiator</td><td><input type="radio" name="nails_11_28" value="b"></td></tr>
+  		  <tr><td>c)  The oligomer</td><td><input type="radio" name="nails_11_28" value="c"></td></tr>
+  		  <tr><td>d)  The pigment</td><td><input type="radio" name="nails_11_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  How long does it take the polymer chains in nail enhancements to reach their ultimate lengths?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Several days</td><td><input type="radio" name="nails_11_29" value="a"></td></tr>
+  		  <tr><td>b)  Several hours</td><td><input type="radio" name="nails_11_29" value="b"></td></tr>
+  		  <tr><td>c)  Several seconds</td><td><input type="radio" name="nails_11_29" value="c"></td></tr>
+  		  <tr><td>d)  Several minutes</td><td><input type="radio" name="nails_11_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  If a catalyst is added to a chemical reaction, what does it do?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Nothing</td><td><input type="radio" name="nails_11_30" value="a"></td></tr>
+  		  <tr><td>b)  Stops the reaction</td><td><input type="radio" name="nails_11_30" value="b"></td></tr>
+  		  <tr><td>c)  Slows the reaction</td><td><input type="radio" name="nails_11_30" value="c"></td></tr>
+  		  <tr><td>d)  Speeds up the reaction</td><td><input type="radio" name="nails_11_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  Without _____, it would take UV gel products 2 or 3 hours to harden into nail enhancements.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  oligomers</td><td><input type="radio" name="nails_11_31" value="a"></td></tr>
+  		  <tr><td>b)  methyl methacrylate monomer (MMA)</td><td><input type="radio" name="nails_11_31" value="b"></td></tr>
+  		  <tr><td>c)  overexposure</td><td><input type="radio" name="nails_11_31" value="c"></td></tr>
+  		  <tr><td>d)  a cross-linker</td><td><input type="radio" name="nails_11_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  Liquid and powder systems use _____ that gather energy from the heat of the room or hand, while UV curling 
+            products use photoinitiators that derive their extra energy from exposure to UV
+  		<table class="table table-condensed">
+  		  <tr><td>a)  endothermic initiators</td><td><input type="radio" name="nails_11_32" value="a"></td></tr>
+  		  <tr><td>b)  exothermic processors</td><td><input type="radio" name="nails_11_32" value="b"></td></tr>
+  		  <tr><td>c)  thermal initiators</td><td><input type="radio" name="nails_11_32" value="c"></td></tr>
+  		  <tr><td>d)  photoprocessors</td><td><input type="radio" name="nails_11_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  Products with simple polymer chains are easily damaged by sharp impacts or _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  foods</td><td><input type="radio" name="nails_11_33" value="a"></td></tr>
+  		  <tr><td>b)  solvents</td><td><input type="radio" name="nails_11_33" value="b"></td></tr>
+  		  <tr><td>c)  marker inks</td><td><input type="radio" name="nails_11_33" value="c"></td></tr>
+  		  <tr><td>d)  heavy stresses</td><td><input type="radio" name="nails_11_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  Compared to uncross-linked products, cross-linked nail enhancements _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  take less time to remove in acetone</td><td><input type="radio" name="nails_11_34" value="a"></td></tr>
+  		  <tr><td>b)  take more time to remove in acetone</td><td><input type="radio" name="nails_11_34" value="b"></td></tr>
+  		  <tr><td>c)  take an equal amount of time to remove in acetone</td><td><input type="radio" name="nails_11_34" value="c"></td></tr>
+  		  <tr><td>d)  cannot be removed in acetone</td><td><input type="radio" name="nails_11_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  All nail enhancements and adhesives are based on a family of chemical ingredients called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  polymers</td><td><input type="radio" name="nails_11_35" value="a"></td></tr>
+  		  <tr><td>b)  monomers</td><td><input type="radio" name="nails_11_35" value="b"></td></tr>
+  		  <tr><td>c)  acrylics</td><td><input type="radio" name="nails_11_35" value="c"></td></tr>
+  		  <tr><td>d)  coatings</td><td><input type="radio" name="nails_11_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  All monomer liquids and polymer powders are based on _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  acrylates</td><td><input type="radio" name="nails_11_36" value="a"></td></tr>
+  		  <tr><td>b)  cyanoacrylates</td><td><input type="radio" name="nails_11_36" value="b"></td></tr>
+  		  <tr><td>c)  ambacrylates</td><td><input type="radio" name="nails_11_36" value="c"></td></tr>
+  		  <tr><td>d)  mythacrylates</td><td><input type="radio" name="nails_11_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  One of the reasons methyl methacrylate monomer (MMA) should not be used is because _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is extremely difficult to remove and will not dissolve in product removers</td><td><input type="radio" name="nails_11_37" value="a"></td></tr>
+  		  <tr><td>b)  it is a safe substance that is widely used for many applications</td><td><input type="radio" name="nails_11_37" value="b"></td></tr>
+  		  <tr><td>c)  it is not dangerous to inhale when there is proper ventilation</td><td><input type="radio" name="nails_11_37" value="c"></td></tr>
+  		  <tr><td>d)  it is not absorbed into the blood to affect health</td><td><input type="radio" name="nails_11_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  The vast majority of chemicals people come in contact with during a lifetime are completely safe and most are _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  beneficial</td><td><input type="radio" name="nails_11_38" value="a"></td></tr>
+  		  <tr><td>b)  easy to use</td><td><input type="radio" name="nails_11_38" value="b"></td></tr>
+  		  <tr><td>c)  harmless</td><td><input type="radio" name="nails_11_38" value="c"></td></tr>
+  		  <tr><td>d)  nontoxic</td><td><input type="radio" name="nails_11_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  The majority of ingredients in evaporation coatings are _____ or quickly evaporating solvents.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  highly flammable</td><td><input type="radio" name="nails_11_39" value="a"></td></tr>
+  		  <tr><td>b)  polymer-based</td><td><input type="radio" name="nails_11_39" value="b"></td></tr>
+  		  <tr><td>c)  volatile</td><td><input type="radio" name="nails_11_39" value="c"></td></tr>
+  		  <tr><td>d)  monomer-based</td><td><input type="radio" name="nails_11_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  In nail enhancements, what is the function of a UV stabilizer?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  To improve flexibility</td><td><input type="radio" name="nails_11_40" value="a"></td></tr>
+  		  <tr><td>b)  To control color stability</td><td><input type="radio" name="nails_11_40" value="b"></td></tr>
+  		  <tr><td>c)  To increase rigidity</td><td><input type="radio" name="nails_11_40" value="c"></td></tr>
+  		  <tr><td>d)  To prevent chipping</td><td><input type="radio" name="nails_11_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  Which type of nail enhancements are made from organic substances?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  All of them</td><td><input type="radio" name="nails_11_41" value="a"></td></tr>
+  		  <tr><td>b)  None of them</td><td><input type="radio" name="nails_11_41" value="b"></td></tr>
+  		  <tr><td>c)  Polymer-based enhancements</td><td><input type="radio" name="nails_11_41" value="c"></td></tr>
+  		  <tr><td>d)  Evaporation coatings</td><td><input type="radio" name="nails_11_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  When problems with nail enhancements occur, they are least likely to be caused by _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  </td><td><input type="radio" name="nails_11_42" value="a"></td></tr>
+  		  <tr><td>b)  </td><td><input type="radio" name="nails_11_42" value="b"></td></tr>
+  		  <tr><td>c)  </td><td><input type="radio" name="nails_11_42" value="c"></td></tr>
+  		  <tr><td>d)  </td><td><input type="radio" name="nails_11_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  _____ said, "All substances are poisons; there is none that is not a poison.  Only the dose differentiates between a poison and a remedy."
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Jeff Pink</td><td><input type="radio" name="nails_11_43" value="a"></td></tr>
+  		  <tr><td>b)  Charles Revson</td><td><input type="radio" name="nails_11_43" value="b"></td></tr>
+  		  <tr><td>c)  Paracelsus</td><td><input type="radio" name="nails_11_43" value="c"></td></tr>
+  		  <tr><td>d)  Queen Nefertiti</td><td><input type="radio" name="nails_11_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  Which of these statements about toxicity is true?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  There are many substances that are completely nontoxic.</td><td><input type="radio" name="nails_11_44" value="a"></td></tr>
+  		  <tr><td>b)  Toxicity is determined by overexposure.</td><td><input type="radio" name="nails_11_44" value="b"></td></tr>
+  		  <tr><td>c)  No toxic product can be used safely.</td><td><input type="radio" name="nails_11_44" value="c"></td></tr>
+  		  <tr><td>d)  Toxic products should never be used in the salon.</td><td><input type="radio" name="nails_11_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  Local _____ systems are very effective ventilators and will help prevent overexposure if the manufacturer's recommendations are followed.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dust capture</td><td><input type="radio" name="nails_11_45" value="a"></td></tr>
+  		  <tr><td>b)  air cleanser</td><td><input type="radio" name="nails_11_45" value="b"></td></tr>
+  		  <tr><td>c)  air purifier</td><td><input type="radio" name="nails_11_45" value="c"></td></tr>
+  		  <tr><td>d)  source capture</td><td><input type="radio" name="nails_11_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

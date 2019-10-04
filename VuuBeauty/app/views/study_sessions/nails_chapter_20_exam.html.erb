@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2> Chapter 20: Seeking Employment </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. Before you can obtain a position as a nail technician you must first pass your regulatory agencys licensing examination and _________.
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="nails_20_1" value="a"></td><td>a) secure the required credentials from the applicable regulatory agency </td></tr>
+		  <tr><td><input type="radio" name="nails_20_1" value="b"></td><td>b) network with industry professionals to determine job oportunities </td></tr>
+		  <tr><td><input type="radio" name="nails_20_1" value="c"></td><td>c) schedule and complete at least six employment interviews </td></tr>
+		  <tr><td><input type="radio" name="nails_20_1" value="d"></td><td>d) prepare a complete resume and employment portfolio </td></tr>
+		</table>
+    </p>
+
+    <p>2. Factors that will affect how well you perform during the licensing examination include your physical and psychological state, your memory, time management, and your _________.  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_2" value="a"></td><td>a) stamina </td></tr>
+		  <tr><td><input type="radio" name="nails_20_2" value="b"></td><td>b) awareness </td></tr>
+		  <tr><td><input type="radio" name="nails_20_2" value="c"></td><td>c) academic skills </td></tr>
+		  <tr><td><input type="radio" name="nails_20_2" value="d"></td><td>d) social skills </td></tr>
+  		</table>
+    </p>
+
+    <p>3. A test-wise student is one who understands ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_3" value="a"></td><td>a) the importance of doing well in school </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_3" value="b"></td><td>b) the strategies for successfully taking tests </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_3" value="c"></td><td>c) the imortance of attitude </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_3" value="d"></td><td>d) that going the extra mile makes a difference </td></tr>
+  		</table>
+    </p>
+
+    <p>4. The word holistic refers to ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_4" value="a"></td><td>a) the whole you </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_4" value="b"></td><td>b) the whole test </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_4" value="c"></td><td>c) a complete scholastic experience </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_4" value="d"></td><td>d) an integrated education </td></tr>
+  		</table>
+    </p>
+
+    <p>5. An important part of preparing for your licensing exam is maintaining good physical, emotional, and spiritual health, including ______.
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_5" value="a"></td><td>a) sharp personal habits </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_5" value="b"></td><td>b) projecting a postive attitude </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_5" value="c"></td><td>c) excellent personal hygiene </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_5" value="d"></td><td>d) sound diet and eating habits </td></tr>
+  		</table>
+    </p>
+
+    <p>6. On the day of the test, it is not recommended that you _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_6" value="a"></td><td>a) relax and try to slow down physically </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_6" value="b"></td><td>b) review the material lightly on the day of the exam </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_6" value="c"></td><td>c) avoid monitoring the time to reduce your stress </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_6" value="d"></td><td>d) arrive early with a self-confident attitude </td></tr>
+  		</table>
+    </p>
+
+    <p>7.The process of reaching logical conclusions by employing logical reasoning is known as _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_7" value="a"></td><td>a) dedutive resoning </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_7" value="b"></td><td>b) conclusive reasoning </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_7" value="c"></td><td>c) resumptive reasoning </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_7" value="d"></td><td>d) deductive justification </td></tr>
+  		</table>
+    </p>
+
+    <p>8. In test questions, the basic question or problem is known as ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_8" value="a"></td><td>a) a query </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_8" value="b"></td><td>b) the stem </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_8" value="c"></td><td>c) a conundrum </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_8" value="d"></td><td>d) the root </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. Which of the following is an example of an absolute?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_9" value="a"></td><td>a) some </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_9" value="b"></td><td>b) never </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_9" value="c"></td><td>c) usually </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_9" value="d"></td><td>d) little </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. When two choices in a multiple-choice question are similar _______.
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_10" value="a"></td><td>a) one is always right </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_10" value="b"></td><td>b) both are usually right </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_10" value="c"></td><td>c) both are usually wrong </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_10" value="d"></td><td>d) one is probably right </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. To better prepare for the practical portion of the examination, you should practice the correct skills required in the test frequently and ________.
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_11" value="a"></td><td>a) participate in mock licensing examinations </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_11" value="b"></td><td>b) take as many tools and implements as you can fit in the kit bag </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_11" value="c"></td><td>c) be concerned about the behavior of other test candiates </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_11" value="d"></td><td>d) dress casually and wear athletic shoes </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. Which of the following is not a characteristic that will help you get the position you want and help you keep it? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_12" value="a"></td><td>a) Apathy </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_12" value="b"></td><td>b) Strong work ethic </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_12" value="c"></td><td>c) Good technical skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_12" value="d"></td><td>d) Self-motivation </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. When you have ______, you are committed to a strong code of moral and artistic values.
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_13" value="a"></td><td>a) integrity </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_13" value="b"></td><td>b) motivation </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_13" value="c"></td><td>c) ethusiasm </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_13" value="d"></td><td>d) curiosity </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. Having _______ means taking pridse in your work and committing yourself to consistently erforming a good job for your clients, employer, and salon team. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_14" value="a"></td><td>a) professional integrity </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_14" value="b"></td><td>b) a strong work ethic </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_14" value="c"></td><td>c) strong technical skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_14" value="d"></td><td>d) exceptional enthusiasm </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. There are nearly ________ professional salons in the United States. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_15" value="a"></td><td>a) 313,000 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_15" value="b"></td><td>b) 370,000 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_15" value="c"></td><td>c) 1.6 million </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_15" value="d"></td><td>d) 97,000 </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. The average independent salon may have as many as ________ nail technicians woring there regulary. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_16" value="a"></td><td>a) 5 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_16" value="b"></td><td>b) 10 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_16" value="c"></td><td>c) 15 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_16" value="d"></td><td>d) 20 </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. The majority of professional nail salons and spas are _______.  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_17" value="a"></td><td>a) large corporate salon chains </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_17" value="b"></td><td>b) independent salon chains </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_17" value="c"></td><td>c) franchises </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_17" value="d"></td><td>d) small independent salons </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. Independent salon chains usually have ______ or more salons that are owned by one individual or two or more partners. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_18" value="a"></td><td>a) 2 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_18" value="b"></td><td>b) 4 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_18" value="c"></td><td>c) 5 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_18" value="d"></td><td>d) 10 </td></tr>
+  		</table>
+    </p>
+
+    <p>19. With large national salon chains, decisions regarding size, decor, hours, services, prices, advertising, and ________ are made at the corporate headquarters. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_19" value="a"></td><td>a) rofit targets </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_19" value="b"></td><td>b) license fees </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_19" value="c"></td><td>c) licensing requirements </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_19" value="d"></td><td>d) esthetician scheduling </td></tr>
+  		</table>
+    </p>
+
+    <p>20. Basic value-priced operations generally ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_21" value="a"></td><td>a) pay nail technicians by the hour </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_21" value="b"></td><td>b) hire highly seasoned technicians </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_21" value="c"></td><td>c) depend primarily on an established client base </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_21" value="d"></td><td>d) usually charge $30 or more for manicures </td></tr>
+  		</table>
+    </p>
+
+    <p>21. High-end salons or day spas hire practitioners whose technical expertise, personal appearance, and ______ meet their high standards. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_22" value="a"></td><td>a) social skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="b"></td><td>b) communication skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="c"></td><td>c) personal goals </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="d"></td><td>d) personal beliefs </td></tr>
+  		</table>
+    </p>
+
+    <p>22. Resume reparation guidelines include keeping it simple, limiting it to one page, and including ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_22" value="a"></td><td>a) a personal photo </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="b"></td><td>b) personal references </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="c"></td><td>c) a cover letter </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_22" value="d"></td><td>d) a list of personal hobbies </td></tr>
+  		</table>
+    </p>
+
+    <p>23. A written summary of a person's education and work experience is known as _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_23" value="a"></td><td>a) a resume </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_23" value="b"></td><td>b) a synopsis </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_23" value="c"></td><td>c) a portfolio </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_23" value="d"></td><td>d) an encapsulation </td></tr>
+  		</table>
+    </p>
+
+    <p>24. On average, a potential employer will scan your resume for about _______ before deciding whether to grant you an interview. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_24" value="a"></td><td>a) 20 seconds </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_24" value="b"></td><td>b) 45 seconds </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_24" value="c"></td><td>c) 60 seconds </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_24" value="d"></td><td>d) 2 minutes </td></tr>
+  		</table>
+    </p>
+
+    <p>25.Accomlishment statements highlight your basic duties and responsibiliites and the best way to show concrete accomplishments is to include _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_25" value="a"></td><td>a) a list of archievements </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_25" value="b"></td><td>b) income and expense ratios </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_25" value="c"></td><td>c) numbers or percentages </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_25" value="d"></td><td>d) glowing words and adjectives </td></tr>
+  		</table>
+    </p>
+
+    <p>26. There is no better time for you to achieve significant accomplishments for you resume than _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_26" value="a"></td><td>a) while you are in school </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_26" value="b"></td><td>b) during your first job </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_26" value="c"></td><td>c) during high school </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_26" value="d"></td><td>d) while growing up </td></tr>
+  		</table>
+    </p>
+
+    <p>27. Make your resume easy to read by using concise, clear sentences and avoid overwriting ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_27" value="a"></td><td>a) and overstating goals </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_27" value="b"></td><td>b) and flowery language </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_27" value="c"></td><td>c) and making it too brief </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_27" value="d"></td><td>d) and making it too easy to read </td></tr>
+  		</table>
+    </p>
+
+    <p>28. Skills that you have mastered in other jobs that can be put to used in a new position are called ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_28" value="a"></td><td>a) transportable skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_28" value="b"></td><td>b) transmittable skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_28" value="c"></td><td>c) transferable skills </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_28" value="d"></td><td>d) deliverable skills </td></tr>
+  		</table>
+    </p>
+
+    <p>29. A collection, usually bound, of photos and documents that reflect your skills, accomplishments, and abilities in a chosen career field is called ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_29" value="a"></td><td>a) a professional resume </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_29" value="b"></td><td>b) an employment binder </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_29" value="c"></td><td>c) a career synopsis </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_29" value="d"></td><td>d) an employment protfolio </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. One of the most important steps in the process of job hunting is determining what you want in a salon or spa environment and narrowing your search so you can _________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_30" value="a"></td><td>a) target potential coworkers </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_30" value="b"></td><td>b) find the best parking areas </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_30" value="c"></td><td>c) find the neighborhood of choice </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_30" value="d"></td><td>d) target potential employers </td></tr>
+  		</table>
+    </p>
+
+    <p>31. Connecting with people, communities, and local businesses to build mutually benefical relationships is known as ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_31" value="a"></td><td>a) socializing </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_31" value="b"></td><td>b) networking </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_31" value="c"></td><td>c) information exchanging </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_31" value="d"></td><td>d) connecting </td></tr>
+  		</table>
+    </p>
+
+    <p>32. When you visit a salon for networking purposes, using a checklist and keeping it on file for future reference is helpful in making informed ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_32" value="a"></td><td>a) interview decisions </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_32" value="b"></td><td>b) networking decisions </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_32" value="c"></td><td>c) comparisons between establishments </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_32" value="d"></td><td>d) socializing decisions </td></tr>
+  		</table>
+    </p>
+
+    <p>33. After visiting a salon, it is recommended that you always ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_33" value="a"></td><td>a) return for a second visit </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_33" value="b"></td><td>b) critique the salon to the manager </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_33" value="c"></td><td>c) ask for an interview </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_33" value="d"></td><td>d) send a thank you note </td></tr>
+  		</table>
+    </p>
+
+    <p>34. When you go to a job interivew, the documents you bring with you should include the contact information of former employers, the contact information of your nearest relative not living with you, your social security number, and ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_34" value="a"></td><td>a) your driver's license number </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_34" value="b"></td><td>b) your license plate number </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_34" value="c"></td><td>c) your preferred work hours </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_34" value="d"></td><td>d) your best handbag or wallet </td></tr>
+  		</table>
+    </p>
+
+    <p>35. It is recommended that you obtain how many interview outfits? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_35" value="a"></td><td>a) One or two </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_35" value="b"></td><td>b) No more than one </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_35" value="c"></td><td>c) No fewer than three </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_35" value="d"></td><td>d) At least five </td></tr>
+  		</table>
+    </p>
+
+    <p>36. The accessories you wear with your interview outfits should be fashionable and _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_36" value="a"></td><td>a) busy </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_36" value="b"></td><td>b) functional </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_36" value="c"></td><td>c) large </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_36" value="d"></td><td>d) expensive </td></tr>
+  		</table>
+    </p>
+
+    <p>37. When you go to a job interview, it is recommended that you take your resume, your portfolio, and ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_37" value="a"></td><td>a) important facts and figures </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_37" value="b"></td><td>b) your postsecondary school transcript </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_37" value="c"></td><td>c) your high school transcript </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_37" value="d"></td><td>d) your prior year income tax statement </td></tr>
+  		</table>
+    </p>
+
+    <p>38. Which of the following is not a typical question asked by a potential employer?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_38" value="a"></td><td>a) can you assume management responsibilities immediately? </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_38" value="b"></td><td>b) What skills do you feel are your strongest? </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_38" value="c"></td><td>c) What are your career goals? </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_38" value="d"></td><td>d) What days and hours are you available for work? </td></tr>
+  		</table>
+    </p>
+
+    <p>39. On the day of the interview, it is recommended that you arrive early, smile, use good posture, be polite and courteous, and _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_39" value="a"></td><td>a) refer to your cell phone often </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_39" value="b"></td><td>b) speak clearly to be understood </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_39" value="c"></td><td>c) cheww gum and smoke if it is offered </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_39" value="d"></td><td>d) constructively criticize former employers </td></tr>
+  		</table>
+    </p>
+
+    <p>40. It is permissible to ask the age of an applicant younger than ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_40" value="a"></td><td>a) 18 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_40" value="b"></td><td>b) 21 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_40" value="c"></td><td>c) 30 </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_40" value="d"></td><td>d) 65 </td></tr>
+  		</table>
+    </p>
+
+    <p>41. An employer is allowed to ask whether you ________.
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_41" value="a"></td><td>a) are a U.S. citizen </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_41" value="b"></td><td>b) use drugs or tobacco </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_41" value="c"></td><td>c) have disabilities </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_41" value="d"></td><td>d) have medical problems </td></tr>
+  		</table>
+    </p>
+
+    <p>42. Employers can legally require you to sign an employment contract, which usually includes a noncompete clause and a ________. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_42" value="a"></td><td>a) schedule commitment </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_42" value="b"></td><td>b) continuing education requirement </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_42" value="c"></td><td>c) salary/pay restriction </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_42" value="d"></td><td>d) confidentiality agreement </td></tr>
+  		</table>
+    </p>
+
+    <p>43. In preparing your porfolio and writing about hwy you chose a career in nail technilogy, you may wish to include a description of your philosophy about the importance of teamwork and _______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_43" value="a"></td><td>a) self-sufficiency </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_43" value="b"></td><td>b) your independence</td></tr>
+  		  <tr><td><input type="radio" name="nails_20_43" value="c"></td><td>c) your role as a team member </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_43" value="d"></td><td>d) your ability to work independently </td></tr>
+  		</table>
+    </p>
+
+   <p>44. When taking a multiple choice text, it is important to ______. 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_44" value="a"></td><td>a) scan the questions quickly before answering </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="b"></td><td>b) read the entire question carefully, including all the choices </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="c"></td><td>c) ignore obviously incorrect answers </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="d"></td><td>d) ignore absolutes in the various answers </td></tr>
+  		</table>
+    </p>
+
+   <p>45. What is the appropriate time period to wait before calling a salon after sending your resume and cover letter? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_20_44" value="a"></td><td>a) one day </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="b"></td><td>b) one week </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="c"></td><td>c) two weeks </td></tr>
+  		  <tr><td><input type="radio" name="nails_20_44" value="d"></td><td>d) one month </td></tr>
+  		</table>
+    </p>
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>
+

@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 23: Selling Products And Services </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What is explained in the literature most companies provide for their products?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_23_1" value="a"></td><td>a) theory behind their products </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_1" value="b"></td><td>b) details of current litigation </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_1" value="c"></td><td>c) information about which competing products are more effective </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_1" value="d"></td><td>d) information about which competing products are less expensive </td></tr>
+		</table>
+    </p>
+
+    <p>2. What is the MAIN purpose of sales quotas?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_2" value="a"></td><td>a) to reward the most popular estheticians in the salon </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_2" value="b"></td><td>b) to stimulate growth </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_2" value="c"></td><td>c) to reduce excess stock of retail products </td></tr>
+		  <tr><td><input type="radio" name="esthetics_23_2" value="d"></td><td>d) to encourage clients to rebook </td></tr>
+  		</table>
+    </p>
+
+    <p>3. When is it prudent for you to formulate your on sales objectives? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_3" value="a"></td><td>a) when you think your salon's sales quota system is too aggressive </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_3" value="b"></td><td>b) when you think your salon's sales quota system is too conservative </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_3" value="c"></td><td>c) when your salon does not have a sales quota system </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_3" value="d"></td><td>d) setting sales obectives is never the responsibility of estheticians </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What should you do sometimes between 24 hours and one week after a client's salon visit? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_4" value="a"></td><td>a) place a follow-up phone call </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_4" value="b"></td><td>b) ask the client for a referral to another potential client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_4" value="c"></td><td>c) send an e-mail asking why the client has not yet return to the salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_4" value="d"></td><td>d) check with receptionist to see if the client has re-booked yet </td></tr>
+  		</table>
+    </p>
+
+    <p>5. What are benefits of receiving referrals from clients, co-workers, and other people? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_5" value="a"></td><td>a) enhance </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_5" value="b"></td><td>b) only full-time employees may accept tips </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_5" value="c"></td><td>c) tips are considered part of your taxable income </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_5" value="d"></td><td>d) the standard tip is about 10 to 12 percent </td></tr>
+  		</table>
+    </p>
+
+    <p>6. What is one of the best methods of advertising for a salon? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_6" value="a"></td><td>a) wearing T-shirt with the salon logo </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_6" value="b"></td><td>b) referrals from current clients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_6" value="c"></td><td>c) using a keychain with the salon logo </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_6" value="d"></td><td>d) a flashing  sign outside the salon </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What client behavior do you encourage by offering clients incentives such as information about upcoming special offers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_7" value="a"></td><td>a) constantly asking for discounts </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_7" value="b"></td><td>b) procrastinating </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_7" value="c"></td><td>c) checking out the competition </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_7" value="d"></td><td>d) rebooking </td></tr>
+  		</table>
+    </p>
+
+    <p>8. When should you find out what the client already knows about his or her on skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_8" value="a"></td><td>a) before trying to educate the client about products or services </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_8" value="b"></td><td>b) after educating the client about products or services </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_8" value="c"></td><td>c) you should always assume the client knows nothing about skin care </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_8" value="d"></td><td>d) you should alays assume the client knows everything about skin care </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. When is it aproriate to reveal to the client that you don't know something?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_9" value="a"></td><td>a) you should alawys create the impression you know everything </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_9" value="b"></td><td>b) when the client requests information about an unfamiliar subject </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_9" value="c"></td><td>c) when you sense the client wants to "show off" personal knowledge </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_9" value="d"></td><td>d) when the client asks about a service you don't want to perform </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What is retailing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_10" value="a"></td><td>a) practice of encouraging clients to add services to an in-salon treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_10" value="b"></td><td>b) art of recommending and selling products to clients for at-home use </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_10" value="c"></td><td>c) practice of sharing general information about retail products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_10" value="d"></td><td>d) physical act of ringing up a client's purchase at the register </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What is upselling?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_11" value="a"></td><td>a) practice of encouraging clients to add services to an in-salon treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_11" value="b"></td><td>b) art of recommending and selling products to clients for at-home use </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_11" value="c"></td><td>c) practice of sharing general information about retail products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_11" value="d"></td><td>d) physical act of ringing up a client's purchase at the register </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What are consultation skills crucial for accomplishing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_12" value="a"></td><td>a) recommeding products and services </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_12" value="b"></td><td>b) analyzing product efficacy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_12" value="c"></td><td>c) complying ith safety regulations </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_12" value="d"></td><td>d) adhering to legal requirements </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What effect do repeat customers have on a business? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_13" value="a"></td><td>a) deter potential clients from coming into the salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_13" value="b"></td><td>b) keep the busines flowing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_13" value="c"></td><td>c) eliminate the need for marketing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_13" value="d"></td><td>d) eliminate the need for advertising </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. Why are estheticians expected to bring client's attention to sales promotions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_14" value="a"></td><td>a) that is the esthetician's role in supporting advertising strategies </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_14" value="b"></td><td>b) supporting advertising strategies is the esthetician's main function </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_14" value="c"></td><td>c) clients want to buy products, not just the treatments they requested </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_14" value="d"></td><td>d) using this technique means the salon doesn't have to pay for advertising </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. Whose needs does a successful sales and marketing program meet? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_15" value="a"></td><td>a) client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_15" value="b"></td><td>b) esthetician </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_15" value="c"></td><td>c) both client and esthetician </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_15" value="d"></td><td>d) neither client nor esthetician </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. Why can the esthetician accomplish by learning to recognize the value in selling?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_16" value="a"></td><td>a) learning how to properly apply recommended products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_16" value="b"></td><td>b) learning to look at the client as a source of money, not a person </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_16" value="c"></td><td>c) learning to look at products as income rether than as useful tools </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_16" value="d"></td><td>d) moving beyond the negative connotations of selling </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What is one of the esthetician's rofessional resposibilities?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_17" value="a"></td><td>a) making the client spend as much money as possible </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_17" value="b"></td><td>b) recommending and providing quality skin care roducts for clents </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_17" value="c"></td><td>c) getting the client used to buying as many products as possible </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_17" value="d"></td><td>d) selecting retail roducts based on price, not function </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What do you become once you are educated on the benefits of products and services? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_18" value="a"></td><td>a) committed to their value </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_18" value="b"></td><td>b) capable of convincing people to make unnecessary purchases </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_18" value="c"></td><td>c) capable of convincing people to spend money irresponsibly </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_18" value="d"></td><td>d) eager to provide them for free </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What are advertisements? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_19" value="a"></td><td>a) cost-free promotional efforts intended to increase business </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_19" value="b"></td><td>b) artistic treatments of the salon's name used on signs and uniforms </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_19" value="c"></td><td>c) catchy slogans used in nespapers, radio, and television </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_19" value="d"></td><td>d) paid promotional efforts intended to increase business </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What is benefit of keeping good client records? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_21" value="a"></td><td>a) serving client needs better </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_21" value="b"></td><td>b) remembering ho much to increase prices each visit </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_21" value="c"></td><td>c) indentifying the least profitable clients so you can refuse to serve them </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_21" value="d"></td><td>d) creating the illusion of persona service </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What is one of possible element of the closing consultation?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="a"></td><td>a) analyzing skin type </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="b"></td><td>b) preparing a home-care program </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="c"></td><td>c) relaxing massage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="d"></td><td>d) hot-towel applicationv</td></tr>
+  		</table>
+    </p>
+
+    <p>22. What is consultative selling? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="a"></td><td>a) presuading a client to buy more products or services than planned </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="b"></td><td>b) telling the client to come back during  a future sales promotion </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="c"></td><td>c) advising clients and recommending the best treatments for them </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_22" value="d"></td><td>d) referring the client to a consultant who can "close" the sale </td></tr>
+  		</table>
+    </p>
+
+    <p>23. Why is NOT an example of direct marketing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_23" value="a"></td><td>a) postcards </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_23" value="b"></td><td>b) coupons </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_23" value="c"></td><td>c) text messages </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_23" value="d"></td><td>d) upselling </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What term refers to a strategy for how goods and services are bought, sold, and exchanged?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_24" value="a"></td><td>a) retailing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_24" value="b"></td><td>b) marketing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_24" value="c"></td><td>c) upselling </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_24" value="d"></td><td>d) merchandising </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What term refers to how retail products are desplayed in the salon? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_25" value="a"></td><td>a) upselling </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_25" value="b"></td><td>b) marketing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_25" value="c"></td><td>c) merchandising </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_25" value="d"></td><td>d) retailing </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What is promotion?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_26" value="a"></td><td>a) process of getting the consumer's attention </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_26" value="b"></td><td>b) persuading clients to spend more during a visit than expected </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_26" value="c"></td><td>c) advising clients about the best products for their skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_26" value="d"></td><td>d) positioning products in the store so clients see them before leaving </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What is the correct term for free media attention? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_27" value="a"></td><td>a) advertising </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_27" value="b"></td><td>b) promotion </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_27" value="c"></td><td>c) marketing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_27" value="d"></td><td>d) publicity </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is NOT an element of an intake form?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_28" value="a"></td><td>a) complete client profile </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_28" value="b"></td><td>b) information about client health </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_28" value="c"></td><td>c) data abouut client skin care habits </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_28" value="d"></td><td>d) credit-card spending limits </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What is an example of hard selling? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_29" value="a"></td><td>a) suggesting that a client can come back for a purchase another day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_29" value="b"></td><td>b) assuring the client that buying a roduct is not necessary </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_29" value="c"></td><td>c) selling a "hard good" like a product instead of a "soft" one like a service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_29" value="d"></td><td>d) repeating emphatically hy a client should buy a product </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What can interfere ith the relaxation benefit of a treatment? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_30" value="a"></td><td>a) improperly utilized sales techniques </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_30" value="b"></td><td>b) use of any type of sales technique </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_30" value="c"></td><td>c) the esthetician's touch on the client's skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_30" value="d"></td><td>d) soft music playing in the background </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What is the main criteria for selecting the products and servics you recommend to a particular client? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_31" value="a"></td><td>a) how much that client can spend </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_31" value="b"></td><td>b) benefits for that specific client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_31" value="c"></td><td>c) whether you think the client ill return </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_31" value="d"></td><td>d) whether you think the client ill provide referrals</td></tr>
+  		</table>
+    </p>
+
+    <p>32. When is it recommended that you demonstrate the use of products and treatments? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_32" value="a"></td><td>a) when you think the client needs an extra push to make a purchase </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_32" value="b"></td><td>b) whenever possible </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_32" value="c"></td><td>c) never </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_32" value="d"></td><td>d) when you think the client can't understand things without help </td></tr>
+  		</table>
+    </p>
+
+    <p>33. What is the MOST important for you to know about your products and services?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_33" value="a"></td><td>a) environmental sustainability </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_33" value="b"></td><td>b) benefits and features </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_33" value="c"></td><td>c) corporate onership </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_33" value="d"></td><td>d) consumer reports rating </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What can you increase once you gain a comprehensive knowledge of products and services? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_34" value="a"></td><td>a) retail sales </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_34" value="b"></td><td>b) retail pricing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_34" value="c"></td><td>c) product efficacy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_34" value="d"></td><td>d) product popularity </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What should you do when faced with an overwhelming amount of information about retail products? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_23_35" value="a"></td><td>a) break down product knowledge into manageble categories know about it </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_35" value="b"></td><td>b) select one single product and learn everything there is to know about it </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_35" value="c"></td><td>c) ignore all outside information and rely solely on marketing materials </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_23_35" value="d"></td><td>d) encourage clients to look into products themselves to determine what they like  </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

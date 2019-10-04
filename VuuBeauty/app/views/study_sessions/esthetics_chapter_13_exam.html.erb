@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 13: Skin Care Products: Chemistry, Ingredients, And Selection </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What are botanicals made from?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_13_1" value="a"></td><td>a) plants and herbs </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_1" value="b"></td><td>b) chemicals </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_1" value="c"></td><td>c) animal fats </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_1" value="d"></td><td>d) recycled plastic </td></tr>
+		</table>
+    </p>
+
+    <p>2. What is NOT among the components of lipids?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_2" value="a"></td><td>a) phospholipids </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_2" value="b"></td><td>b) ceramides </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_2" value="c"></td><td>c) botanicals </td></tr>
+		  <tr><td><input type="radio" name="esthetics_13_2" value="d"></td><td>d) sterols </td></tr>
+  		</table>
+    </p>
+
+    <p>3. What is NOT something from which healing agents are made? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_3" value="a"></td><td>a) recycled plastics </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_3" value="b"></td><td>b) licorice </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_3" value="c"></td><td>c) aloe </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_3" value="d"></td><td>d) chamomile </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What is a possible advantage of synthetic ingredients over natural ingredients? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_4" value="a"></td><td>a) fewer allergic reactions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_4" value="b"></td><td>b) shorter shelf life </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_4" value="c"></td><td>c) less environment impact </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_4" value="d"></td><td>d) decreased chemical content </td></tr>
+  		</table>
+    </p>
+
+    <p>5. When is a manufacturer responsible for a client's allergic reaction to a product? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_5" value="a"></td><td>a) when the product is purchased in bulk and repackaged by the salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_5" value="b"></td><td>b) when the product is used as an ingredient in a salon mixture </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_5" value="c"></td><td>c) when the product is taken directly from the manufacturer's packaging </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_5" value="d"></td><td>d) when the client ignores warnings on the product's label </td></tr>
+  		</table>
+    </p>
+
+    <p>6. When is the salon responsible for a client's allergic reaction to a product? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_6" value="a"></td><td>a) when the client buys the product directly from the manufacturer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_6" value="b"></td><td>b) when the produis purchased in bulk and reackaged by the salon  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_6" value="c"></td><td>c) when the client ignores warnings on the product's label </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_6" value="d"></td><td>d) when the product is taken directly from the manufacturer's packaging </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What is true of organic labeling standards for cosmetics in the United States? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_7" value="a"></td><td>a) these labeling standards are numerous and strict </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_7" value="b"></td><td>b) these labeling standards are few and lenient </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_7" value="c"></td><td>c) there are no such standards in the United States </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_7" value="d"></td><td>d) standards from other countries are anforced in the United States </td></tr>
+  		</table>
+    </p>
+
+    <p>8. What is NOT an area requiring approval from the Food and Drug Administration (FDA)? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_8" value="a"></td><td>a) cosmetics manufacturing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_8" value="b"></td><td>b) cosmetics safety </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_8" value="c"></td><td>c) cosmetics labeling </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_8" value="d"></td><td>d) cosmetics claims </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. What term refers to skin-freshening lotions with a low alcohol content?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_9" value="a"></td><td>a) moisturizers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_9" value="b"></td><td>b) antibiotics </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_9" value="c"></td><td>c) fresheners </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_9" value="d"></td><td>d) conditioners </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What is NOT among the purposes of functional ingredients in cosmetic products? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_10" value="a"></td><td>a) allowing products to spread </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_10" value="b"></td><td>b) giving  products body and texture  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_10" value="c"></td><td>c) making products affordable </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_10" value="d"></td><td>d) giving products specific form </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What is NOT true of glycerin?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_11" value="a"></td><td>a) it is formed by a decomposition of oils or fats </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_11" value="b"></td><td>b) it is a very weak water binder </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_11" value="c"></td><td>c) it is an excellent skin softener </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_11" value="d"></td><td>d) it is an excellent humectant </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What term refers to an exfoliating cream that is rubbed off the skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_12" value="a"></td><td>a) humectant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_12" value="b"></td><td>b) emulsifier </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_12" value="c"></td><td>c) gommage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_12" value="d"></td><td>d) paraben </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What is grapeseed extract? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_13" value="a"></td><td>a) powerful antioxidant with soothing properties </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_13" value="b"></td><td>b) powerful antioxidant with stimulating properties </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_13" value="c"></td><td>c) powerful exfoliant with soothing properties </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_13" value="d"></td><td>d) powerful exfoliant with stimulating properties </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What are hydrators? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_14" value="a"></td><td>a) machines used to apply water to the skin's surface </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_14" value="b"></td><td>b) machines used to extract water from the skin's surface </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_14" value="c"></td><td>c) ingredients that attract water to the skin's surface </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_14" value="d"></td><td>d) ingredients that repel water from the skin's surface </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What are alpha hydroxy acids? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_15" value="a"></td><td>a) products that exfoliate by loosening bonds between dead cells </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_15" value="b"></td><td>b) products that exfoliate by tightening bonds between living cells </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_15" value="c"></td><td>c) the active ingredients in most acne-treatment medications </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_15" value="d"></td><td>d) the active ingredients in most dandruff-control shampoos </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What type of product does NOT sometimes include alcohol?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_16" value="a"></td><td>a) perfume </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_16" value="b"></td><td>b) lotion </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_16" value="c"></td><td>c) astringent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_16" value="d"></td><td>d) paraffin mask </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What is NOT true of aloe vera?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_17" value="a"></td><td>a) it is the most popular botanical used in cosmetic formulations </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_17" value="b"></td><td>b) it is the least popular botanical used in cosmetic formulations </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_17" value="c"></td><td>c) it is an emollient and film-forming gum resin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_17" value="d"></td><td>d) it has hydrating and softening qualities, among others </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. Where in the body is alpha liponic acid found? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_18" value="a"></td><td>a) every cell </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_18" value="b"></td><td>b) nerve used for injections </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_18" value="c"></td><td>c) blood cell </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_18" value="d"></td><td>d) striated muscle cells </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is ampoule? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_19" value="a"></td><td>a) small, sealed vial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_19" value="b"></td><td>b) needle used for injecions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_19" value="c"></td><td>c) popular botanical cream </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_19" value="d"></td><td>d) family of chemical products </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What is aromatherapy? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_21" value="a"></td><td>a) practice of focusing massage on the nose and nostrils </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_21" value="b"></td><td>b) therapeutic use of plant aromas and essential oils </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_21" value="c"></td><td>c) therapeutic use of scented candles in the treatment room </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_21" value="d"></td><td>d) practice of focusing acupuncture on the nose and nostrils </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What are astrongents?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="a"></td><td>a) contton pads used to dab excess sebum from the surface of the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="b"></td><td>b) cotton pads used to dab excess lymph from the surface of the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="c"></td><td>c) oil-laden liquids used to increase the oiliness of the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="d"></td><td>d) liquids that help remove excess oil on the skin </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What is NOT true of benzoyl peroxide? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="a"></td><td>a) it is commonly used for peroxide? </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="b"></td><td>b) it is commonly used for acne </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="c"></td><td>c) it is drying agent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_22" value="d"></td><td>d) it is a tye of alpha hydroxy acid </td></tr>
+  		</table>
+    </p>
+
+    <p>23. What is glycerin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_23" value="a"></td><td>a) astringent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_23" value="b"></td><td>b) binder </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_23" value="c"></td><td>c) exfoliant  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_23" value="d"></td><td>d) antibiotic </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What are ingredients derived from plants called? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_24" value="a"></td><td>a) chemicals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_24" value="b"></td><td>b) pharmaceuticals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_24" value="c"></td><td>c) pentacostals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_24" value="d"></td><td>d) botanicals </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What are ceramides? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_25" value="a"></td><td>a) astringents that have moisturizingand antibacterial properties </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_25" value="b"></td><td>b) family of lipid materials that are part of the intercellular matrix </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_25" value="c"></td><td>c) bacteria that cause itching in the surface of the skin  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_25" value="d"></td><td>d) clusters of dead skin cells that clog follicles and cause comedones </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What plant extract has calming and soothing properties?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_26" value="a"></td><td>a) blackcurrant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_26" value="b"></td><td>b) chamomile </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_26" value="c"></td><td>c) ginseng </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_26" value="d"></td><td>d) honeybush </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What is jojoba? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_27" value="a"></td><td>a) oil extracted from the acorns that grow on oak trees </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_27" value="b"></td><td>b) oil extracted from the bean-like seeds of a desert shrub </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_27" value="c"></td><td>c) exfoliating agent made from the gritty sand of tropical beaches </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_27" value="d"></td><td>d) moisturizing agent made from Pacific Ocean seaweed </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is another term for exfoliation?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_28" value="a"></td><td>a) sloughing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_28" value="b"></td><td>b) binding </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_28" value="c"></td><td>c) excoriation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_28" value="d"></td><td>d) emulsification </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What are lakes? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_29" value="a"></td><td>a) insoluble pigments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_29" value="b"></td><td>b) botanical moisturizers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_29" value="c"></td><td>c) botanical emulsifiers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_29" value="d"></td><td>d) insoluble antioxidants </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What is an emollient with moisturizing properties and also an emulsifier with high water absorption caabilities? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_30" value="a"></td><td>a) chamomile </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_30" value="b"></td><td>b) jojoba </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_30" value="c"></td><td>c) papaya </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_30" value="d"></td><td>d) lanolin </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What products coat the skin and reduce friction? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_31" value="a"></td><td>a) lubricants </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_31" value="b"></td><td>b) antioxidants </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_31" value="c"></td><td>c) emulsifiers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_31" value="d"></td><td>d) acids </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What is NOT true of polymers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_32" value="a"></td><td>a) they are chemical compounds </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_32" value="b"></td><td>b) they are botanicals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_32" value="c"></td><td>c) they are formed by small molecules </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_32" value="d"></td><td>d) they release substance at a microscopically controlled rate </td></tr>
+  		</table>
+    </p>
+
+
+    <p>33. What is potassium hydroxide?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_33" value="a"></td><td>a) strong alkali used in soaps and creams </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_33" value="b"></td><td>b) weak alkali used in soaps and creams </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_33" value="c"></td><td>c) strong acid used in soaps and creams </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_33" value="d"></td><td>d) weak acid used in soaps and creams </td></tr>
+  		</table>
+    </p>
+
+
+    <p>34. What function do preservatives perform? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_34" value="a"></td><td>a) give products the desired color, shape, and form </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_34" value="b"></td><td>b) give products the desired efficacy and strength </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_34" value="c"></td><td>c) activate products once they are applied to the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_34" value="d"></td><td>d) inhibit the growth of microorganisms </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What is the vitamin of which retinols is the natural form? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_35" value="a"></td><td>a) vitamin A </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_35" value="b"></td><td>b) vitamin B </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_35" value="c"></td><td>c) vitamin C </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_35" value="d"></td><td>d) vitamin D </td></tr>
+  		</table>
+    </p>
+
+    <p>36. What is NOT a natural source of salicylic acid? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_36" value="a"></td><td>a) jojoba  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_36" value="b"></td><td>b) sweet birch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_36" value="c"></td><td>c) willow bark </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_36" value="d"></td><td>d) wintergreen </td></tr>
+  		</table>
+    </p>
+
+    <p>37. What does the term "comedogenicity" refer to? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_37" value="a"></td><td>a) tendency of some ethnicities to have more comedones than others </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_37" value="b"></td><td>b) scientific study of the genetics of comedones </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_37" value="c"></td><td>c) tendency of any substance to trigger the rise of blackheads </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_37" value="d"></td><td>d) tendency of any substance to inhibit the rise of blackheads </td></tr>
+  		</table>
+    </p>
+
+    <p>38. What is NOT true of tissue respiratory factor (TRF)? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_38" value="a"></td><td>a) it is an anti-inflammatory ingredient </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_38" value="b"></td><td>b) it is a natural antibiotic </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_38" value="c"></td><td>c) it is a moisturizing ingredient </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_38" value="d"></td><td>d) it is derived from yeast cells </td></tr>
+  		</table>
+    </p>
+
+    <p>39. What vitamin has NOT been used in skin care products as an antioxidant? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_39" value="a"></td><td>a) vitamin A </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_39" value="b"></td><td>b) vitamin B </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_39" value="c"></td><td>c) vitamin C </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_39" value="d"></td><td>d) vitamin E </td></tr>
+  		</table>
+    </p>
+
+    <p>40. What are liposomes? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_40" value="a"></td><td>a) open-lipid bilayer spheres </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_40" value="b"></td><td>b) open-lipid unilayer spores </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_40" value="c"></td><td>c) close-lipid bilayer spheres </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_40" value="d"></td><td>d) close-lipid unilayer spores </td></tr>
+  		</table>
+    </p>
+
+    <p>41. What is mechanical exfoliation? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_41" value="a"></td><td>a) physical method of rubbing dead cells off the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_41" value="b"></td><td>b) use of machines to push product deeper into the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_41" value="c"></td><td>c) physical method of drawing pus from a whitehead </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_41" value="d"></td><td>d) lipidic skiuse of mechines to draw pus from a whitehead </td></tr>
+  		</table>
+    </p>
+
+    <p>42. What is mineral oil? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_42" value="a"></td><td>a) lubricant derived from petroleum </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_42" value="b"></td><td>b) antioxidant derived from petroleum </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_42" value="c"></td><td>c) lubricant derived from sebum </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_42" value="d"></td><td>d) antioxidant derived from sebum </td></tr>
+  		</table>
+    </p>
+
+    <p>43. What are mucopolysaccharides? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_43" value="a"></td><td>a) irritated mucous membranes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_43" value="b"></td><td>b) healthy mucous membranes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_43" value="c"></td><td>c) carbohydrate-lipid complexes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_43" value="d"></td><td>d) carbohydrate-lymph complexes </td></tr>
+  		</table>
+    </p>
+
+   <p>44. What is the srtongest of our five senses? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_44" value="a"></td><td>a) taste </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_44" value="b"></td><td>b) touch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_44" value="c"></td><td>c) smell </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_44" value="d"></td><td>d) sight </td></tr>
+  		</table>
+    </p>
+
+ <p>45. What is papaya used for? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_45" value="a"></td><td>a) exfoliation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_45" value="b"></td><td>b) moisturizing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_45" value="c"></td><td>c) hydration </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_45" value="d"></td><td>d) pigmentation </td></tr>
+  		</table>
+    </p>
+
+ <p>46. What is NOT an industry that commonly uses parabens? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_46" value="a"></td><td>a) cosmetic </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_46" value="b"></td><td>b) pharmaceutical </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_46" value="c"></td><td>c) food </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_46" value="d"></td><td>d) aeronautic </td></tr>
+  		</table>
+    </p>
+
+<p>47. What are peptides? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_47" value="a"></td><td>a) chain of red blood cells </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_47" value="b"></td><td>b) chain of white blood cells </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_47" value="c"></td><td>c) chain of fibroblasts </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_47" value="d"></td><td>d) sensitive </td></tr>
+  		</table>
+    </p>
+
+<p>48. What are performance ingredients? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_48" value="a"></td><td>a) ingredients included to elongate the shelf life of products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_48" value="b"></td><td>b) ingredients used to give products distinct shape and texture </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_48" value="c"></td><td>c) ingredients that cause actual changes in the appereance of the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_48" value="d"></td><td>d) ingredients that stimulate blood circulation and increase energy </td></tr>
+  		</table>
+    </p>
+
+<p>49. What is NOT true of petroleum jelly? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_49" value="a"></td><td>a) it is commonly used after laser surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_49" value="b"></td><td>b) it holds water in the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_49" value="c"></td><td>c) it is an occlusive agent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_49" value="d"></td><td>d) it dehydrates the skin </td></tr>
+  		</table>
+
+<p>50. What term refers to the use of plant extracts for therapeutic benefits? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_50" value="a"></td><td>a) arboratherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_50" value="b"></td><td>b) green therapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_50" value="c"></td><td>c) ecotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_50" value="d"></td><td>d) phytotherapy </td></tr>
+  		</table>
+    </p>
+
+<p>51. What is a chelating agent? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_51" value="a"></td><td>a) chemical added to improve the thickness of a product </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_51" value="b"></td><td>b) chemical added to improve the efficacy of the preservative </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_51" value="c"></td><td>c) chemical added to soften the aroma of a product </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_51" value="d"></td><td>d) chemical added to increase the grit of a product </td></tr>
+  		</table>
+    </p>
+
+<p>52. What do clay nasks do as they dry and tighten? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_52" value="a"></td><td>a) seal follicles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_52" value="b"></td><td>b) rupture comedones </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_52" value="c"></td><td>c) extract facial hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_52" value="d"></td><td>d) draw impurities to the surface </td></tr>
+  		</table>
+    </p>
+
+<p>53. What is coenzyme Q10? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_53" value="a"></td><td>a) antioxidant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_53" value="b"></td><td>b) exfoliant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_53" value="c"></td><td>c) preservative </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_53" value="d"></td><td>d) emulsifier </td></tr>
+  		</table>
+    </p>
+
+<p>54. What is the term for substances such as mineral dyes that give product color? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_54" value="a"></td><td>a) color additives </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_54" value="b"></td><td>b) color ingredients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_54" value="c"></td><td>c) colorants </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_54" value="d"></td><td>d) chromophores </td></tr>
+  		</table>
+    </p>
+
+<p>55. What term refers to products intended to improve the skin's health and appearance? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_55" value="a"></td><td>a) cosmetics  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_55" value="b"></td><td>b) cosmeceuticals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_55" value="c"></td><td>c) eppidermals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_55" value="d"></td><td>d) estheticals </td></tr>
+  		</table>
+    </p>
+
+<p>56. What are detergents a type of? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_56" value="a"></td><td>a) surfactant  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_56" value="b"></td><td>b) emollient </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_56" value="c"></td><td>c) antioxidant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_56" value="d"></td><td>d) exfoliant </td></tr>
+  		</table>
+    </p>
+
+<p>57. What do emulsifiers cause to mix in order to form an emulsion? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_57" value="a"></td><td>a) oil and lymph  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_57" value="b"></td><td>b) oil and water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_57" value="c"></td><td>c) lymph and water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_57" value="d"></td><td>d) lymph and sebum </td></tr>
+  		</table>
+    </p>
+
+<p>58. What is exfoliation? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_58" value="a"></td><td>a) careful removal of a clay or paraffin mask from the skin  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_58" value="b"></td><td>b) thorough cleansing of the skin with soap and hot water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_58" value="c"></td><td>c) peeling or sloughing of the outer layer of the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_58" value="d"></td><td>d) use od chemicals to reduce the size of the inner layers of the skin </td></tr>
+  		</table>
+    </p>
+
+<p>59. What are fatty acids? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_59" value="a"></td><td>a) excessive sebum discharges common in overweight clients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_59" value="b"></td><td>b) excessive lymph discharges common in overweight clients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_59" value="c"></td><td>c) antioxidant ingredients derived solely from animal fats </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_59" value="d"></td><td>d) lubricant ingredients derived from plant oils or animal fats  </td></tr>
+  		</table>
+    </p>
+
+<p>60. What function do fragrances perform? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_13_60" value="a"></td><td>a) giving products their color </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_60" value="b"></td><td>b) giving products their scent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_60" value="c"></td><td>c) giving products their taste </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_13_60" value="d"></td><td>d) giving products their texture </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

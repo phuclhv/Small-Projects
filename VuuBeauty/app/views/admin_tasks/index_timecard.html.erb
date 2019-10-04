@@ -1,0 +1,219 @@
+<% provide(:title, 'Student Timecards') %>
+
+<h1>Student Timecards</h1>
+
+<%= form_tag("/admin_tasks/payment_history") do %>
+  <%= label_tag "month_year", "Report Month" %>
+  <%= select_tag "calendar_id", options_from_collection_for_select(@calendars, :id, :month_year, @report_month_calendar_id) %>
+  <%= label_tag "study_program_id", "Study Program" %>
+  <%= select_tag "study_program_id", options_from_collection_for_select(@study_programs, :id, :title, @study_programs.first.id) %>
+  <%= label_tag "school_user_id", "Student" %>
+  <%= select_tag "school_user_id", options_from_collection_for_select(@students, :id, :full_name, @students.first.id) %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" id="students-form"></div>
+</div>
+
+<div>
+<a href='#' id='adjust-button' class='btn btn-primary btn-lg'>Adjust</a>
+<a href='#' id='process-button' class='btn btn-primary btn-lg'>Process</a>
+<a href='#' id='rollback-button' class='btn btn-primary btn-lg'>Rollback</a>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" id="timecards-form"></div>
+</div>
+<a href='#' id='delete-timecards-button' class='btn btn-primary btn-lg'>Delete</a>
+
+<script>
+
+  // Get the list of students & their timecards by study programs.
+  $("#study_program_id").on("change", function() {
+    // Get the list of students
+    var studentHoursObj = {};  // hash or object to store study_program_id and calendar_id
+    var $selectFields = $('select option:selected');
+    var calendarID = $selectFields[0].value;
+    var studyProgramID = $selectFields[1].value;
+    studentHoursObj[0] = calendarID;
+    studentHoursObj[1] = studyProgramID;
+    $.ajax({
+      type: 'GET',
+      url: '/admin_tasks/get_students_for_timecards',
+      data: { studentHoursObj: JSON.stringify(studentHoursObj) },
+      success:function(result){
+        var id;
+        var full_name;
+        var i;
+        var x = result;
+        $("#school_user_id").empty();
+        $("#students-form").empty();
+        for (i = 0; i < x.length; i++) {
+          id = x[i].id;
+          full_name = x[i].full_name;
+          duration_in_hours = x[i].duration_in_hours;
+          // Dropdown select:
+          $("#school_user_id").append($('<option></option>').attr("value", id).text(full_name));
+ 
+          // List the students in the form
+          $("#students-form").append($("<label for='"+full_name+"'>"+full_name+" with "+duration_in_hours+" hours:</label>"));
+          $("#students-form").append($("<input type='text' name='"+id+"' />"));
+        }
+      }
+    });
+  });
+  
+  // Get the list of timecards.
+  $("#school_user_id").on("change", function() {
+    var studentHoursObj = {};  // hash or object to store study_program_id and calendar_id
+    var $selectFields = $('select option:selected');
+    var calendarID = $selectFields[0].value;
+    var studyProgramID = $selectFields[1].value;
+    var studentID = $selectFields[2].value;
+    studentHoursObj[0] = calendarID;
+    studentHoursObj[1] = studyProgramID;
+    studentHoursObj[2] = studentID;
+    $.ajax({
+      type: 'GET',
+      url: '/admin_tasks/get_timecards',
+      data: { studentHoursObj: JSON.stringify(studentHoursObj) },
+      success:function(result){
+        var i;
+        var out = "<table class=\"table table-striped\">";
+        out += "<th>ID</th><th>Clock_in</th><th>Clock_out</th><th>Hours</th><th>Processed?</th><th>Delete?</th>";
+        x = result;
+        $("#timecards-form").empty();
+        for (i = 0; i < x.length; i++) {
+          out +=  "<tr><td>"  +  x[i].id + 
+                  "</td><td>" +  x[i].clock_in +
+                  "</td><td>" +  x[i].clock_out + 
+                  "</td><td>" +  x[i].duration_in_hours.toFixed(2) +
+                  "</td><td>" + x[i].processed +
+                  "</td><td><input type='checkbox' name='"+x[i].id+"'/>" +
+                  "</td></tr>";
+        }
+        out += "</table>";
+        $("#timecards-form").append(out);
+      }
+    });
+  });
+
+  // Ajust last month's hours.
+  $("#adjust-button").on("click", function(){
+    // array built from input fields:
+    var $inputHourFields = $('#students-form').find('input');
+    
+    var i;
+    var studentHoursObj = {};  // hash or object of ID and hours
+    var studentID;
+    var studentHour;
+    for (i = 0; i < $inputHourFields.length; i++) {
+      studentID = $inputHourFields[i].name;
+      studentHour = $inputHourFields[i].value;
+      studentHoursObj[studentID] = studentHour;
+    }
+    var $selectFields = $('select option:selected');
+    var calendarID = $selectFields[0].value;
+    studentHoursObj[0] = calendarID;
+
+    $.ajax({
+      type:'POST',
+      url:'/admin_tasks/adjust_student_hours',
+      data: { studentHoursObj: JSON.stringify(studentHoursObj) },
+      success:function(result){
+        var patt = /David/;
+        if (patt.test(result)) {
+          //$("#adjust-button").text("Clock out");
+        }
+      }
+    });
+  });
+
+  // Process last month's hours.
+  $("#process-button").on("click", function(){
+    // array built from input fields:
+    var $inputHourFields = $('#students-form').find('input');
+    
+    var i;
+    var studentHoursObj = {};  // hash or object of ID and hours
+    var studentID;
+    var studentHour;
+    for (i = 0; i < $inputHourFields.length; i++) {
+      studentID = $inputHourFields[i].name;
+      studentHour = $inputHourFields[i].value;
+      studentHoursObj[studentID] = studentHour;
+    }
+    // Processing one student at a time if no student is in the students-form
+    var $selectFields = $('select option:selected');
+    //alert($selectFields.length);
+    var calendarID = $selectFields[0].value;
+    studentHoursObj[-1] = calendarID;
+    //alert("Calendar ID: " + calendarID);
+    studentID =  $selectFields[2].value; // 2nd select dropdown is StudyProgram; 3rd is Student; 1st is Month Year
+    studentHoursObj[-2] = studentID;
+    //alert("StudentID: " + studentID);
+
+    $.ajax({
+      type:'POST',
+      url:'/admin_tasks/process_student_hours',
+      data: { studentHoursObj: JSON.stringify(studentHoursObj) },
+      success:function(result){
+        var patt = /David/;
+        if (patt.test(result)) {
+          //$("#adjust-button").text("Clock out");
+        }
+      }
+    });
+  });
+
+  // Rollback the chosen month's hours for a single student.
+  $("#rollback-button").on("click", function(){
+    var i;
+    var studentHoursObj = {};  // hash or object of ID and hours
+    var studentID;
+    var studentHour;
+
+    // Roll back hours for one student per a chosen month
+    var $selectFields = $('select option:selected');
+    var calendarID = $selectFields[0].value;
+    studentHoursObj[-1] = calendarID;
+    studentID =  $selectFields[2].value; // 2nd select dropdown is StudyProgram; 3rd is Student; 1st is Month Year
+    studentHoursObj[-2] = studentID;
+
+    $.ajax({
+      type:'POST',
+      url:'/admin_tasks/rollback_student_hours',
+      data: { studentHoursObj: JSON.stringify(studentHoursObj) }
+    });
+  });
+
+  // Delete timecards
+  $("#delete-timecards-button").on("click", function(){
+    // array built from input fields:
+    var $inputTimecardCheckboxes = $('#timecards-form').find('input');
+    
+    var i;
+    var studentTimecardsObj = {};  // hash or object of ID and hours
+    var timecardID;
+    var timecardChecked;
+    for (i = 0; i < $inputTimecardCheckboxes.length; i++) {
+      timecardID = $inputTimecardCheckboxes[i].name;
+      timecardChecked = $inputTimecardCheckboxes[i].checked;
+      studentTimecardsObj[timecardID] = timecardChecked;
+    }
+    $.ajax({
+      type:'POST',
+      url:'/admin_tasks/delete_timecards',
+      data: { studentTimecardsObj: JSON.stringify(studentTimecardsObj) },
+      success:function(result){
+        var patt = /David/;
+        if (patt.test(result)) {
+          //$("#executer-button").text("Clock out");
+        }
+      }
+    });
+  });
+  
+</script>

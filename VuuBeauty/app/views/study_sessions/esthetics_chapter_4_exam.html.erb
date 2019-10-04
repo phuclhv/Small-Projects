@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 4 -- Communication for Success</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  What do you earn when you approach a new client with a smile on your face?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a new personal friendship</td><td><input type="radio" name="esthetics_4_1" value="a"></td></tr>
+  		  <tr><td>b)  trust and loyalty</td><td><input type="radio" name="esthetics_4_1" value="b"></td></tr>
+  		  <tr><td>c)  a bonus from your manager</td><td><input type="radio" name="esthetics_4_1" value="c"></td></tr>
+  		  <tr><td>d)  career advancement</td><td><input type="radio" name="esthetics_4_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  When should a client fill out an intake form?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  before arriving at the salon</td><td><input type="radio" name="esthetics_4_2" value="a"></td></tr>
+  		  <tr><td>b)  before receiving services</td><td><input type="radio" name="esthetics_4_2" value="b"></td></tr>
+  		  <tr><td>c)  during treatment</td><td><input type="radio" name="esthetics_4_2" value="c"></td></tr>
+  		  <tr><td>d)  after treatment</td><td><input type="radio" name="esthetics_4_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  What is considered a legal document?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  intake form</td><td><input type="radio" name="esthetics_4_3" value="a"></td></tr>
+  		  <tr><td>b)  color chart</td><td><input type="radio" name="esthetics_4_3" value="b"></td></tr>
+  		  <tr><td>c)  consent form</td><td><input type="radio" name="esthetics_4_3" value="c"></td></tr>
+  		  <tr><td>d)  service record</td><td><input type="radio" name="esthetics_4_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Why should you offer a compliment if you see that a co-worker has done something well?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  that's the only way to get a compliment in return</td><td><input type="radio" name="esthetics_4_4" value="a"></td></tr>
+  		  <tr><td>b)  so your manager will see you praising a co-worker</td><td><input type="radio" name="esthetics_4_4" value="b"></td></tr>
+  		  <tr><td>c)  managers are too busy to keep up employee morale</td><td><input type="radio" name="esthetics_4_4" value="c"></td></tr>
+  		  <tr><td>d)  everyone benefits from a well-deserved compliment</td><td><input type="radio" name="esthetics_4_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  What does everyone in the salon deserve from you?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  respect</td><td><input type="radio" name="esthetics_4_5" value="a"></td></tr>
+  		  <tr><td>b)  assistance with their jobs</td><td><input type="radio" name="esthetics_4_5" value="b"></td></tr>
+  		  <tr><td>c)  personal favors</td><td><input type="radio" name="esthetics_4_5" value="c"></td></tr>
+  		  <tr><td>d)  affection</td><td><input type="radio" name="esthetics_4_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  What is an approriate action in the event of unethical behavior on the part of the manager, such as sexual harassment or misappropriating funds?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  perform a citizen's arrest</td><td><input type="radio" name="esthetics_4_6" value="a"></td></tr>
+  		  <tr><td>b)  challenge the manager's authority</td><td><input type="radio" name="esthetics_4_6" value="b"></td></tr>
+  		  <tr><td>c)  physically eject the manager from the salon</td><td><input type="radio" name="esthetics_4_6" value="c"></td></tr>
+  		  <tr><td>d)  create a petition demanding the manager's termination</td><td><input type="radio" name="esthetics_4_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  What is an example of a positive nonverbal cue?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  checking out your nails while someone is talking</td><td><input type="radio" name="esthetics_4_7" value="a"></td></tr>
+  		  <tr><td>b)  yawning during conversation</td><td><input type="radio" name="esthetics_4_7" value="b"></td></tr>
+  		  <tr><td>c)  good eye contact</td><td><input type="radio" name="esthetics_4_7" value="c"></td></tr>
+  		  <tr><td>d)  looking at your shoes while someone is talking</td><td><input type="radio" name="esthetics_4_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  When should you make amends?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  when you can tell the manager dislikes something you did</td><td><input type="radio" name="esthetics_4_8" value="a"></td></tr>
+  		  <tr><td>b)  when you are wrong</td><td><input type="radio" name="esthetics_4_8" value="b"></td></tr>
+  		  <tr><td>c)  when you can tell a co-worker dislikes something you did</td><td><input type="radio" name="esthetics_4_8" value="c"></td></tr>
+  		  <tr><td>d)  you never need to make amends</td><td><input type="radio" name="esthetics_4_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  What must you master in order to thrive in the field of aesthetics?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  psychology</td><td><input type="radio" name="esthetics_4_9" value="a"></td></tr>
+  		  <tr><td>b)  psychiatry</td><td><input type="radio" name="esthetics_4_9" value="b"></td></tr>
+  		  <tr><td>c)  the art of manipulation</td><td><input type="radio" name="esthetics_4_9" value="c"></td></tr>
+  		  <tr><td>d)  the art of communication</td><td><input type="radio" name="esthetics_4_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  What is based on trust?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  your scope of practice</td><td><input type="radio" name="esthetics_4_10" value="a"></td></tr>
+  		  <tr><td>b)  strong professional relationships</td><td><input type="radio" name="esthetics_4_10" value="b"></td></tr>
+  		  <tr><td>c)  certification and licensure</td><td><input type="radio" name="esthetics_4_10" value="c"></td></tr>
+  		  <tr><td>d)  your personal satisfaction</td><td><input type="radio" name="esthetics_4_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  How can you ensure continued patronage from your clients?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  by saying your'e the only person who can make them look good</td><td><input type="radio" name="esthetics_4_11" value="a"></td></tr>
+  		  <tr><td>b)  by perfecting professional communication</td><td><input type="radio" name="esthetics_4_11" value="b"></td></tr>
+  		  <tr><td>c)  by perfecting professional manipulation</td><td><input type="radio" name="esthetics_4_11" value="c"></td></tr>
+  		  <tr><td>d)  by giving clients free samples every time they visit the salon</td><td><input type="radio" name="esthetics_4_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  When should a client be asked to reschedule his or her appointment?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  when he or she arrives more than 15 minutes late</td><td><input type="radio" name="esthetics_4_12" value="a"></td></tr>
+  		  <tr><td>b)  when you're not in the mood to interact with that particular client</td><td><input type="radio" name="esthetics_4_12" value="b"></td></tr>
+  		  <tr><td>c)  when you can tell the client is in a rotten mood</td><td><input type="radio" name="esthetics_4_12" value="c"></td></tr>
+  		  <tr><td>d)  when he or she arrives more then five minutes late</td><td><input type="radio" name="esthetics_4_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  What is a good description of a client who should be scheduled at the end of the day?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  someone who is habitually late</td><td><input type="radio" name="esthetics_4_13" value="a"></td></tr>
+  		  <tr><td>b)  someone who is never sure of the services they want</td><td><input type="radio" name="esthetics_4_13" value="b"></td></tr>
+  		  <tr><td>c)  someone who is often rude to the salon staff</td><td><input type="radio" name="esthetics_4_13" value="c"></td></tr>
+  		  <tr><td>d)  someone who is habitually talkative</td><td><input type="radio" name="esthetics_4_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  When should you argue with a client?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  when a schedule mix-up occurs</td><td><input type="radio" name="esthetics_4_14" value="a"></td></tr>
+  		  <tr><td>b)  when the client disagrees with you</td><td><input type="radio" name="esthetics_4_14" value="b"></td></tr>
+  		  <tr><td>c)  when you are certain that the client is wrong</td><td><input type="radio" name="esthetics_4_14" value="c"></td></tr>
+  		  <tr><td>d)  never</td><td><input type="radio" name="esthetics_4_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  What is a goal of the "assess" consultation step?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  determine your client's objectives</td><td><input type="radio" name="esthetics_4_15" value="a"></td></tr>
+  		  <tr><td>b)  discuss topics like home care</td><td><input type="radio" name="esthetics_4_15" value="b"></td></tr>
+  		  <tr><td>c)  discuss products the client uses</td><td><input type="radio" name="esthetics_4_15" value="c"></td></tr>
+  		  <tr><td>d)  Fitzpatrick typing</td><td><input type="radio" name="esthetics_4_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  What is body language?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the set of scientific terms used for describing the body</td><td><input type="radio" name="esthetics_4_16" value="a"></td></tr>
+  		  <tr><td>b)  any terminology the client uses to describe his or her body</td><td><input type="radio" name="esthetics_4_16" value="b"></td></tr>
+  		  <tr><td>c)  verbal communication such as describing which area will be treated</td><td><input type="radio" name="esthetics_4_16" value="c"></td></tr>
+  		  <tr><td>d)  nonverbal communication such as crossing your arms and frowning</td><td><input type="radio" name="esthetics_4_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  What is an example of sensitivity?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  telling a brand-new client she looks terrible but you can help</td><td><input type="radio" name="esthetics_4_17" value="a"></td></tr>
+  		  <tr><td>b)  choosing your words carefully</td><td><input type="radio" name="esthetics_4_17" value="b"></td></tr>
+  		  <tr><td>c)  reminding a co-worker that her hairstyle is out of fashion</td><td><input type="radio" name="esthetics_4_17" value="c"></td></tr>
+  		  <tr><td>d)  swearing in the workplace</td><td><input type="radio" name="esthetics_4_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  What is true of listening?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it accomplishes less than talking</td><td><input type="radio" name="esthetics_4_18" value="a"></td></tr>
+  		  <tr><td>b)  listening too closely makes most people uncomfortable</td><td><input type="radio" name="esthetics_4_18" value="b"></td></tr>
+  		  <tr><td>c)  too much listening means not enough talking</td><td><input type="radio" name="esthetics_4_18" value="c"></td></tr>
+  		  <tr><td>d)  it is the best relationship builder</td><td><input type="radio" name="esthetics_4_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  According to the golden rules of human relations, what does every action bring?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  reaction</td><td><input type="radio" name="esthetics_4_19" value="a"></td></tr>
+  		  <tr><td>b)  inaction</td><td><input type="radio" name="esthetics_4_19" value="b"></td></tr>
+  		  <tr><td>c)  verbal response</td><td><input type="radio" name="esthetics_4_19" value="c"></td></tr>
+  		  <tr><td>d)  physical response</td><td><input type="radio" name="esthetics_4_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  What is also known as a client questionaire?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  beauty review</td><td><input type="radio" name="esthetics_4_20" value="a"></td></tr>
+  		  <tr><td>b)  intake form</td><td><input type="radio" name="esthetics_4_20" value="b"></td></tr>
+  		  <tr><td>c)  consent form</td><td><input type="radio" name="esthetics_4_20" value="c"></td></tr>
+  		  <tr><td>d)  color chart</td><td><input type="radio" name="esthetics_4_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  What is a primary ingredient for success in any career?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  ability to express your ideas in a forceful manner</td><td><input type="radio" name="esthetics_4_21" value="a"></td></tr>
+  		  <tr><td>b)  ability to manipulate other people into doing what you want</td><td><input type="radio" name="esthetics_4_21" value="b"></td></tr>
+  		  <tr><td>c)  ability to manipulate people into believing what you believe</td><td><input type="radio" name="esthetics_4_21" value="c"></td></tr>
+  		  <tr><td>d)  ability to express your ideas in a professional manner</td><td><input type="radio" name="esthetics_4_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  Why is customer service important in esthetics?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is central to success</td><td><input type="radio" name="esthetics_4_22" value="a"></td></tr>
+  		  <tr><td>b)  treating customers well is the only way to make them tip generously</td><td><input type="radio" name="esthetics_4_22" value="b"></td></tr>
+  		  <tr><td>c)  treating customers well is the only way to get promoted</td><td><input type="radio" name="esthetics_4_22" value="c"></td></tr>
+  		  <tr><td>d)  it is not important in esthetics</td><td><input type="radio" name="esthetics_4_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  What can you do when you begin with a firm understanding of yourself?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  manipulate others</td><td><input type="radio" name="esthetics_4_23" value="a"></td></tr>
+  		  <tr><td>b)  persuade others</td><td><input type="radio" name="esthetics_4_23" value="b"></td></tr>
+  		  <tr><td>c)  impress others</td><td><input type="radio" name="esthetics_4_23" value="c"></td></tr>
+  		  <tr><td>d)  understand others</td><td><input type="radio" name="esthetics_4_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  What is an attitude adjustment?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  modification when emotions are interfering with work</td><td><input type="radio" name="esthetics_4_24" value="a"></td></tr>
+  		  <tr><td>b)  scolding you give to a client who is being annoying</td><td><input type="radio" name="esthetics_4_24" value="b"></td></tr>
+  		  <tr><td>c)  disciplinary action a manager makes to a misbehaving employee</td><td><input type="radio" name="esthetics_4_24" value="c"></td></tr>
+  		  <tr><td>d)  relaxation you feel when you leave work at the end of the day</td><td><input type="radio" name="esthetics_4_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  What is constructive criticism?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  observations you offer about why a client does not look good</td><td><input type="radio" name="esthetics_4_25" value="a"></td></tr>
+  		  <tr><td>b)  comments you make about how other estheticians do their jobs</td><td><input type="radio" name="esthetics_4_25" value="b"></td></tr>
+  		  <tr><td>c)  feedback you provide when your manager is not performing</td><td><input type="radio" name="esthetics_4_25" value="c"></td></tr>
+  		  <tr><td>d)  guidance offered by supervisors to improve your job performance</td><td><input type="radio" name="esthetics_4_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  What do you exercise when you ensure that client information is kept private?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  sensitivity</td><td><input type="radio" name="esthetics_4_26" value="a"></td></tr>
+  		  <tr><td>b)  confidentiality</td><td><input type="radio" name="esthetics_4_26" value="b"></td></tr>
+  		  <tr><td>c)  duplicity</td><td><input type="radio" name="esthetics_4_26" value="c"></td></tr>
+  		  <tr><td>d)  courtesy</td><td><input type="radio" name="esthetics_4_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  What do you exercise by not "picking a side" in a conflict?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  confidentiality</td><td><input type="radio" name="esthetics_4_27" value="a"></td></tr>
+  		  <tr><td>b)  hypocrisy</td><td><input type="radio" name="esthetics_4_27" value="b"></td></tr>
+  		  <tr><td>c)  neutrality</td><td><input type="radio" name="esthetics_4_27" value="c"></td></tr>
+  		  <tr><td>d)  sensitivity</td><td><input type="radio" name="esthetics_4_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  What is a goal of the "maintenance" consultation step?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  discuss home care</td><td><input type="radio" name="esthetics_4_28" value="a"></td></tr>
+  		  <tr><td>b)  Fitzpatrick typing</td><td><input type="radio" name="esthetics_4_28" value="b"></td></tr>
+  		  <tr><td>c)  O'Malley typing</td><td><input type="radio" name="esthetics_4_28" value="c"></td></tr>
+  		  <tr><td>d)  discuss products the client uses</td><td><input type="radio" name="esthetics_4_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  What type of cue is a smile?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  negative verbal</td><td><input type="radio" name="esthetics_4_29" value="a"></td></tr>
+  		  <tr><td>b)  positive verbal</td><td><input type="radio" name="esthetics_4_29" value="b"></td></tr>
+  		  <tr><td>c)  negative nonverbal</td><td><input type="radio" name="esthetics_4_29" value="c"></td></tr>
+  		  <tr><td>d)  positive nonverbal</td><td><input type="radio" name="esthetics_4_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  What type of cue are hand gestures that are used to scold or embarrass?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  negative verbal</td><td><input type="radio" name="esthetics_4_30" value="a"></td></tr>
+  		  <tr><td>b)  positive verbal</td><td><input type="radio" name="esthetics_4_30" value="b"></td></tr>
+  		  <tr><td>c)  negative nonverbal</td><td><input type="radio" name="esthetics_4_30" value="c"></td></tr>
+  		  <tr><td>d)  positive nonverbal</td><td><input type="radio" name="esthetics_4_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  What is a goal of the "preference" consultation step?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  discuss products the client uses</td><td><input type="radio" name="esthetics_4_31" value="a"></td></tr>
+  		  <tr><td>b)  discuss home care</td><td><input type="radio" name="esthetics_4_31" value="b"></td></tr>
+  		  <tr><td>c)  recommend new products</td><td><input type="radio" name="esthetics_4_31" value="c"></td></tr>
+  		  <tr><td>d)  determine skin type</td><td><input type="radio" name="esthetics_4_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  What is our emotional state when we feel secure?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  sad, nervous, and unsure</td><td><input type="radio" name="esthetics_4_32" value="a"></td></tr>
+  		  <tr><td>b)  happy, calm, and confident</td><td><input type="radio" name="esthetics_4_32" value="b"></td></tr>
+  		  <tr><td>c)  arrogant, cocky, and obnoxious</td><td><input type="radio" name="esthetics_4_32" value="c"></td></tr>
+  		  <tr><td>d)  bored, calm, and tired</td><td><input type="radio" name="esthetics_4_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  What should you remember when someone seems insensitive?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  people are genetically predetermined to be sensitive or insensitive</td><td><input type="radio" name="esthetics_4_33" value="a"></td></tr>
+  		  <tr><td>b)  you probably caused their insensitivity with your actions</td><td><input type="radio" name="esthetics_4_33" value="b"></td></tr>
+  		  <tr><td>c)  you probably caused their insensitivity with your words</td><td><input type="radio" name="esthetics_4_33" value="c"></td></tr>
+  		  <tr><td>d)  at this particular time, the person is feeling insecure</td><td><input type="radio" name="esthetics_4_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  What should you avoid doing when confronted with bad behavior?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  responding calmly</td><td><input type="radio" name="esthetics_4_34" value="a"></td></tr>
+  		  <tr><td>b)  counting to 10 before speaking</td><td><input type="radio" name="esthetics_4_34" value="b"></td></tr>
+  		  <tr><td>c)  considering the other person's mood</td><td><input type="radio" name="esthetics_4_34" value="c"></td></tr>
+  		  <tr><td>d)  overreacting</td><td><input type="radio" name="esthetics_4_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  What are you able to do when you believe in yourself?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  win every argument because you have confidence</td><td><input type="radio" name="esthetics_4_35" value="a"></td></tr>
+  		  <tr><td>b)  trust your judgment and uphold your own values</td><td><input type="radio" name="esthetics_4_35" value="b"></td></tr>
+  		  <tr><td>c)  convince clients to buy anything since you're so persuasive</td><td><input type="radio" name="esthetics_4_35" value="c"></td></tr>
+  		  <tr><td>d)  change your own values whenever it is convenient to do so</td><td><input type="radio" name="esthetics_4_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  Why should you attentive with all clients to learn what they want?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  in order to sell them products</td><td><input type="radio" name="esthetics_4_36" value="a"></td></tr>
+  		  <tr><td>b)  all clients are different</td><td><input type="radio" name="esthetics_4_36" value="b"></td></tr>
+  		  <tr><td>c)  in order to earn generous tips</td><td><input type="radio" name="esthetics_4_36" value="c"></td></tr>
+  		  <tr><td>d)  all clients want the same things</td><td><input type="radio" name="esthetics_4_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  What is the act of successfully sharing information between people?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  networking</td><td><input type="radio" name="esthetics_4_37" value="a"></td></tr>
+  		  <tr><td>b)  espionage</td><td><input type="radio" name="esthetics_4_37" value="b"></td></tr>
+  		  <tr><td>c)  gossiping</td><td><input type="radio" name="esthetics_4_37" value="c"></td></tr>
+  		  <tr><td>d)  communication</td><td><input type="radio" name="esthetics_4_37" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>38.  What should happen <i>before</i> beginning any part of the service?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Fitzpatrick typing</td><td><input type="radio" name="esthetics_4_38" value="a"></td></tr>
+  		  <tr><td>b)  product recommendation</td><td><input type="radio" name="esthetics_4_38" value="b"></td></tr>
+  		  <tr><td>c)  client consultation</td><td><input type="radio" name="esthetics_4_38" value="c"></td></tr>
+  		  <tr><td>d)  aromatherapy</td><td><input type="radio" name="esthetics_4_38" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>39.  Why should client consultation be performed with as much privacy as possible?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  because they are embarrassing</td><td><input type="radio" name="esthetics_4_39" value="a"></td></tr>
+  		  <tr><td>b)  to avoid breaches of confidentiality</td><td><input type="radio" name="esthetics_4_39" value="b"></td></tr>
+  		  <tr><td>c)  so other estheticians cannot steal your clients</td><td><input type="radio" name="esthetics_4_39" value="c"></td></tr>
+  		  <tr><td>d)  so the manager won't hear if you make mistakes</td><td><input type="radio" name="esthetics_4_39" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>40.  When does the "review" step occur in the consultation process?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  at the beginning</td><td><input type="radio" name="esthetics_4_40" value="a"></td></tr>
+  		  <tr><td>b)  somewhere in the middle</td><td><input type="radio" name="esthetics_4_40" value="b"></td></tr>
+  		  <tr><td>c)  whenever is convenient</td><td><input type="radio" name="esthetics_4_40" value="c"></td></tr>
+  		  <tr><td>d)  at the end</td><td><input type="radio" name="esthetics_4_40" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>41.  When does the "repeat" step occur in the consultation process?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  at the end</td><td><input type="radio" name="esthetics_4_41" value="a"></td></tr>
+  		  <tr><td>b)  whenever is convenient</td><td><input type="radio" name="esthetics_4_41" value="b"></td></tr>
+  		  <tr><td>c)  somewhere in the middle</td><td><input type="radio" name="esthetics_4_41" value="c"></td></tr>
+  		  <tr><td>d)  at the beginning</td><td><input type="radio" name="esthetics_4_41" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>42.  What is reflective listening?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  repeating sales pitches taught to you by manufacturer's representatives</td><td><input type="radio" name="esthetics_4_42" value="a"></td></tr>
+  		  <tr><td>b)  watching the client's face in the mirror while she is speaking</td><td><input type="radio" name="esthetics_4_42" value="b"></td></tr>
+  		  <tr><td>c)  closing your eyes while someone speaks so you listen more closely</td><td><input type="radio" name="esthetics_4_42" value="c"></td></tr>
+  		  <tr><td>d)  repeating, in your own words, what you think the client has said</td><td><input type="radio" name="esthetics_4_42" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>43.  Why is the "repeat" step the most critical of the consultation process?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  clients don't pay attention until the end of the consultation</td><td><input type="radio" name="esthetics_4_43" value="a"></td></tr>
+  		  <tr><td>b)  it ultimately determines the service(s) you will perform</td><td><input type="radio" name="esthetics_4_43" value="b"></td></tr>
+  		  <tr><td>c)  everything you say in this step is considered a legal obligation</td><td><input type="radio" name="esthetics_4_43" value="c"></td></tr>
+  		  <tr><td>d)  your manager will be present for this step of the consultation</td><td><input type="radio" name="esthetics_4_43" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>44.  What is proven by the fact that human beings desire to interact with other people when they feel secure?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  everyone is basically lonely</td><td><input type="radio" name="esthetics_4_44" value="a"></td></tr>
+  		  <tr><td>b)  insecure people don't have friends</td><td><input type="radio" name="esthetics_4_44" value="b"></td></tr>
+  		  <tr><td>c)  people choose when to feel secure or insecure</td><td><input type="radio" name="esthetics_4_44" value="c"></td></tr>
+  		  <tr><td>d)  human beings are social animals</td><td><input type="radio" name="esthetics_4_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  When should you ask for help, according to the golden rules of human relations?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  when you feel lazy</td><td><input type="radio" name="esthetics_4_45" value="a"></td></tr>
+  		  <tr><td>b)  when you feel overwhelmed</td><td><input type="radio" name="esthetics_4_45" value="b"></td></tr>
+  		  <tr><td>c)  when you feel lonely</td><td><input type="radio" name="esthetics_4_45" value="c"></td></tr>
+  		  <tr><td>d)  when you dislike your client</td><td><input type="radio" name="esthetics_4_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

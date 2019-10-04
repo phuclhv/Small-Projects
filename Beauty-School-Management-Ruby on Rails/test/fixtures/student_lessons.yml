@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visible: false
+  enabled: false
+  completed: false
+  taken_order: 1
+  school_user: one
+  lesson: one
+
+two:
+  visible: false
+  enabled: false
+  completed: false
+  taken_order: 1
+  school_user: two
+  lesson: two

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 18: Hair Removal </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What is the third stage of hair growth?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_18_1" value="a"></td><td>a) anagen </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_1" value="b"></td><td>b) catagen </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_1" value="c"></td><td>c) latent </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_1" value="d"></td><td>d) telogen </td></tr>
+		</table>
+    </p>
+
+    <p>2. How does thermolysis destroy hair follicles?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_2" value="a"></td><td>a) shattering them with sound </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_2" value="b"></td><td>b) clogging them with sebum </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_2" value="c"></td><td>c) burning them with heat </td></tr>
+		  <tr><td><input type="radio" name="esthetics_18_2" value="d"></td><td>d) sealing them with light </td></tr>
+  		</table>
+    </p>
+
+    <p>3. What is another name for threading? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_3" value="a"></td><td>a) stitching </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_3" value="b"></td><td>b) attaching </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_3" value="c"></td><td>c) weaving </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_3" value="d"></td><td>d) banding </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What is trichology? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_4" value="a"></td><td>a) scientific study of hair-removal techniques </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_4" value="b"></td><td>b) scientific study of hair and its diseases </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_4" value="c"></td><td>c) technical term for mechanically removing hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_4" value="d"></td><td>d) technical term for articially coloring hair </td></tr>
+  		</table>
+    </p>
+
+    <p>5. What is vellus hair? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_5" value="a"></td><td>a) fine, soft, downy hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_5" value="b"></td><td>b) short, coarse, shaved hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_5" value="c"></td><td>c) heavy, thick, strong hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_5" value="d"></td><td>d) hair found on the back and shoulders </td></tr>
+  		</table>
+    </p>
+
+    <p>6. What is oily skin a contraindication for? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_6" value="a"></td><td>a) hair removal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_6" value="b"></td><td>b) acne treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_6" value="c"></td><td>c) waxing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_6" value="d"></td><td>d) extractions </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What is NOT a contraindication for facial waxing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_7" value="a"></td><td>a) recent cosmetic surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_7" value="b"></td><td>b) recent reconstructive surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_7" value="c"></td><td>c) recent laser treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_7" value="d"></td><td>d) recent steam treatments </td></tr>
+  		</table>
+    </p>
+
+    <p>8. How long must hair be in order to remove it with waxing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_8" value="a"></td><td>a) 1/4-inch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_8" value="b"></td><td>b) 1/2-inch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_8" value="c"></td><td>c) 3/4-inch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_8" value="d"></td><td>d) 2/3-inch </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. What should clients avoid for at least 24 to 48 hours after waxing?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_9" value="a"></td><td>a) moisture </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_9" value="b"></td><td>b) exercise </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_9" value="c"></td><td>c) salty foods </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_9" value="d"></td><td>d) excessive heat </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What can lead to the production of new terminal hairs? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_10" value="a"></td><td>a) removing fine (vellus) hair on areas not covered by terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_10" value="b"></td><td>b) applying heat to areas not covered by terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_10" value="c"></td><td>c) applying moisture to areas not covered by terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_10" value="d"></td><td>d) conditioning fine (vellus) hair on areas not covered by terminal hairs </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What happens to lanugo hair shortly after birth?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_11" value="a"></td><td>a) replaced exclusively by vellus hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_11" value="b"></td><td>b) replaced either by vellus hairs or by terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_11" value="c"></td><td>c) replaced exclusively by terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_11" value="d"></td><td>d) falls off, leaving those parts of the skin perfectly smooth </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. When happens during puberty? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_12" value="a"></td><td>a) lanugo hairs are lost by the body </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_12" value="b"></td><td>b) follicles switch from producing vellus hairs to terminal hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_12" value="c"></td><td>c) follicles switch from producing terminal hairs to vellus hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_12" value="d"></td><td>d) lanugo hairs emerge on the body </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What is the acronym ACT used to help estheticians remember? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_13" value="a"></td><td>a) procedural steps for a basic facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_13" value="b"></td><td>b) safety stes for mechanical hair removal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_13" value="c"></td><td>c) layers of the skin from outermost to innermost </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_13" value="d"></td><td>d) stages of hair growth </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What is anagen? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_14" value="a"></td><td>a) first stage of hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_14" value="b"></td><td>b) second stage of hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_14" value="c"></td><td>c) third stage of hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_14" value="d"></td><td>d) fourth stage of hair growth </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What describes the arrector pili muscle? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_15" value="a"></td><td>a) muscle that moves the nostrils </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_15" value="b"></td><td>b) muscle that moves the lips </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_15" value="c"></td><td>c) appendage of the hair follicle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_15" value="d"></td><td>d) appendage of the sweat glands </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What is infected inflammation of the hair follicle?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_16" value="a"></td><td>a) benign follicutosis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_16" value="b"></td><td>b) barbae folliculitis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_16" value="c"></td><td>c) tinea follicutosis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_16" value="d"></td><td>d) acute folliculastis </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What is the second stage of hair growth?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_17" value="a"></td><td>a) catagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_17" value="b"></td><td>b) anagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_17" value="c"></td><td>c) latent </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_17" value="d"></td><td>d) telogen </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What is the function of a depilatory? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_18" value="a"></td><td>a) permanently removing superfluous hair by extracting the root </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_18" value="b"></td><td>b) temporarily removing superfluous hair by extracting the root </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_18" value="c"></td><td>c) permanently removing superfluous hair by dissolving it at skin level </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_18" value="d"></td><td>d) temporarily removing superfluous hair by dissolving it at skin level </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is the removal of hair by means of an electric current that destroys the hair root? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_19" value="a"></td><td>a) anagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_19" value="b"></td><td>b) catagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_19" value="c"></td><td>c) electrolysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_19" value="d"></td><td>d) epilation </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What is removing hair from the follicles via tweezing or waxing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_21" value="a"></td><td>a) electrolysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_21" value="b"></td><td>b) epilation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_21" value="c"></td><td>c) anagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_21" value="d"></td><td>d) catagen </td></tr>
+  		</table>
+    </p>
+
+    <p>21. Where is the hair buld located?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="a"></td><td>a) interior shaft of the follicle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="b"></td><td>b) exterior shaft of the follicle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="c"></td><td>c) outermost tip of the follicle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="d"></td><td>d) base of the follicle </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What shape does a hair follicles take? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="a"></td><td>a) perfect square </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="b"></td><td>b) elongate triangle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="c"></td><td>c) small sphere </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_22" value="d"></td><td>d) small tube </td></tr>
+  		</table>
+    </p>
+
+    <p>23. Why is it beneficial that each thread is discarded after use during the threading process? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_23" value="a"></td><td>a) allow you to charge clients more for additional thread </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_23" value="b"></td><td>b) makes threading more sanitary than waxing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_23" value="c"></td><td>c) ensures more direct contact than with waxing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_23" value="d"></td><td>d) reduces the amount of motions in threading </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What type of skin might benefit from sugaring as an alternative form of epilation?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_24" value="a"></td><td>a) oily </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_24" value="b"></td><td>b) sensitive </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_24" value="c"></td><td>c) pale </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_24" value="d"></td><td>d) dark </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What direction is product applied during the hand method of sugaring? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_25" value="a"></td><td>a) toward the center of the torso </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_25" value="b"></td><td>b) away from the center of the torso </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_25" value="c"></td><td>c) with the hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_25" value="d"></td><td>d) against the hair growth </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What direction is product applied during the spatula method of sugaring?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_26" value="a"></td><td>a) toward the center of the torso </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_26" value="b"></td><td>b) away from the center of the torso </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_26" value="c"></td><td>c) with the hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_26" value="d"></td><td>d) against the hair growth </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What epilation technique is associated with the dangers of burns severe enough for blisters, failure to remove hair, and the removal of actual skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_27" value="a"></td><td>a) waxing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_27" value="b"></td><td>b) threading </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_27" value="c"></td><td>c) spatula-method sugaring </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_27" value="d"></td><td>d) hand-method sugaring </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is NOT a form in which hard waxes are available?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_28" value="a"></td><td>a) blocks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_28" value="b"></td><td>b) pellets </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_28" value="c"></td><td>c) beads </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_28" value="d"></td><td>d) strips </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What is true of soft wax? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_29" value="a"></td><td>a) has a lower melting point than hard wax </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_29" value="b"></td><td>b) has a higher melting point than hard wax </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_29" value="c"></td><td>c) available only in tins </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_29" value="d"></td><td>d) must always be applied thicky </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What is true of stainless steel slant-tipped tweezers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_30" value="a"></td><td>a) they are best for general tweezing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_30" value="b"></td><td>b) they are best for removing ingrown hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_30" value="c"></td><td>c) they will corrode when disinfected in solution </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_30" value="d"></td><td>d) they break down easily </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What is pellon used to make? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_31" value="a"></td><td>a) dermal fillers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_31" value="b"></td><td>b) paraffin masks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_31" value="c"></td><td>c) enzyme peel ingredients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_31" value="d"></td><td>d) wax strips </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What is the shape of the hair papilla? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_32" value="a"></td><td>a) box </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_32" value="b"></td><td>b) tube </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_32" value="c"></td><td>c) cone </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_32" value="d"></td><td>d) triangle </td></tr>
+  		</table>
+    </p>
+
+    <p>33. What function does the hair root perform?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_33" value="a"></td><td>a) infusing color into the hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_33" value="b"></td><td>b) connecting hair into the bones </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_33" value="c"></td><td>c) feeding nutrients to the hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_33" value="d"></td><td>d) anchoring the hair to the skin cells </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What is hirsutism? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_34" value="a"></td><td>a) outgrowths of downy hair on body parts usually bearing terminal hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_34" value="b"></td><td>b) outgrowths of ingrown downy hairs causing skin irritation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_34" value="c"></td><td>c) unusually hair loss on body parts normally bearing downy hair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_34" value="d"></td><td>d) unusually hair growth on body parts normally bearing downy hair </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What is the term for excessive hair growth where hair does not normally grow? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_35" value="a"></td><td>a) hypertrichosis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_35" value="b"></td><td>b) hypopigmentation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_35" value="c"></td><td>c) epilation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_35" value="d"></td><td>d) lanugo </td></tr>
+  		</table>
+    </p>
+
+    <p>36. What does the acronym IPL stand for? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_36" value="a"></td><td>a) intermittent phased light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_36" value="b"></td><td>b) intermediate power light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_36" value="c"></td><td>c) intense pulsed light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_36" value="d"></td><td>d) intergumenttary patterned lesions </td></tr>
+  		</table>
+    </p>
+
+    <p>37. When in life does the human body grow lanugo hair? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_37" value="a"></td><td>a) old age </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_37" value="b"></td><td>b) middle age </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_37" value="c"></td><td>c) puberty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_37" value="d"></td><td>d) gestation </td></tr>
+  		</table>
+    </p>
+
+    <p>38. What is NOT true of laser hair removal? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_38" value="a"></td><td>a) it is a type of photoepilation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_38" value="b"></td><td>b) it involves pulsing a laser on skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_38" value="c"></td><td>c) hair removed by this method tends to grow back quickly </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_38" value="d"></td><td>d) several awvelengths are used at a time </td></tr>
+  		</table>
+    </p>
+
+    <p>39. What does photoepilation use to remove hair? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_39" value="a"></td><td>a) galvanic current and shaving </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_39" value="b"></td><td>b) IPL and laser hair removal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_39" value="c"></td><td>c) IPL and shaving </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_39" value="d"></td><td>d) galvanic current and laser hair removal </td></tr>
+  		</table>
+    </p>
+
+    <p>40. What is NOT contained within the pilosebaceous unit? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_40" value="a"></td><td>a) hair root </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_40" value="b"></td><td>b) bulb </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_40" value="c"></td><td>c) dermal papilla </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_40" value="d"></td><td>d) sebaceous gland </td></tr>
+  		</table>
+    </p>
+
+    <p>41. What is an ancient method of hair removal? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_41" value="a"></td><td>a) sweetening </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_41" value="b"></td><td>b) shortening </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_41" value="c"></td><td>c) sharpening </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_41" value="d"></td><td>d) sugaring </td></tr>
+  		</table>
+    </p>
+
+    <p>42. How long does a hair located on the scalp grow each month, on average? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_42" value="a"></td><td>a) one-half inch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_42" value="b"></td><td>b) one inch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_42" value="c"></td><td>c) two inches </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_42" value="d"></td><td>d) three inches </td></tr>
+  		</table>
+    </p>
+
+    <p>43. When does the talent phase of hair groth occur? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_43" value="a"></td><td>a) between catagen and telogen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_43" value="b"></td><td>b) between anagen and catagen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_43" value="c"></td><td>c) after anagen and before telogen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_43" value="d"></td><td>d) after telogen and before anagen </td></tr>
+  		</table>
+    </p>
+
+    <p>44. What is considered to be the only true method of permanent hair removal? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_44" value="a"></td><td>a) IPL </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_44" value="b"></td><td>b) laser hair removal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_44" value="c"></td><td>c) depilation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_44" value="d"></td><td>d) electrolysis </td></tr>
+  		</table>
+    </p>
+
+
+    <p>45. What hair-removal procedure is performed by inserting small needles into the hair follicles? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_45" value="a"></td><td>a) sugaring </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_45" value="b"></td><td>b) electrolysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_45" value="c"></td><td>c) threading </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_45" value="d"></td><td>d) waxing </td></tr>
+  		</table>
+    </p>
+
+    <p>46. What effect does galvanic eletrolysis have? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_46" value="a"></td><td>a) sealing the hair follicle shut through severe burning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_46" value="b"></td><td>b) quickly yanking the entire hair shaft out by the root </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_46" value="c"></td><td>c) chemical alteration of the skin pH in the area neaer the follicle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_46" value="d"></td><td>d) chemical decomposition of the hair follicle </td></tr>
+  		</table>
+    </p>
+
+    <p>47. What is NOT true of shaving? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_47" value="a"></td><td>a) it can irritate the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_47" value="b"></td><td>b) it is a daily ritual for many men </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_47" value="c"></td><td>c) it is a daily ritual for many women </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_47" value="d"></td><td>d) it permanently removes hair </td></tr>
+  		</table>
+    </p>
+
+    <p>48. What can be corrected by changing the direction of shaving? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_48" value="a"></td><td>a) prevalence of ingrowth hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_48" value="b"></td><td>b) need for frequent shaving </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_48" value="c"></td><td>c) speed of hair growth </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_48" value="d"></td><td>d) density of hair growth </td></tr>
+  		</table>
+    </p>
+
+    <p>49. For what type of skin is tweezing often a better alternative to waxing? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_18_49" value="a"></td><td>a) oily </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_49" value="b"></td><td>b) dry </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_49" value="c"></td><td>c) normal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_18_49" value="d"></td><td>d) sensitive </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 5 -- Infection Control And Safe Work Practices</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  The spread of contagious diseases is minimized by _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  close contact with other people</td><td><input type="radio" name="barber_5_1" value="a"></td></tr>
+  		  <tr><td>b)  frequent visits to the doctor</td><td><input type="radio" name="barber_5_1" value="b"></td></tr>
+  		  <tr><td>c)  the implementation of infection control measures</td><td><input type="radio" name="barber_5_1" value="c"></td></tr>
+  		  <tr><td>d)  All of the answers are correct</td><td><input type="radio" name="barber_5_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  _____ are not responsible for regulating the practice of barbering.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Local agencies</td><td><input type="radio" name="barber_5_2" value="a"></td></tr>
+  		  <tr><td>b)  Barbershop owners</td><td><input type="radio" name="barber_5_2" value="b"></td></tr>
+  		  <tr><td>c)  State agencies</td><td><input type="radio" name="barber_5_2" value="c"></td></tr>
+  		  <tr><td>d)  Federal agencies</td><td><input type="radio" name="barber_5_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  The EPA is responsible for developing and enforcing the regulations of environmental laws in an effort to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  protect local businesses</td><td><input type="radio" name="barber_5_3" value="a"></td></tr>
+  		  <tr><td>b)  avoid lawsuits</td><td><input type="radio" name="barber_5_3" value="b"></td></tr>
+  		  <tr><td>c)  minimize human interaction with the environment</td><td><input type="radio" name="barber_5_3" value="c"></td></tr>
+  		  <tr><td>d)  protect human health and the environment</td><td><input type="radio" name="barber_5_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  The FDA enforces rules and regulations associated with _____ purchased and used by the public.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  foods</td><td><input type="radio" name="barber_5_4" value="a"></td></tr>
+  		  <tr><td>b)  drugs</td><td><input type="radio" name="barber_5_4" value="b"></td></tr>
+  		  <tr><td>c)  cosmetics</td><td><input type="radio" name="barber_5_4" value="c"></td></tr>
+  		  <tr><td>d)  All answers are correct</td><td><input type="radio" name="barber_5_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  _____ is/are one of the cosmetic preparations typically used in the barbershop.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Razors</td><td><input type="radio" name="barber_5_5" value="a"></td></tr>
+  		  <tr><td>b)  Clippers</td><td><input type="radio" name="barber_5_5" value="b"></td></tr>
+  		  <tr><td>c)  Hair spray</td><td><input type="radio" name="barber_5_5" value="c"></td></tr>
+  		  <tr><td>d)  Toothpaste</td><td><input type="radio" name="barber_5_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  _____ products are not required to display a list of ingredients on the label.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Professional</td><td><input type="radio" name="barber_5_6" value="a"></td></tr>
+  		  <tr><td>b)  Retail</td><td><input type="radio" name="barber_5_6" value="b"></td></tr>
+  		  <tr><td>c)  Over-the-counter</td><td><input type="radio" name="barber_5_6" value="c"></td></tr>
+  		  <tr><td>d)  None of the answers are correct</td><td><input type="radio" name="barber_5_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  _____ was passed in 1970 to assure, regulate, and enforce safe and healthful working conditions in the workplace.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  FDA</td><td><input type="radio" name="barber_5_7" value="a"></td></tr>
+  		  <tr><td>b)  OSHA</td><td><input type="radio" name="barber_5_7" value="b"></td></tr>
+  		  <tr><td>c)  MSDS</td><td><input type="radio" name="barber_5_7" value="c"></td></tr>
+  		  <tr><td>d)  EPA</td><td><input type="radio" name="barber_5_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  The Bloodborne Pathogens Standard helps to protect _____ from being at risk from cross-infection.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the public</td><td><input type="radio" name="barber_5_8" value="a"></td></tr>
+  		  <tr><td>b)  employees</td><td><input type="radio" name="barber_5_8" value="b"></td></tr>
+  		  <tr><td>c)  barbershop clients</td><td><input type="radio" name="barber_5_8" value="c"></td></tr>
+  		  <tr><td>d)  All of the answers are correct</td><td><input type="radio" name="barber_5_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  The Hazard Communication Rule includes requirements for _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  pharmacists and technicians</td><td><input type="radio" name="barber_5_9" value="a"></td></tr>
+  		  <tr><td>b)  all importers</td><td><input type="radio" name="barber_5_9" value="b"></td></tr>
+  		  <tr><td>c)  anyone who uses drugs</td><td><input type="radio" name="barber_5_9" value="c"></td></tr>
+  		  <tr><td>d)  chemical manufacturers and importers</td><td><input type="radio" name="barber_5_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  MSDSs are available from _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a barber school</td><td><input type="radio" name="barber_5_10" value="a"></td></tr>
+  		  <tr><td>b)  the FDA</td><td><input type="radio" name="barber_5_10" value="b"></td></tr>
+  		  <tr><td>c)  the product manufacturer</td><td><input type="radio" name="barber_5_10" value="c"></td></tr>
+  		  <tr><td>d)  the EPA</td><td><input type="radio" name="barber_5_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  Labeling refers to the listing of ingredients and the approriate _____ on the packaging of a product.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  hazard warning</td><td><input type="radio" name="barber_5_11" value="a"></td></tr>
+  		  <tr><td>b)  price</td><td><input type="radio" name="barber_5_11" value="b"></td></tr>
+  		  <tr><td>c)  uses</td><td><input type="radio" name="barber_5_11" value="c"></td></tr>
+  		  <tr><td>d)  administration</td><td><input type="radio" name="barber_5_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  According to the Right-to-Know law, one of the _____'s responsibilities is to maintain Material Safety Data Sheets and have them available upon request.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  government</td><td><input type="radio" name="barber_5_12" value="a"></td></tr>
+  		  <tr><td>b)  employee</td><td><input type="radio" name="barber_5_12" value="b"></td></tr>
+  		  <tr><td>c)  employer</td><td><input type="radio" name="barber_5_12" value="c"></td></tr>
+  		  <tr><td>d)  client</td><td><input type="radio" name="barber_5_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  _____, health, safety, and welfare while receiving services in the barbershop is protected by state regulatory agencies.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Employers</td><td><input type="radio" name="barber_5_13" value="a"></td></tr>
+  		  <tr><td>b)  Consumers</td><td><input type="radio" name="barber_5_13" value="b"></td></tr>
+  		  <tr><td>c)  Employees</td><td><input type="radio" name="barber_5_13" value="c"></td></tr>
+  		  <tr><td>d)  All answers are correct</td><td><input type="radio" name="barber_5_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  The key to effective infection control is _____, which is primarily the responsibility of barbershop personnel.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the prevention of the transmission of microorganisms</td><td><input type="radio" name="barber_5_14" value="a"></td></tr>
+  		  <tr><td>b)  periodic cleaning</td><td><input type="radio" name="barber_5_14" value="b"></td></tr>
+  		  <tr><td>c)  keeping all germs outside of the barbershop</td><td><input type="radio" name="barber_5_14" value="c"></td></tr>
+  		  <tr><td>d)  treating illness</td><td><input type="radio" name="barber_5_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  Decontamination is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the prevention of the spread of disease</td><td><input type="radio" name="barber_5_15" value="a"></td></tr>
+  		  <tr><td>b)  the destruction of pathogens within the body</td><td><input type="radio" name="barber_5_15" value="b"></td></tr>
+  		  <tr><td>c)  the removal of pathogens and other substances from tools or surfaces</td><td><input type="radio" name="barber_5_15" value="c"></td></tr>
+  		  <tr><td>d)  a method for treating disease</td><td><input type="radio" name="barber_5_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  The _____ level of decontamination is sanitation or cleaning.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lowest</td><td><input type="radio" name="barber_5_16" value="a"></td></tr>
+  		  <tr><td>b)  second</td><td><input type="radio" name="barber_5_16" value="b"></td></tr>
+  		  <tr><td>c)  fourth</td><td><input type="radio" name="barber_5_16" value="c"></td></tr>
+  		  <tr><td>d)  highest</td><td><input type="radio" name="barber_5_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  Sanitation or cleaning involves _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  washing with water only</td><td><input type="radio" name="barber_5_17" value="a"></td></tr>
+  		  <tr><td>b)  washing with soaps or detergents</td><td><input type="radio" name="barber_5_17" value="b"></td></tr>
+  		  <tr><td>c)  chemicals such as hydrogen peroxide</td><td><input type="radio" name="barber_5_17" value="c"></td></tr>
+  		  <tr><td>d)  chemicals such as bleach</td><td><input type="radio" name="barber_5_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  Sterilization is the _____ level of effective decontamination.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lowest</td><td><input type="radio" name="barber_5_18" value="a"></td></tr>
+  		  <tr><td>b)  second</td><td><input type="radio" name="barber_5_18" value="b"></td></tr>
+  		  <tr><td>c)  fourth</td><td><input type="radio" name="barber_5_18" value="c"></td></tr>
+  		  <tr><td>d)  highest</td><td><input type="radio" name="barber_5_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  _____ used to destroy harmful microorganisms are called disinfectants.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Cleaning implements</td><td><input type="radio" name="barber_5_19" value="a"></td></tr>
+  		  <tr><td>b)  Light rays</td><td><input type="radio" name="barber_5_19" value="b"></td></tr>
+  		  <tr><td>c)  Soaps</td><td><input type="radio" name="barber_5_19" value="c"></td></tr>
+  		  <tr><td>d)  Prepared chemical substances</td><td><input type="radio" name="barber_5_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  Sanitation or cleaning includes _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  bleaching</td><td><input type="radio" name="barber_5_20" value="a"></td></tr>
+  		  <tr><td>b)  hand washing</td><td><input type="radio" name="barber_5_20" value="b"></td></tr>
+  		  <tr><td>c)  immersion in hospital-grade disinfectant</td><td><input type="radio" name="barber_5_20" value="c"></td></tr>
+  		  <tr><td>d)  None of the answers are correct</td><td><input type="radio" name="barber_5_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  Public sanitation is the application of measures to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  promote less contact between people</td><td><input type="radio" name="barber_5_21" value="a"></td></tr>
+  		  <tr><td>b)  eradicate infectious diseases</td><td><input type="radio" name="barber_5_21" value="b"></td></tr>
+  		  <tr><td>c)  develop new medicines</td><td><input type="radio" name="barber_5_21" value="c"></td></tr>
+  		  <tr><td>d)  promote public health and prevent the spread of infectious diseases</td><td><input type="radio" name="barber_5_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  Chemical or _____ agents are used to decontaminate barbering tools and shop surfaces.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  engineered</td><td><input type="radio" name="barber_5_22" value="a"></td></tr>
+  		  <tr><td>b)  natural</td><td><input type="radio" name="barber_5_22" value="b"></td></tr>
+  		  <tr><td>c)  biological</td><td><input type="radio" name="barber_5_22" value="c"></td></tr>
+  		  <tr><td>d)  physical</td><td><input type="radio" name="barber_5_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  An example of a physical decontamination agent is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  steam</td><td><input type="radio" name="barber_5_23" value="a"></td></tr>
+  		  <tr><td>b)  antiseptics</td><td><input type="radio" name="barber_5_23" value="b"></td></tr>
+  		  <tr><td>c)  disinfectants</td><td><input type="radio" name="barber_5_23" value="c"></td></tr>
+  		  <tr><td>d)  phenol</td><td><input type="radio" name="barber_5_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  The electric UV sanitizer is a(n) _____ disinfection method commonly used in modern barbershops.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  antiseptic</td><td><input type="radio" name="barber_5_24" value="a"></td></tr>
+  		  <tr><td>b)  physical</td><td><input type="radio" name="barber_5_24" value="b"></td></tr>
+  		  <tr><td>c)  septic</td><td><input type="radio" name="barber_5_24" value="c"></td></tr>
+  		  <tr><td>d)  chemical</td><td><input type="radio" name="barber_5_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  Substances that may kill, retard, or prevent the growth of bacteria and _____ are antiseptics.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  can generally be used safely on the skin</td><td><input type="radio" name="barber_5_25" value="a"></td></tr>
+  		  <tr><td>b)  should never be used on the skin</td><td><input type="radio" name="barber_5_25" value="b"></td></tr>
+  		  <tr><td>c)  can be used only on the hair</td><td><input type="radio" name="barber_5_25" value="c"></td></tr>
+  		  <tr><td>d)  are generally used only in hospitals</td><td><input type="radio" name="barber_5_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  The chemical agents used to destroy _____ are disinfectants.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  most viruses and bacteria</td><td><input type="radio" name="barber_5_26" value="a"></td></tr>
+  		  <tr><td>b)  most bacteria and some viruses</td><td><input type="radio" name="barber_5_26" value="b"></td></tr>
+  		  <tr><td>c)  all viruses but not bacteria</td><td><input type="radio" name="barber_5_26" value="c"></td></tr>
+  		  <tr><td>d)  all bacteria but not viruses</td><td><input type="radio" name="barber_5_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  In a 2%-5% solution _____ is used as an antiseptic.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  isopropyl alcohol</td><td><input type="radio" name="barber_5_27" value="a"></td></tr>
+  		  <tr><td>b)  boric acid</td><td><input type="radio" name="barber_5_27" value="b"></td></tr>
+  		  <tr><td>c)  ethyl alcohol</td><td><input type="radio" name="barber_5_27" value="c"></td></tr>
+  		  <tr><td>d)  sodium hydrochlorite</td><td><input type="radio" name="barber_5_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  Immersing implements with sharp cutting edges in bleach for a minimum of 10 minutes serves to _____ them.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  disinfect</td><td><input type="radio" name="barber_5_28" value="a"></td></tr>
+  		  <tr><td>b)  clean</td><td><input type="radio" name="barber_5_28" value="b"></td></tr>
+  		  <tr><td>c)  grade</td><td><input type="radio" name="barber_5_28" value="c"></td></tr>
+  		  <tr><td>d)  destroy</td><td><input type="radio" name="barber_5_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  The EPA is responsible for _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  testing disinfectants</td><td><input type="radio" name="barber_5_29" value="a"></td></tr>
+  		  <tr><td>b)  approving all disinfectants</td><td><input type="radio" name="barber_5_29" value="b"></td></tr>
+  		  <tr><td>c)  approving new-to-the-market disinfectants</td><td><input type="radio" name="barber_5_29" value="c"></td></tr>
+  		  <tr><td>d)  making claims about the effectiveness of disinfectants</td><td><input type="radio" name="barber_5_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  Products that will kill either the staphylococcus or salmonella organisms, but not both, have a _____ level of disinfection efficacy.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  limited</td><td><input type="radio" name="barber_5_30" value="a"></td></tr>
+  		  <tr><td>b)  general</td><td><input type="radio" name="barber_5_30" value="b"></td></tr>
+  		  <tr><td>c)  hospital-grade</td><td><input type="radio" name="barber_5_30" value="c"></td></tr>
+  		  <tr><td>d)  hospital-grade tuberculocidal</td><td><input type="radio" name="barber_5_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  Hospital-grade tuberculocidal is the _____ level of disinfection.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  highest</td><td><input type="radio" name="barber_5_31" value="a"></td></tr>
+  		  <tr><td>b)  second</td><td><input type="radio" name="barber_5_31" value="b"></td></tr>
+  		  <tr><td>c)  third</td><td><input type="radio" name="barber_5_31" value="c"></td></tr>
+  		  <tr><td>d)  lowest</td><td><input type="radio" name="barber_5_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  Most _____ solutions disinfect implements in 10-15 minutes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  quat</td><td><input type="radio" name="barber_5_32" value="a"></td></tr>
+  		  <tr><td>b)  phenol</td><td><input type="radio" name="barber_5_32" value="b"></td></tr>
+  		  <tr><td>c)  limited disinfection</td><td><input type="radio" name="barber_5_32" value="c"></td></tr>
+  		  <tr><td>d)  general disinfection</td><td><input type="radio" name="barber_5_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  Rubber and plastic materials should be used with care because they may become softened or discolored with continued _____ use.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  phenol</td><td><input type="radio" name="barber_5_33" value="a"></td></tr>
+  		  <tr><td>b)  quat</td><td><input type="radio" name="barber_5_33" value="b"></td></tr>
+  		  <tr><td>c)  alcohol</td><td><input type="radio" name="barber_5_33" value="c"></td></tr>
+  		  <tr><td>d)  bleach</td><td><input type="radio" name="barber_5_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  _____ disinfectants include pine oil.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Petroleum distillate</td><td><input type="radio" name="barber_5_34" value="a"></td></tr>
+  		  <tr><td>b)  Sodium hydrochlorite</td><td><input type="radio" name="barber_5_34" value="b"></td></tr>
+  		  <tr><td>c)  Phenol</td><td><input type="radio" name="barber_5_34" value="c"></td></tr>
+  		  <tr><td>d)  Quat</td><td><input type="radio" name="barber_5_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  A 50 to 60% _____ alcohol solution may be used on the skin as an antiseptic.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  pine</td><td><input type="radio" name="barber_5_35" value="a"></td></tr>
+  		  <tr><td>b)  phenol</td><td><input type="radio" name="barber_5_35" value="b"></td></tr>
+  		  <tr><td>c)  isopropyl</td><td><input type="radio" name="barber_5_35" value="c"></td></tr>
+  		  <tr><td>d)  ethyl</td><td><input type="radio" name="barber_5_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  H-42 Disinfectant and _____ are multipurpose formulations that can be used on surfaces and implements.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Barbicide</td><td><input type="radio" name="barber_5_36" value="a"></td></tr>
+  		  <tr><td>b)  Pine-Sol</td><td><input type="radio" name="barber_5_36" value="b"></td></tr>
+  		  <tr><td>c)  Lysol</td><td><input type="radio" name="barber_5_36" value="c"></td></tr>
+  		  <tr><td>d)  Clippercide</td><td><input type="radio" name="barber_5_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  The four functions that commercial prepared products perform are cleaning, _____, lubrication, and/or cooling.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  satiation</td><td><input type="radio" name="barber_5_37" value="a"></td></tr>
+  		  <tr><td>b)  disinfection</td><td><input type="radio" name="barber_5_37" value="b"></td></tr>
+  		  <tr><td>c)  heating</td><td><input type="radio" name="barber_5_37" value="c"></td></tr>
+  		  <tr><td>d)  None of the answers are correct</td><td><input type="radio" name="barber_5_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  Dilute _____ with water to achieve the required strength.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  concentrates</td><td><input type="radio" name="barber_5_38" value="a"></td></tr>
+  		  <tr><td>b)  petroleum distillates</td><td><input type="radio" name="barber_5_38" value="b"></td></tr>
+  		  <tr><td>c)  Lysol</td><td><input type="radio" name="barber_5_38" value="c"></td></tr>
+  		  <tr><td>d)  blade wash</td><td><input type="radio" name="barber_5_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  A solute is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a type of disinfectant</td><td><input type="radio" name="barber_5_39" value="a"></td></tr>
+  		  <tr><td>b)  the substance in which something is dissolved</td><td><input type="radio" name="barber_5_39" value="b"></td></tr>
+  		  <tr><td>c)  the substance that is dissolved</td><td><input type="radio" name="barber_5_39" value="c"></td></tr>
+  		  <tr><td>d)  a concentrated solution</td><td><input type="radio" name="barber_5_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  The percentage of solute is indicated by the _____ of the solution.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  price</td><td><input type="radio" name="barber_5_40" value="a"></td></tr>
+  		  <tr><td>b)  concentration</td><td><input type="radio" name="barber_5_40" value="b"></td></tr>
+  		  <tr><td>c)  strength</td><td><input type="radio" name="barber_5_40" value="c"></td></tr>
+  		  <tr><td>d)  purity</td><td><input type="radio" name="barber_5_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  _____ cabinets used to store disinfected tools and implements are called ultraviolet-ray sanitizers.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Glass</td><td><input type="radio" name="barber_5_41" value="a"></td></tr>
+  		  <tr><td>b)  Plastic</td><td><input type="radio" name="barber_5_41" value="b"></td></tr>
+  		  <tr><td>c)  Wood</td><td><input type="radio" name="barber_5_41" value="c"></td></tr>
+  		  <tr><td>d)  Metal</td><td><input type="radio" name="barber_5_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  A cabinet sanitizer is an airtight cabinet containing an active fumigant such as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  formalin</td><td><input type="radio" name="barber_5_42" value="a"></td></tr>
+  		  <tr><td>b)  quats</td><td><input type="radio" name="barber_5_42" value="b"></td></tr>
+  		  <tr><td>c)  steam</td><td><input type="radio" name="barber_5_42" value="c"></td></tr>
+  		  <tr><td>d)  phenols</td><td><input type="radio" name="barber_5_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  After using a wet sanitizer for the recommended amount of time and rinsing the implements, _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dry them with a clean towel</td><td><input type="radio" name="barber_5_43" value="a"></td></tr>
+  		  <tr><td>b)  place in a dry cabinet</td><td><input type="radio" name="barber_5_43" value="b"></td></tr>
+  		  <tr><td>c)  wash again with soap and water</td><td><input type="radio" name="barber_5_43" value="c"></td></tr>
+  		  <tr><td>d)  use the implements immediately</td><td><input type="radio" name="barber_5_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  To disinfect clippers, pour blade wash into a _____ container.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  glass</td><td><input type="radio" name="barber_5_44" value="a"></td></tr>
+  		  <tr><td>b)  plastic</td><td><input type="radio" name="barber_5_44" value="b"></td></tr>
+  		  <tr><td>c)  disposable</td><td><input type="radio" name="barber_5_44" value="c"></td></tr>
+  		  <tr><td>d)  All answers are correct</td><td><input type="radio" name="barber_5_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  Work surfaces should be disinfected with an EPA-registered, hospital-grade tuberculocidal disinfectant _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  once a month</td><td><input type="radio" name="barber_5_45" value="a"></td></tr>
+  		  <tr><td>b)  once a day</td><td><input type="radio" name="barber_5_45" value="b"></td></tr>
+  		  <tr><td>c)  twice a day</td><td><input type="radio" name="barber_5_45" value="c"></td></tr>
+  		  <tr><td>d)  before and after each client</td><td><input type="radio" name="barber_5_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>46.  Standard precautions cover bodily fluids and body sites and were developed by the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  CDC</td><td><input type="radio" name="barber_5_46" value="a"></td></tr>
+  		  <tr><td>b)  EPA</td><td><input type="radio" name="barber_5_46" value="b"></td></tr>
+  		  <tr><td>c)  FDA</td><td><input type="radio" name="barber_5_46" value="c"></td></tr>
+  		  <tr><td>d)  state barber boards</td><td><input type="radio" name="barber_5_46" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>47.  Blood-spill disinfection is required when _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a client sustains a cut during a service</td><td><input type="radio" name="barber_5_47" value="a"></td></tr>
+  		  <tr><td>b)  a client has a bloody nose before a service procedure and leaves the shop</td><td><input type="radio" name="barber_5_47" value="b"></td></tr>
+  		  <tr><td>c)  a client exhibits signs of infection</td><td><input type="radio" name="barber_5_47" value="c"></td></tr>
+  		  <tr><td>d)  None of the answers are correct</td><td><input type="radio" name="barber_5_47" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>48.  When chemical solution becomes _____, change it.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dirty</td><td><input type="radio" name="barber_5_48" value="a"></td></tr>
+  		  <tr><td>b)  cloudy</td><td><input type="radio" name="barber_5_48" value="b"></td></tr>
+  		  <tr><td>c)  contaminated</td><td><input type="radio" name="barber_5_48" value="c"></td></tr>
+  		  <tr><td>d)  All answers are correct</td><td><input type="radio" name="barber_5_48" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>49.  70 degrees Fahrenheit is _____ for a barbershop.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  too warm</td><td><input type="radio" name="barber_5_49" value="a"></td></tr>
+  		  <tr><td>b)  too cold</td><td><input type="radio" name="barber_5_49" value="b"></td></tr>
+  		  <tr><td>c)  an ideal temperature</td><td><input type="radio" name="barber_5_49" value="c"></td></tr>
+  		  <tr><td>d)  inapproriate</td><td><input type="radio" name="barber_5_49" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>50.  When implements are used, they should be _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  immediately cleaned and disinfected</td><td><input type="radio" name="barber_5_50" value="a"></td></tr>
+  		  <tr><td>b)  put aside until the end of the day</td><td><input type="radio" name="barber_5_50" value="b"></td></tr>
+  		  <tr><td>c)  washed with soap and used again</td><td><input type="radio" name="barber_5_50" value="c"></td></tr>
+  		  <tr><td>d)  immediately used again</td><td><input type="radio" name="barber_5_50" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>51.  If a client is cut during a service procedure, _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the client should be informed</td><td><input type="radio" name="barber_5_51" value="a"></td></tr>
+  		  <tr><td>b)  the barber should not tell anyone</td><td><input type="radio" name="barber_5_51" value="b"></td></tr>
+  		  <tr><td>c)  the barber will be fired</td><td><input type="radio" name="barber_5_51" value="c"></td></tr>
+  		  <tr><td>d)  the barber's license will be suspended</td><td><input type="radio" name="barber_5_51" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

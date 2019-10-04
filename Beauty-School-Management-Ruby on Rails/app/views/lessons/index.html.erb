@@ -1,0 +1,23 @@
+<% provide(:title, 'Lessons') %>
+
+<h2>
+  <%= link_to gravatar_for(current_user, size: 50), current_user %> <%= current_user.school_users.first.school.name %>'s Lessons  
+</h2>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-4">
+    <% if school_admin?(current_user) %>
+      <%= link_to new_lesson_path, remote: true do %>
+          <button class="btn btn-lg btn-primary">New Lesson</button>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2" id="lesson-form" style="display:none;"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-md-offset-1" id="lessons"><%= render @lessons %></div>
+</div>

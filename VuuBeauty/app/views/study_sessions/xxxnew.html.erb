@@ -1,0 +1,82 @@
+<% provide(:title, "Study") %>
+<h1>Study Room</h1>
+
+<script>
+  $(document).ready(function(){
+      $("#btn_next").click(function(){
+        $.ajax({
+          type:'POST',
+          url:'/study',
+          data: { id: "demo.html" },
+          success:function(result){
+            $("#lesson").html(result);
+          }
+        });
+      });
+  });
+
+  $("button2222").click(function() {
+      //alert(this.id); // or alert($(this).attr('id'));
+    $.ajax({
+      type: 'POST',
+      url:'/study',
+      data: { id: this.id },
+      success:function(result){
+        $("#lesson").html(result);
+      }
+    })
+  });
+</script>
+
+<!-- See example and reference at http://www.samrayner.com/bootstrap-side-navbar/ -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-lg-2">
+      <nav class="navbar navbar-default navbar-fixed-side">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="./">Lessons</a>
+          </div>
+          <div class="btn-group-vertical navbar-btn">
+                <div class="btn-group navbar-btn">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                      Lesson #1<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>Lecture</li>
+                      <li>Quiz</li>
+                      <li>Exam</li>
+                    </ul>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                      Lesson #2<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>Lecture</li>
+                      <li>Quiz</li>
+                      <li>Exam</li>
+                    </ul>
+                </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="col-sm-9 col-lg-10">
+      <div id="lesson">
+        <h2>Choose a lesson on the left panel to start your study module.</h2>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" id="btn_next">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

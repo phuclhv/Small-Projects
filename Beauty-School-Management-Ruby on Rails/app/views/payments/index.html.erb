@@ -1,0 +1,15 @@
+<% provide(:title, "Tuition History") %>
+<h1>Tuition History</h1>
+
+<h2>Tuition balance: <%= number_to_currency(@tuition_balance) %> </h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr>
+      <th>Payment ID</th>
+      <th>Amount</th>
+      <th>Payment Date</th>
+    </tr>
+      <%= render @payments %>
+  </table>
+</div>
+

@@ -1,0 +1,180 @@
+<style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    width: 100%;
+    margin: auto;
+  }
+</style>
+
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+  </div>
+  <% if !school_user?(current_user) %>
+    <%= render "program1" %>
+  <% elsif !enrolled?(current_user) %>
+    <%= render "program2" %>
+  <% end %>
+<% else %>
+
+  <div class="container">
+    <div id="myCarousel" class="carousel slide">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li class="item1 active"></li>
+        <li class="item2"></li>
+        <li class="item3"></li>
+        <li class="item4"></li>
+        <li class="item5"></li>
+        <li class="item6"></li>
+        <li class="item7"></li>
+      </ol>
+  
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+  
+        <div class="item active">
+          <%= image_tag("site_main1.jpg", size: "900x300", alt: "Students & Instructors") %>
+          <div class="carousel-caption">
+            <h3>School Party</h3>
+            <p>The atmosphere of the party!</p>
+          </div>
+        </div>
+  
+        <div class="item">
+          <%= image_tag("site_main2.jpg", size: "900x300", alt: "Salon Service") %>
+          <div class="carousel-caption">
+            <h3>Salon Service</h3>
+            <p>The atmosphere of salon service.</p>
+          </div>
+        </div>
+      
+        <div class="item">
+          <%= image_tag("site_main3.jpg", size: "900x300",  alt: "Vuu") %>
+          <div class="carousel-caption">
+            <h3>Vuu's Beauty School</h3>
+            <p>Early days of Vuu's Beauty School.</p>
+          </div>
+        </div>
+  
+        <div class="item">
+          <%= image_tag("site_main4.jpg", size: "900x300", alt: "Classroom") %>
+          <div class="carousel-caption">
+            <h3>Classroom</h3>
+            <p>Students and instructors in their classroom.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag("site_main5.jpg", size: "900x300", alt: "Graduation") %>
+          <div class="carousel-caption">
+            <h3>Flowers and Graduation</h3>
+            <p>Happy day of graduation!</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag("site_main6.jpg", size: "900x300", alt: "Graduation") %>
+          <div class="carousel-caption">
+            <h3>Graduation</h3>
+            <p>Happy graduation day again!</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <%= image_tag("site_main7.jpg", size: "900x300", alt: "Party") %>
+          <div class="carousel-caption">
+            <h3>Party!</h3>
+            <p>Students and instructors at school party!</p>
+          </div>
+        </div>
+    
+      </div>
+  
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+<div class="container">
+<div class="row">
+  <div class="col-sm-8">
+    <p>
+      Vuu's Beauty School is licensed by the State of Washington's Department of Licensing.  You can search for us and verify our license on the state website
+      <a href="https://fortress.wa.gov/dol/dolprod/bpdLicenseQuery/Default.aspx">here.</a>
+    </p>
+    <p>
+      Vuu's is a SEVP-certified school.  We currently enroll international students, and can issue Form I-20 to students accepted to our study programs in the United States.
+      With Form I-20, students can apply for M-1 visas to come to Seattle, Washington to study at Vuu's.  You can verify the school at the this
+      <a href="http://studyinthestates.dhs.gov/school-search">link</a>.  Type in "Vuu's Beauty School" in the first search box and the school should come up.
+    </p>
+  </div>
+  <div class="col-sm-4">
+    <p>
+      Vuu's is located in the International District in Seattle, WA.  Our address is<br/>
+      <blockquote>
+        807 S King St
+        Seattle,  WA 98104
+        (206)340-2655
+        vuubeautyschool@gmail.com
+      </blockquote>  
+      Vuu's has been training our students and serving our clients since 2000.  Thank you for your support!!!
+    </p>
+</div>
+
+<div class="container">
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Vuu's+Beauty+School,+807+South+King+Street,+Seattle,+WA+98104-3019&amp;aq=0&amp;oq=vuu's+b&amp;sll=47.669512,-122.414957&amp;sspn=0.249228,0.497131&amp;vpsrc=6&amp;ie=UTF8&amp;hq=Vuu's+Beauty+School,&amp;hnear=807+S+King+St,+Seattle,+King,+Washington+98104&amp;t=m&amp;cid=16242767803986317222&amp;ll=47.60651,-122.319202&amp;spn=0.020254,0.036478&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Vuu's+Beauty+School,+807+South+King+Street,+Seattle,+WA+98104-3019&amp;aq=0&amp;oq=vuu's+b&amp;sll=47.669512,-122.414957&amp;sspn=0.249228,0.497131&amp;vpsrc=6&amp;ie=UTF8&amp;hq=Vuu's+Beauty+School,&amp;hnear=807+S+King+St,+Seattle,+King,+Washington+98104&amp;t=m&amp;cid=16242767803986317222&amp;ll=47.60651,-122.319202&amp;spn=0.020254,0.036478&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+</div>
+
+  <%= render "program0" %>
+<% end %>
+
+
+<script>
+$(document).ready(function(){
+    // Activate Carousel
+    $("#myCarousel").carousel();
+    
+    // Enable Carousel Indicators
+    $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+    });
+    $(".item2").click(function(){
+        $("#myCarousel").carousel(1);
+    });
+    $(".item3").click(function(){
+        $("#myCarousel").carousel(2);
+    });
+    $(".item4").click(function(){
+        $("#myCarousel").carousel(3);
+    });
+    $(".item5").click(function(){
+        $("#myCarousel").carousel(4);
+    });
+    $(".item6").click(function(){
+        $("#myCarousel").carousel(5);
+    });
+    $(".item7").click(function(){
+        $("#myCarousel").carousel(6);
+    });
+
+    // Enable Carousel Controls
+    $(".left").click(function(){
+        $("#myCarousel").carousel("prev");
+    });
+    $(".right").click(function(){
+        $("#myCarousel").carousel("next");
+    });
+});
+</script>

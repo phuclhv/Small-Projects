@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 21: Career Planning </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. When should you start keeping careful track of what you are spending, if you have not already done so ?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_21_1" value="a"></td><td>a) when you start earning a salary </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_1" value="b"></td><td>b) when you've had a job for a year </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_1" value="c"></td><td>c) when you reach age 21 </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_1" value="d"></td><td>d) when you reach age 25 </td></tr>
+		</table>
+    </p>
+
+    <p>2. What is NOT an indication that you might benefit from professional  financial advice?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_2" value="a"></td><td>a) when you have difficulty managing money </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_2" value="b"></td><td>b) when you feel unsure about how to handle your bank account </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_2" value="c"></td><td>c) when you feel unsure about how to handle your bank retirement </td></tr>
+		  <tr><td><input type="radio" name="esthetics_21_2" value="d"></td><td>d) when your realize you have money left over after paying your bills </td></tr>
+  		</table>
+    </p>
+
+    <p>3. What is NOT something for which you will be responsible if you accept employment as an independent contractor? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_3" value="a"></td><td>a) insurance </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_3" value="b"></td><td>b) taxes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_3" value="c"></td><td>c) compliance ith laws </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_3" value="d"></td><td>d) building maintenance fees </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What amount is used by clients to calculate tips? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_4" value="a"></td><td>a) total service ticket </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_4" value="b"></td><td>b) amount charged for retail products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_4" value="c"></td><td>c) price of the basic facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_4" value="d"></td><td>d) price of the basic facial plus any add-ons </td></tr>
+  		</table>
+    </p>
+
+    <p>5. What statement about tips is correct? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_5" value="a"></td><td>a) all salons allo estheticians to accept tips </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_5" value="b"></td><td>b) only full-time employees may accept tips </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_5" value="c"></td><td>c) tips are considered part of your taxable income </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_5" value="d"></td><td>d) the standard tip is about 10 to 12 percent </td></tr>
+  		</table>
+    </p>
+
+    <p>6. When should you answer the questions on a test for which you are sure of the answers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_6" value="a"></td><td>a) after completing the most difficult questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_6" value="b"></td><td>b) when you need a break from more difficult questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_6" value="c"></td><td>c) at the beginning, so you save time for difficult questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_6" value="d"></td><td>d) you should answer all questions in the order in which they appear on the test </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What should you do when you come across a difficult question on a test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_7" value="a"></td><td>a) work through it and put down an answer before moving on </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_7" value="b"></td><td>b) skip it and come back to it later </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_7" value="c"></td><td>c) skip it altogether, leaving the answer blank </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_7" value="d"></td><td>d) guess at the answer and move on </td></tr>
+  		</table>
+    </p>
+
+    <p>8. What is an advantage of booth rental over other business structures? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_8" value="a"></td><td>a) significantly lower expenses </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_8" value="b"></td><td>b) shared risk with a partner </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_8" value="c"></td><td>c) capital provided by investors </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_8" value="d"></td><td>d) ownership of the salon building </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. What is a destination spa?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_9" value="a"></td><td>a) spa area of a franchise salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_9" value="b"></td><td>b) all-inclusive retreat </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_9" value="c"></td><td>c) spa area of a medical practice </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_9" value="d"></td><td>d) local day spa </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What do full-service salons typically offer? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_10" value="a"></td><td>a) medical aesthetic procedures </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_10" value="b"></td><td>b) nutrition counseling </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_10" value="c"></td><td>c) a total beauty exerience </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_10" value="d"></td><td>d) guest rooms for an extended stay </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What is a focus of treatment at wellness spas?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_11" value="a"></td><td>a) optimal health maintenance </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_11" value="b"></td><td>b) surgical procedures </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_11" value="c"></td><td>c) cosmetic surgery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_11" value="d"></td><td>d) chemical skin treatments </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What is NOT a location where one might expect to find a medical spa? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_12" value="a"></td><td>a) dermatology office </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_12" value="b"></td><td>b) laser center </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_12" value="c"></td><td>c) hospital </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_12" value="d"></td><td>d) country club </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What form of compensation specifies a certain amount of pay based on a flat or hourly rate? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_13" value="a"></td><td>a) commission </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_13" value="b"></td><td>b) gratuity </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_13" value="c"></td><td>c) quota </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_13" value="d"></td><td>d) salary </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What behavior characterizes a test-wise student? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_14" value="a"></td><td>a) cramming the day before a test </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_14" value="b"></td><td>b) cheating without getting caught </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_14" value="c"></td><td>c) practicing good study habits </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_14" value="d"></td><td>d) answering all questions quickly  </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What are transferable skills? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_15" value="a"></td><td>a) skills you are able to quickly teach to co-workers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_15" value="b"></td><td>b) skills mastered at one jjob that are applicable to a new position </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_15" value="c"></td><td>c) skills that you must learn in order to succeed at a specific salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_15" value="d"></td><td>d) skills learned in the salon that can also be applied at home </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. Why is it important to be an active student?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_16" value="a"></td><td>a) to become friends with your teacher </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_16" value="b"></td><td>b) to pass the license exam </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_16" value="c"></td><td>c) to make the teacher give extra credit for classroom involvement </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_16" value="d"></td><td>d) to intimidate other students by showing how assertive you are </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What should you do to prepare yourself for the test?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_17" value="a"></td><td>a) discard class handouts and focus entirely on the textbook </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_17" value="b"></td><td>b) stay up late studying and get up early to study some more before class </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_17" value="c"></td><td>c) maintain a pessimistic attitude </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_17" value="d"></td><td>d) take effective notes during class </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What should you do to avoid cramming the night before a test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_18" value="a"></td><td>a) skip class the day before the test so you can stay home and study </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_18" value="b"></td><td>b) plan your study schedule </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_18" value="c"></td><td>c) flat-rate form of pay based upon job description </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_18" value="d"></td><td>d) sliding-scale form of pay based upon experience </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is commission? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_19" value="a"></td><td>a) flat-rate form of pay based upon hours worked </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_19" value="b"></td><td>b) percentage-based form of ay related to performance </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_19" value="c"></td><td>c) flat-rate form of pay based upon job description </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_19" value="d"></td><td>d) sliding-scale form of pay based upon experience </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What is the term for the process of reaching logical conclusions by employing logical reasoning? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_21" value="a"></td><td>a) reductive analysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_21" value="b"></td><td>b) instructive reasoning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_21" value="c"></td><td>c) deductive reasoning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_21" value="d"></td><td>d) constructive analysis </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What is NOT one of the respponsibilities of an independent contractor?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="a"></td><td>a) paying his or her own fees </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="b"></td><td>b) controlling his or her own hours </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="c"></td><td>c) paying his or her own taxes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="d"></td><td>d) paying franchise fees for the salon </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What is the term for a scheduled meeting with the sole purpose of garthering knowledge about a salon? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="a"></td><td>a) information interview </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="b"></td><td>b) salon visit </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="c"></td><td>c) job interview </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_22" value="d"></td><td>d) manager consulation </td></tr>
+  		</table>
+    </p>
+
+    <p>23. Why is a jod description? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_23" value="a"></td><td>a) list of serives to be provided in a particular appointment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_23" value="b"></td><td>b) text in an advertisement describing a job opening </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_23" value="c"></td><td>c) list of an esthetician's specific duties and resposibilities </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_23" value="d"></td><td>d) service description given by the esthetician to a client </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What is the umbrella term for methods of increasing contacts and building relationships to further one's career?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_24" value="a"></td><td>a) incentivizing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_24" value="b"></td><td>b) franchising </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_24" value="c"></td><td>c) contracting </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_24" value="d"></td><td>d) networking</td></tr>
+  		</table>
+    </p>
+
+    <p>25. What are quotas? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_25" value="a"></td><td>a) percentage of retail sales returned to you as commission </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_25" value="b"></td><td>b) list of duties and resposibilities related to your job</td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_25" value="c"></td><td>c) minimum number of questions you must get right on tests</td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_25" value="d"></td><td>d) amounts of goods and services to be sold in a given period of time </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What is a written summary of education and work experience that highlights relevant accomolishments and achievements?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_26" value="a"></td><td>a) quota </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_26" value="b"></td><td>b) job description </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_26" value="c"></td><td>c) commission </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_26" value="d"></td><td>d) resume </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What is true of role models? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_27" value="a"></td><td>a) their behavior and success are worthy of emulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_27" value="b"></td><td>b) they represent the opposite of what you want to achieve </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_27" value="c"></td><td>c) they are women hired to showcase clothing, hairstyles, and makeup </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_27" value="d"></td><td>d) every supervisor in every salon is an excellent role model </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is NOT among the services commonly offered at resort spas?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_28" value="a"></td><td>a) skin care </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_28" value="b"></td><td>b) massage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_28" value="c"></td><td>c) hair and nail services </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_28" value="d"></td><td>d) surgical rocedures </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What is one tool for writing an effective resume? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_29" value="a"></td><td>a) avoiding cliched phrases </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_29" value="b"></td><td>b) highlighting personal goals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_29" value="c"></td><td>c) using vague language </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_29" value="d"></td><td>d) avoiding action or power words </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. When should you consider writing separate resumes? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_30" value="a"></td><td>a) when you are trying to hide the fact that you got fired from your last job </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_30" value="b"></td><td>b) when you want to apply for a job without your current employer knowing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_30" value="c"></td><td>c) when you are applying for different positiotions with distinct requirements </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_30" value="d"></td><td>d) when you are applying for similar positios at various employers </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What is one techinique for considering your audience while writing a resume? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_31" value="a"></td><td>a) using words to hich the reader can relate </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_31" value="b"></td><td>b) using "fancy" langudge that shos off your intelligence </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_31" value="c"></td><td>c) providing vague information that will force an intervieer to ask questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_31" value="d"></td><td>d) leaving out dates so people cannot guess your approximate age </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What is meant by "highlighting your accommplishments" in a resume? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_32" value="a"></td><td>a) mentioning achievements </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_32" value="b"></td><td>b) identifying how frequently you stay after work to help clean the salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_32" value="c"></td><td>c) exaggerating your past salaries </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_32" value="d"></td><td>d)identifying how frequently you were singled out for praise by teachers </td></tr>
+  		</table>
+    </p>
+
+    <p>33. Where in your resume should you mention hobbies that are unrelated to business?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_33" value="a"></td><td>a) "personal interests" section </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_33" value="b"></td><td>b) employment history </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_33" value="c"></td><td>c) education section </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_33" value="d"></td><td>d) you should not mention these </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What should you EXCLUDE from your resume? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_34" value="a"></td><td>a) employment history </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_34" value="b"></td><td>b) notable accomplishments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_34" value="c"></td><td>c) description of transferable skills </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_34" value="d"></td><td>d) salary requirements </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What is true about the anxiety you feel when taking a test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_35" value="a"></td><td>a) if you feel anxious, you are very likely to fail the test </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_35" value="b"></td><td>b) a certain amount of anxiety may actually help you do better </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_35" value="c"></td><td>c) it is very unusual to experience anxiety when taking a test </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_35" value="d"></td><td>d) if you feel anxious, you should excuse yourself and take the test at a later date </td></tr>
+  		</table>
+    </p>
+
+    <p>36. What is characteristic of a positive attitude toward test-taking? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_36" value="a"></td><td>a) remembering not to take the test seriously because it's just a test </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_36" value="b"></td><td>b) keeping in mind that individual test rarely have much impact on final grades </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_36" value="c"></td><td>c) cramming for 24 hours straight immediately before a test </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_36" value="d"></td><td>d) viewing the test as a useful step toward achieving your goals </td></tr>
+  		</table>
+    </p>
+
+    <p>37. What should you do when you encounter options on a test that you kno to be incorrect? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_37" value="a"></td><td>a) elimate them immediately </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_37" value="b"></td><td>b) assume they reveal "strick questions" and are therefore correct </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_37" value="c"></td><td>c) consider themfor a long time </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_37" value="d"></td><td>d) skip the question and go back to it later </td></tr>
+  		</table>
+    </p>
+
+    <p>38. What is the basic question or problem you are being asked to answer and/or solve on a test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_38" value="a"></td><td>a) root </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_38" value="b"></td><td>b) limb </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_38" value="c"></td><td>c) branch </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_38" value="d"></td><td>d) stem </td></tr>
+  		</table>
+    </p>
+
+    <p>39. What does it typically mean if the last ord in a stem is an? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_39" value="a"></td><td>a) answer must begin ith a consonant </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_39" value="b"></td><td>b) answer must begin with a vowel </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_39" value="c"></td><td>c) all of the answer are liely to be correct </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_39" value="d"></td><td>d) all of the answer are liely to be incorrect </td></tr>
+  		</table>
+    </p>
+
+    <p>40. When should you read the questions in test that contain long paragraphs of reading folloed by several questions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_40" value="a"></td><td>a) after you read the paragraph </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_40" value="b"></td><td>b) before you read the paragraph </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_40" value="c"></td><td>c) after you think of the answer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_40" value="d"></td><td>d) while you read the paragraph </td></tr>
+  		</table>
+    </p>
+
+    <p>41. What should you do on the day of the test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_41" value="a"></td><td>a) skip breakfast </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_41" value="b"></td><td>b) leave your watch at home </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_41" value="c"></td><td>c) listen carefully to the examiner's verbal directions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_41" value="d"></td><td>d) try to answer questions without reading them thoroughly </td></tr>
+  		</table>
+    </p>
+
+    <p>42. What should you do before answering questions on a test? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_42" value="a"></td><td>a) enter identifying information </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_42" value="b"></td><td>b) read every word of every question </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_42" value="c"></td><td>c) count the number of the questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_42" value="d"></td><td>d) watch what other students are doing </td></tr>
+  		</table>
+    </p>
+
+    <p>43. When during a test is it appropriate to ask the examiner questions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_43" value="a"></td><td>a) when you need help with an answer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_43" value="b"></td><td>b) when you want to distract the examiner so a friend can cheat </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_43" value="c"></td><td>c) when something is not clear </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_43" value="d"></td><td>d) when you think you can trick the ecaminer into answering a question </td></tr>
+  		</table>
+    </p>
+
+    <p>44. What should you do if you skip a question? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_44" value="a"></td><td>a) forget about it and focus solely on the easiest questions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_44" value="b"></td><td>b) go back later and simply guess at the answer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_44" value="c"></td><td>c) mark it so you can quickly find it later </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_44" value="d"></td><td>d) cross it out and hand the test in without answering it </td></tr>
+  		</table>
+    </p>
+
+
+    <p>45. What is the LEAST important concern when performing your own trials for the practice exam? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_21_45" value="a"></td><td>a) timing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_45" value="b"></td><td>b) infection control </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_45" value="c"></td><td>c) safety procedures </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_21_45" value="d"></td><td>d) model's satisfaction with yor work </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

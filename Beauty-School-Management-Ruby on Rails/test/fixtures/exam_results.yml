@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exam_id: 1
+  score: 1
+  answer_keys: MyString
+  student_lesson: one
+
+two:
+  exam_id: 1
+  score: 1
+  answer_keys: MyString
+  student_lesson: two

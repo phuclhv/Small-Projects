@@ -1,0 +1,58 @@
+<script>
+  $(".nav a").on("click", function(){
+   $(".nav").find(".active").removeClass("active");
+   $(this).parent().addClass("active");
+  });
+</script>
+
+<!-- To do: see Bootstrap JS Affix -->
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2">
+      <ul class="nav nav-pills nav-stacked" >
+        <li class="active"><a href="#">Lessons</a></li>
+        <% @lessons.each do |lesson| %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= lesson.lesson_name %><spand class="caret"></spand></a>
+            <ul class="dropdown-menu">
+              <% if lesson.lesson_number < 30 then %>
+                <li>
+                  <%= link_to study_path(lesson, id: lesson.id), method: :post, remote: true do %>
+                    Study
+                  <% end %>
+                </li>
+                <% @exams.where(lesson_id: lesson.id).each do |exam| %>
+                  <li>
+                    <%= link_to load_exam_path(id: exam.id), method: :get, remote: true do %>
+                      Exam
+                    <% end %>
+                  </li>
+                <% end %>
+              <% else %> <%# State Board videos below %> 
+                <li>
+                  <%= link_to study_path(lesson, id: lesson.id), method: :post, remote: true do %>
+                    Watch
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-sm-9 text-left">
+      <div id="lesson"></div>
+      <div id="exam"></div>
+      <div id="answers"></div>
+    </div>
+    <div class="col-sm-1 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>

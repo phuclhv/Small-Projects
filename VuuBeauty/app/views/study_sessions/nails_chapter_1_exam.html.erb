@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 1 -- History and Career Opportunities</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  Which term refers to the art and science of beautifying and improving the nails and skin of the hands and feet?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_1_1" value="a"></td><td>a)  cosmetology</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_1" value="b"></td><td>b)  nail technology</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_1" value="c"></td><td>c)  esthetics</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_1" value="d"></td><td>d)  manicuring</td></tr>
+  		</table>
+    </p>
+
+    <p>2.  In what year was the first successful nail lacquer brand marketed?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="nails_1_2" value="a"></td><td>a)  1910</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_2" value="b"></td><td>b)  1925</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_2" value="c"></td><td>c)  1932</td></tr>
+  		  <tr><td><input type="radio" name="nails_1_2" value="d"></td><td>d)  1940</td></tr>
+  		</table>
+    </p>
+
+    <p>3.  Who were the first people to use cosmetics to prepare the deceased for burial?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The Egyptians</td><td><input type="radio" name="nails_1_3" value="a"></td></tr>
+  		  <tr><td>b)  The Greeks</td><td><input type="radio" name="nails_1_3" value="b"></td></tr>
+  		  <tr><td>c)  The Romans</td><td><input type="radio" name="nails_1_3" value="c"></td></tr>
+  		  <tr><td>d)  The Chinese</td><td><input type="radio" name="nails_1_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Ancient Egyptians used _________ to stain their hair and nails a rich, warm red.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  camel blood</td><td><input type="radio" name="nails_1_4" value="a"></td></tr>
+  		  <tr><td>b)  rose petals</td><td><input type="radio" name="nails_1_4" value="b"></td></tr>
+  		  <tr><td>c)  henna paste</td><td><input type="radio" name="nails_1_4" value="c"></td></tr>
+  		  <tr><td>d)  crushed insects</td><td><input type="radio" name="nails_1_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  In which ancient cultures did military commanders stain their nails and lips in matching colors before important battles?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Chinese and Greek</td><td><input type="radio" name="nails_1_5" value="a"></td></tr>
+  		  <tr><td>b)  Egyptian and Roman</td><td><input type="radio" name="nails_1_5" value="b"></td></tr>
+  		  <tr><td>c)  Greek and Roman</td><td><input type="radio" name="nails_1_5" value="c"></td></tr>
+  		  <tr><td>d)  Chinese and Egyptian</td><td><input type="radio" name="nails_1_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  Which practice was closely tied to social status during the Chou Dynasty?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Nail tinting</td><td><input type="radio" name="nails_1_6" value="a"></td></tr>
+  		  <tr><td>b)  Hair tinting</td><td><input type="radio" name="nails_1_6" value="b"></td></tr>
+  		  <tr><td>c)  Lip tinting</td><td><input type="radio" name="nails_1_6" value="c"></td></tr>
+  		  <tr><td>d)  Cheek tinting</td><td><input type="radio" name="nails_1_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  In which ancient culture could commoners be put to death for wearing the royal nail colors?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Egyptian</td><td><input type="radio" name="nails_1_7" value="a"></td></tr>
+  		  <tr><td>b)  Roman</td><td><input type="radio" name="nails_1_7" value="b"></td></tr>
+  		  <tr><td>c)  Chinese</td><td><input type="radio" name="nails_1_7" value="c"></td></tr>
+  		  <tr><td>d)  Greek</td><td><input type="radio" name="nails_1_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  The ancient Greeks made lavish use of perfumes and cosmetics for grooming, medicinal purposes, and ____________.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  religious rites</td><td><input type="radio" name="nails_1_8" value="a"></td></tr>
+  		  <tr><td>b)  burial rites</td><td><input type="radio" name="nails_1_8" value="b"></td></tr>
+  		  <tr><td>c)  social rites</td><td><input type="radio" name="nails_1_8" value="c"></td></tr>
+  		  <tr><td>d)  family events</td><td><input type="radio" name="nails_1_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  Which ancient culture built elaborate baths and developed excellent methods of dressing the hair?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The Romans</td><td><input type="radio" name="nails_1_9" value="a"></td></tr>
+  		  <tr><td>b)  The Greeks</td><td><input type="radio" name="nails_1_9" value="b"></td></tr>
+  		  <tr><td>c)  The Egyptians</td><td><input type="radio" name="nails_1_9" value="c"></td></tr>
+  		  <tr><td>d)  The Chinese</td><td><input type="radio" name="nails_1_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  When preparing for battle, what color did Greek soldiers often apply to their lips and nails?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Red</td><td><input type="radio" name="nails_1_10" value="a"></td></tr>
+  		  <tr><td>b)  Black</td><td><input type="radio" name="nails_1_10" value="b"></td></tr>
+  		  <tr><td>c)  Brown</td><td><input type="radio" name="nails_1_10" value="c"></td></tr>
+  		  <tr><td>d)  Blue</td><td><input type="radio" name="nails_1_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  Where did ancient Greek women apply kohl?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  to their cheeks</td><td><input type="radio" name="nails_1_11" value="a"></td></tr>
+  		  <tr><td>b)  to their eyes</td><td><input type="radio" name="nails_1_11" value="b"></td></tr>
+  		  <tr><td>c)  to their hair</td><td><input type="radio" name="nails_1_11" value="c"></td></tr>
+  		  <tr><td>d)  to their nails</td><td><input type="radio" name="nails_1_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  What did ancient Greek women apply to their lips to add color?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Ground cinnabar</td><td><input type="radio" name="nails_1_12" value="a"></td></tr>
+  		  <tr><td>b)  Insect blood</td><td><input type="radio" name="nails_1_12" value="b"></td></tr>
+  		  <tr><td>c)  Henna paste</td><td><input type="radio" name="nails_1_12" value="c"></td></tr>
+  		  <tr><td>d)  Lead powder</td><td><input type="radio" name="nails_1_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  The Roman philosopher Plautus is credited with comparing a woman without paint (cosmetics) to ________.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  music without instruments</td><td><input type="radio" name="nails_1_13" value="a"></td></tr>
+  		  <tr><td>b)  a day without sunshine</td><td><input type="radio" name="nails_1_13" value="b"></td></tr>
+  		  <tr><td>c)  food without salt</td><td><input type="radio" name="nails_1_13" value="c"></td></tr>
+  		  <tr><td>d)  life without music</td><td><input type="radio" name="nails_1_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  If you were a noblewoman in ancient Rome, you would color your hair _______ to indicate your class status.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  brown</td><td><input type="radio" name="nails_1_14" value="a"></td></tr>
+  		  <tr><td>b)  black</td><td><input type="radio" name="nails_1_14" value="b"></td></tr>
+  		  <tr><td>c)  blond</td><td><input type="radio" name="nails_1_14" value="c"></td></tr>
+  		  <tr><td>d)  red</td><td><input type="radio" name="nails_1_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  In ancient Rome, it was common for both men and women to add color to their nails using a mixture of sheep blood and ______.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  powder</td><td><input type="radio" name="nails_1_15" value="a"></td></tr>
+  		  <tr><td>b)  roots</td><td><input type="radio" name="nails_1_15" value="b"></td></tr>
+  		  <tr><td>c)  fat</td><td><input type="radio" name="nails_1_15" value="c"></td></tr>
+  		  <tr><td>d)  bark</td><td><input type="radio" name="nails_1_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  Which period immediately followed the Middle Ages?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The Roman Empire</td><td><input type="radio" name="nails_1_16" value="a"></td></tr>
+  		  <tr><td>b)  The Victorian Age</td><td><input type="radio" name="nails_1_16" value="b"></td></tr>
+  		  <tr><td>c)  The Ice Age</td><td><input type="radio" name="nails_1_16" value="c"></td></tr>
+  		  <tr><td>d)  The Renaissance</td><td><input type="radio" name="nails_1_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  During the ______, the use of highly colored preparations for the lips, cheeks, eyes, and nails was discouraged.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Middle Ages</td><td><input type="radio" name="nails_1_17" value="a"></td></tr>
+  		  <tr><td>b)  Victorian Age</td><td><input type="radio" name="nails_1_17" value="b"></td></tr>
+  		  <tr><td>c)  Roman Empire</td><td><input type="radio" name="nails_1_17" value="c"></td></tr>
+  		  <tr><td>d)  Renaissance</td><td><input type="radio" name="nails_1_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  Archaeological digs have uncovered cosmetic tools from the Renaissance period, including nail cleaners, some doubling as
+            ______, made of bone or metal in a wide variety of designs.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  nail files</td><td><input type="radio" name="nails_1_18" value="a"></td></tr>
+  		  <tr><td>b)  ear scoops</td><td><input type="radio" name="nails_1_18" value="b"></td></tr>
+  		  <tr><td>c)  eye cleaners</td><td><input type="radio" name="nails_1_18" value="c"></td></tr>
+  		  <tr><td>d)  hair brushes</td><td><input type="radio" name="nails_1_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  Victorian women ______ to induce natural lip color.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  applied rouge</td><td><input type="radio" name="nails_1_19" value="a"></td></tr>
+  		  <tr><td>b)  bit their lips</td><td><input type="radio" name="nails_1_19" value="b"></td></tr>
+  		  <tr><td>c)  applied lip stains</td><td><input type="radio" name="nails_1_19" value="c"></td></tr>
+  		  <tr><td>d)  applied natural ingredients</td><td><input type="radio" name="nails_1_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  The onset of _____ led to a new prosperity in the United States, during which all forms of beauty began to follow trends.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  World War I</td><td><input type="radio" name="nails_1_20" value="a"></td></tr>
+  		  <tr><td>b)  the Great Depression</td><td><input type="radio" name="nails_1_20" value="b"></td></tr>
+  		  <tr><td>c)  industrialization</td><td><input type="radio" name="nails_1_20" value="c"></td></tr>
+  		  <tr><td>d)  assembly lines</td><td><input type="radio" name="nails_1_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  The first noncaking, non-cracking makeup was marketed to movie stars _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Max Factor</td><td><input type="radio" name="nails_1_21" value="a"></td></tr>
+  		  <tr><td>b)  Charles Revson</td><td><input type="radio" name="nails_1_21" value="b"></td></tr>
+  		  <tr><td>c)  Mary Kay</td><td><input type="radio" name="nails_1_21" value="c"></td></tr>
+  		  <tr><td>d)  Charles Graf</td><td><input type="radio" name="nails_1_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  In 1910, Flowery Manicure Products introduced the first modern-style _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  nail polish</td><td><input type="radio" name="nails_1_22" value="a"></td></tr>
+  		  <tr><td>b)  emery board</td><td><input type="radio" name="nails_1_22" value="b"></td></tr>
+  		  <tr><td>c)  nail wrap</td><td><input type="radio" name="nails_1_22" value="c"></td></tr>
+  		  <tr><td>d)  artificial nail</td><td><input type="radio" name="nails_1_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  Who introduced the first mass-marketed nail lacquers?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Yves Rocher</td><td><input type="radio" name="nails_1_23" value="a"></td></tr>
+  		  <tr><td>b)  Paul Mitchell</td><td><input type="radio" name="nails_1_23" value="b"></td></tr>
+  		  <tr><td>c)  Madam C. J. Walker</td><td><input type="radio" name="nails_1_23" value="c"></td></tr>
+  		  <tr><td>d)  Charles Revson</td><td><input type="radio" name="nails_1_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  Jean Harlow and _____ helped glamorize the hip new nail lacquer trend in the 1930s by wearing matching colors on her fingers
+            and toes.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Gloria Swanson</td><td><input type="radio" name="nails_1_24" value="a"></td></tr>
+  		  <tr><td>b)  Elizabeth Taylor</td><td><input type="radio" name="nails_1_24" value="b"></td></tr>
+  		  <tr><td>c)  Marilyn Monroe</td><td><input type="radio" name="nails_1_24" value="c"></td></tr>
+  		  <tr><td>d)  Lillian Gish</td><td><input type="radio" name="nails_1_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  Shiny lips came into vogue for the first time in the _____ when women began applying petroleum jelly over their lipstick.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  1920s</td><td><input type="radio" name="nails_1_25" value="a"></td></tr>
+  		  <tr><td>b)  1930s</td><td><input type="radio" name="nails_1_25" value="b"></td></tr>
+  		  <tr><td>c)  1940s</td><td><input type="radio" name="nails_1_25" value="c"></td></tr>
+  		  <tr><td>d)  1950s</td><td><input type="radio" name="nails_1_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  The 1950s saw the introduction of tube mascara, improved hair care and nail products, and the boom of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  artificial nail enhancements</td><td><input type="radio" name="nails_1_26" value="a"></td></tr>
+  		  <tr><td>b)  monthly hair care appointments</td><td><input type="radio" name="nails_1_26" value="b"></td></tr>
+  		  <tr><td>c)  opaque paint</td><td><input type="radio" name="nails_1_26" value="c"></td></tr>
+  		  <tr><td>d)  weekly manicure appointments</td><td><input type="radio" name="nails_1_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  When did hot oil manicures first become the ultimate luxury in nail and hand care?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The 1950s</td><td><input type="radio" name="nails_1_27" value="a"></td></tr>
+  		  <tr><td>b)  The 1960s</td><td><input type="radio" name="nails_1_27" value="b"></td></tr>
+  		  <tr><td>c)  The 1970s</td><td><input type="radio" name="nails_1_27" value="c"></td></tr>
+  		  <tr><td>d)  The 1980s</td><td><input type="radio" name="nails_1_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  Which of the following is credited with establishing the biweekly nail maintenance appointment?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Fiberglass wraps</td><td><input type="radio" name="nails_1_28" value="a"></td></tr>
+  		  <tr><td>b)  Juliette wraps</td><td><input type="radio" name="nails_1_28" value="b"></td></tr>
+  		  <tr><td>c)  Silk wraps</td><td><input type="radio" name="nails_1_28" value="c"></td></tr>
+  		  <tr><td>d)  UV gel nail services</td><td><input type="radio" name="nails_1_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  In the 1960s, where did the nails from nail technicians' "nail banks" typically come from?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Hospital patients</td><td><input type="radio" name="nails_1_29" value="a"></td></tr>
+  		  <tr><td>b)  Friends and family</td><td><input type="radio" name="nails_1_29" value="b"></td></tr>
+  		  <tr><td>c)  Their clients</td><td><input type="radio" name="nails_1_29" value="c"></td></tr>
+  		  <tr><td>d)  Plastics manufacturers</td><td><input type="radio" name="nails_1_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  When were the first monomer liquid and polymer powder nail services offered by nail technicians?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The 1960s</td><td><input type="radio" name="nails_1_30" value="a"></td></tr>
+  		  <tr><td>b)  The 1970s</td><td><input type="radio" name="nails_1_30" value="b"></td></tr>
+  		  <tr><td>c)  The 1980s</td><td><input type="radio" name="nails_1_30" value="c"></td></tr>
+  		  <tr><td>d)  The 1990s</td><td><input type="radio" name="nails_1_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  Who invented the first Ridgefiller?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Jeff Pink</td><td><input type="radio" name="nails_1_31" value="a"></td></tr>
+  		  <tr><td>b)  Charles Revson</td><td><input type="radio" name="nails_1_31" value="b"></td></tr>
+  		  <tr><td>c)  Jean Harlow</td><td><input type="radio" name="nails_1_31" value="c"></td></tr>
+  		  <tr><td>d)  Yves Rocher</td><td><input type="radio" name="nails_1_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  When did the use of spray guns to apply monomer liquid nail colors become common?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The 1970s</td><td><input type="radio" name="nails_1_32" value="a"></td></tr>
+  		  <tr><td>b)  The 1980s</td><td><input type="radio" name="nails_1_32" value="b"></td></tr>
+  		  <tr><td>c)  The 1990s</td><td><input type="radio" name="nails_1_32" value="c"></td></tr>
+  		  <tr><td>d)  The 1960s</td><td><input type="radio" name="nails_1_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  The 1990s ushered in a huge resurgence in _____ and pedicure services.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  plain manicure</td><td><input type="radio" name="nails_1_33" value="a"></td></tr>
+  		  <tr><td>b)  artificial nail enhancements</td><td><input type="radio" name="nails_1_33" value="b"></td></tr>
+  		  <tr><td>c)  hot oil manicure</td><td><input type="radio" name="nails_1_33" value="c"></td></tr>
+  		  <tr><td>d)  natural manicure</td><td><input type="radio" name="nails_1_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  In the 1960s, detached nail tips were reaffixed with _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  model airplane glue</td><td><input type="radio" name="nails_1_34" value="a"></td></tr>
+  		  <tr><td>b)  wood glue</td><td><input type="radio" name="nails_1_34" value="b"></td></tr>
+  		  <tr><td>c)  instant resin</td><td><input type="radio" name="nails_1_34" value="c"></td></tr>
+  		  <tr><td>d)  nail paste</td><td><input type="radio" name="nails_1_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  Which part of the nail did nail technicians commonly leave free of polish in the 1950s?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The tip</td><td><input type="radio" name="nails_1_35" value="a"></td></tr>
+  		  <tr><td>b)  The side edges</td><td><input type="radio" name="nails_1_35" value="b"></td></tr>
+  		  <tr><td>c)  The moon</td><td><input type="radio" name="nails_1_35" value="c"></td></tr>
+  		  <tr><td>d)  The free edge</td><td><input type="radio" name="nails_1_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  One notable achievement of the twentieth century included the fact that nail technicians had _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  more clients than ever</td><td><input type="radio" name="nails_1_36" value="a"></td></tr>
+  		  <tr><td>b)  unprecedented career choices</td><td><input type="radio" name="nails_1_36" value="b"></td></tr>
+  		  <tr><td>c)  made more money</td><td><input type="radio" name="nails_1_36" value="c"></td></tr>
+  		  <tr><td>d)  less regulatory oversight</td><td><input type="radio" name="nails_1_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  A new, opaque paint being produced for the automobile insdustry inspired the introduction of the first mass-marketed _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lipsticks</td><td><input type="radio" name="nails_1_37" value="a"></td></tr>
+  		  <tr><td>b)  mascaras</td><td><input type="radio" name="nails_1_37" value="b"></td></tr>
+  		  <tr><td>c)  nail lacquers</td><td><input type="radio" name="nails_1_37" value="c"></td></tr>
+  		  <tr><td>d)  makeup</td><td><input type="radio" name="nails_1_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  In the 1960s, nail technicians reaffixed detached nail tips and reinforced them with what?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Thin paper strips</td><td><input type="radio" name="nails_1_38" value="a"></td></tr>
+  		  <tr><td>b)  Thick fabric strips</td><td><input type="radio" name="nails_1_38" value="b"></td></tr>
+  		  <tr><td>c)  Thin sewing thread</td><td><input type="radio" name="nails_1_38" value="c"></td></tr>
+  		  <tr><td>d)  Thin strands of cotton</td><td><input type="radio" name="nails_1_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  Another notable beauty industry achievement of the twentieth century included nail polish becoming _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  softer and lighter</td><td><input type="radio" name="nails_1_39" value="a"></td></tr>
+  		  <tr><td>b)  brighter and thicker</td><td><input type="radio" name="nails_1_39" value="b"></td></tr>
+  		  <tr><td>c)  darker and heavier</td><td><input type="radio" name="nails_1_39" value="c"></td></tr>
+  		  <tr><td>d)  safer and longer-lasting</td><td><input type="radio" name="nails_1_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  In the twenty-first century, UV gel enhancements _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  are less and less popular</td><td><input type="radio" name="nails_1_40" value="a"></td></tr>
+  		  <tr><td>b)  grow by leaps and bounds</td><td><input type="radio" name="nails_1_40" value="b"></td></tr>
+  		  <tr><td>c)  require more curing</td><td><input type="radio" name="nails_1_40" value="c"></td></tr>
+  		  <tr><td>d)  last less than two weeks</td><td><input type="radio" name="nails_1_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  Modern nail polish formulations embody chip- and _____-resistant characteristics.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  smear</td><td><input type="radio" name="nails_1_41" value="a"></td></tr>
+  		  <tr><td>b)  lift</td><td><input type="radio" name="nails_1_41" value="b"></td></tr>
+  		  <tr><td>c)  fade</td><td><input type="radio" name="nails_1_41" value="c"></td></tr>
+  		  <tr><td>d)  streak</td><td><input type="radio" name="nails_1_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  Modern manicuring implements now incorporate _____ designs and enhanced workmanship.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  state-of-the-art</td><td><input type="radio" name="nails_1_42" value="a"></td></tr>
+  		  <tr><td>b)  simple</td><td><input type="radio" name="nails_1_42" value="b"></td></tr>
+  		  <tr><td>c)  more complex</td><td><input type="radio" name="nails_1_42" value="c"></td></tr>
+  		  <tr><td>d)  ergonomic</td><td><input type="radio" name="nails_1_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  A regular nail technician in a traditional salon can expect to do all but which of the following?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Work with UV gel nail products</td><td><input type="radio" name="nails_1_43" value="a"></td></tr>
+  		  <tr><td>b)  Work under the supervision of a physician</td><td><input type="radio" name="nails_1_43" value="b"></td></tr>
+  		  <tr><td>c)  Provide manicures and pedicures</td><td><input type="radio" name="nails_1_43" value="c"></td></tr>
+  		  <tr><td>d)  Offer silk nail wrap services</td><td><input type="radio" name="nails_1_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  To become a medical nail technician, you are required to take specialty course and complete an internship under the direction
+            of a _____ physician.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  physician's assistant</td><td><input type="radio" name="nails_1_44" value="a"></td></tr>
+  		  <tr><td>b)  nurse practitioner</td><td><input type="radio" name="nails_1_44" value="b"></td></tr>
+  		  <tr><td>c)  registered nurse</td><td><input type="radio" name="nails_1_44" value="c"></td></tr>
+  		  <tr><td>d)  podiatrist</td><td><input type="radio" name="nails_1_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  Which of these services is commonly offered by day spas, but not full-service salons?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Body services</td><td><input type="radio" name="nails_1_45" value="a"></td></tr>
+  		  <tr><td>b)  Hair services</td><td><input type="radio" name="nails_1_45" value="b"></td></tr>
+  		  <tr><td>c)  Skin services</td><td><input type="radio" name="nails_1_45" value="c"></td></tr>
+  		  <tr><td>d)  Nail services</td><td><input type="radio" name="nails_1_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

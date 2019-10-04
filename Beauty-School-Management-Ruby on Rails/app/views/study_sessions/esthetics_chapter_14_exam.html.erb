@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 14: Esthetics </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What should you do wash your hands with before touching clean supplies?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_14_1" value="a"></td><td>a) soap and wawrm water </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_1" value="b"></td><td>b) chemical disinfectant </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_1" value="c"></td><td>c) autoclave steam  </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_1" value="d"></td><td>d) harsh exfoliant </td></tr>
+		</table>
+    </p>
+
+    <p>2. What should you do with single-use items as you prepare for a treatment?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_2" value="a"></td><td>a) place them on a countertop on descending size order </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_2" value="b"></td><td>b) set them on a clean towel in the order they will be used </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_2" value="c"></td><td>c) place them on a countertop on ascending size order </td></tr>
+		  <tr><td><input type="radio" name="esthetics_14_2" value="d"></td><td>d) set them on a clean towel in the order of importance </td></tr>
+  		</table>
+    </p>
+
+    <p>3. When should you clean and disinfect the nail brush you keep in your room to scrub your nails and hands? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_3" value="a"></td><td>a) after each use </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_3" value="b"></td><td>b) twice each day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_3" value="c"></td><td>c) whenever you take a break </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_3" value="d"></td><td>d) only at the end of each day </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What should you do to accommodate the fact taht some clients have never received facial or waxing treatments before? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_4" value="a"></td><td>a) remain silent while clients figure out for themselves how to do things </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_4" value="b"></td><td>b) ask the receptionist to educate clients before treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_4" value="c"></td><td>c) prepare a brochure explaining what you expect from each client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_4" value="d"></td><td>d) explain to the client where to put belongings and how to put on the wrap </td></tr>
+  		</table>
+    </p>
+
+    <p>5. Why should you wear gloves for all decontamination procedures? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_5" value="a"></td><td>a) only to prevent contamination </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_5" value="b"></td><td>b) only to protect your skin from strong chemicals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_5" value="c"></td><td>c) to prevent contamination and protect your skin from dtrong chemicals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_5" value="d"></td><td>d) it is not necessary to wear gloves for all decontamination procedures </td></tr>
+  		</table>
+    </p>
+
+    <p>6. What is true of butterfly pads? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_6" value="a"></td><td>a) they are superior to round pads in all respects </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_6" value="b"></td><td>b) they will not fall off the eyes as easily as round pads  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_6" value="c"></td><td>c) butterfly pads are only useful for clients with sensitive skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_6" value="d"></td><td>d) butterfly pads are only useful for clients with couperose skin </td></tr>
+  		</table>
+    </p>
+
+    <p>7. When in the procedure for making cleansing pads do you squeeze out excess water? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_7" value="a"></td><td>a) at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_7" value="b"></td><td>b) at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_7" value="c"></td><td>c) in the mmiddle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_7" value="d"></td><td>d) anytime you wish </td></tr>
+  		</table>
+    </p>
+
+    <p>8. How many facial treatments can you perform with four to six cleansing pads? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_8" value="a"></td><td>a) one </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_8" value="b"></td><td>b) three </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_8" value="c"></td><td>c) five </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_8" value="d"></td><td>d) seven </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. When should you consider using a roll of cotton to  make cleansing pads?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_9" value="a"></td><td>a) when you are too tired to make a trip to the supply room </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_9" value="b"></td><td>b) when your client has oily skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_9" value="c"></td><td>c) when prepackgaded esthetic wipes or sponges are unvailable </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_9" value="d"></td><td>d) when your client has dry skin </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What should happen before the client leaves your treatment area? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_10" value="a"></td><td>a) payment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_10" value="b"></td><td>b) rebooking  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_10" value="c"></td><td>c) retail purchase </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_10" value="d"></td><td>d) product recommendations </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. When in your end-of-day procedure should you put on a fresh pair of gloves?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_11" value="a"></td><td>a) at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_11" value="b"></td><td>b) at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_11" value="c"></td><td>c) whenever you realize you're about to touch something dirty </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_11" value="d"></td><td>d) whenever you realize you're about to touch something wet </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What can you do to prevent mildew from growing in the laundry hamper? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_12" value="a"></td><td>a) leave the hamper oen so fresh air circulates </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_12" value="b"></td><td>b) take wet laundry out of the hamper once each day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_12" value="c"></td><td>c) disinfect the hamper after removing all dirty laundry </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_12" value="d"></td><td>d) spray the hamper with disinfectant whenever it gets full </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What should you do once you're escorted the client to the reception desk? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_13" value="a"></td><td>a) hold out your hand for a trip </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_13" value="b"></td><td>b) write up a service ticket </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_13" value="c"></td><td>c) watch the client make payment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_13" value="d"></td><td>d) ensure the client buys retail products </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What do paper towels, tissues for blotting the face, and vinyl gloves have in common? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_14" value="a"></td><td>a) they are multi-use items </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_14" value="b"></td><td>b) they are single-use items </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_14" value="c"></td><td>c) they are disinfecting products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_14" value="d"></td><td>d) they are cleansing products </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What piece of salon furniture is also known as an operator's? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_15" value="a"></td><td>a) receptionist's chair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_15" value="b"></td><td>b) esthetician's chair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_15" value="c"></td><td>c) manager's chair </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_15" value="d"></td><td>d) client's chair </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What is a sharps container?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_16" value="a"></td><td>a) disinfectant-filled jar in which fresh hair shears are stored </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_16" value="b"></td><td>b) plastic case in which unused injectables are stored </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_16" value="c"></td><td>c) biohazard container for disposable needles and anything sharp </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_16" value="d"></td><td>d) special wastebasket for breakable items such as glass </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. What is a dispensary?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_17" value="a"></td><td>a) drawer at the reception desk for storing retail products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_17" value="b"></td><td>b) printing machine at your station that roduces service tickets </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_17" value="c"></td><td>c) room or area used for mixing products and storing supplies </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_17" value="d"></td><td>d) another name for the pharmacy closest to your salon </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What are implements? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_18" value="a"></td><td>a) tools used by technicians </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_18" value="b"></td><td>b) ingrown hairs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_18" value="c"></td><td>c) contraindications </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_18" value="d"></td><td>d) garments worn by clients </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What does the "S" stand for in the acronym LOHAS? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_19" value="a"></td><td>a) superiority </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_19" value="b"></td><td>b) seniority </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_19" value="c"></td><td>c) sustainability </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_19" value="d"></td><td>d) susceptibility </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What does "sustainability" mean? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_21" value="a"></td><td>a) acquiring enough goods to provide services for one year </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_21" value="b"></td><td>b) meeting the needs of the present without compromising the future </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_21" value="c"></td><td>c) building a client base that ensures an annual increase of profits  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_21" value="d"></td><td>d) compromising the future to ensure that present needs are met </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What is facilitated by planning and preparing a well-stocked and organized treatment room?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="a"></td><td>a) only functioning efficiently </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="b"></td><td>b) only providing good service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="c"></td><td>c) perfect treatment results </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="d"></td><td>d) functioning efficiently and providing good service </td></tr>
+  		</table>
+    </p>
+
+    <p>22. Why is it important for estheticians/students to maintain clean treatment rooms? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="a"></td><td>a) only client safety </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="b"></td><td>b) only compliance with laws </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="c"></td><td>c) client safety and compliance with laws </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_22" value="d"></td><td>d) cleaning treatment rooms is not the job of estheticians/students </td></tr>
+  		</table>
+    </p>
+
+    <p>23. What is a benefit of being prepared? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_23" value="a"></td><td>a) you never encounter surprises </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_23" value="b"></td><td>b) you never have problem at work </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_23" value="c"></td><td>c) you project a calm, confident image  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_23" value="d"></td><td>d) you do everything well </td></tr>
+  		</table>
+    </p>
+
+    <p>24. When in the process of performing services do you plan and prepare the treatment room? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_24" value="a"></td><td>a) at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_24" value="b"></td><td>b) at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_24" value="c"></td><td>c) once the client arrives </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_24" value="d"></td><td>d) once the treatment is underway </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What are criteria for determining that a treatment table is large enough? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_25" value="a"></td><td>a) large enough to accommodate clients, suitable for body waxing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_25" value="b"></td><td>b) any size that fits into the treatment room is acceptable </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_25" value="c"></td><td>c) the only criteria is being large enough to accommodate clients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_25" value="d"></td><td>d) the only criteria is being suitable for body waxing </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What is the function of a magnifying lamp or light?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_26" value="a"></td><td>a) directing LED beams </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_26" value="b"></td><td>b) analyzing the skin and performing detail work such as tweezing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_26" value="c"></td><td>c) heaeting up product for deeper penetration into the dermis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_26" value="d"></td><td>d) blocking LED beams </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What can you do to accommodate walk-ins or unexpected requests? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_27" value="a"></td><td>a) keep massage oil on your hands </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_27" value="b"></td><td>b) keep water running all day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_27" value="c"></td><td>c) keep wax heaters on all day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_27" value="d"></td><td>d) avoid taking breaks or lunches </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is NOT a salon area in which supplies are regularly kept?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_28" value="a"></td><td>a) work station </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_28" value="b"></td><td>b) treatment room </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_28" value="c"></td><td>c) reception desk </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_28" value="d"></td><td>d) dispensary </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What should you use to disperse products from jars? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_29" value="a"></td><td>a) fingers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_29" value="b"></td><td>b) scissors </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_29" value="c"></td><td>c) tongs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_29" value="d"></td><td>d) spatulas </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What should you have among your facial supplies in order to provide neck support for the client? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_30" value="a"></td><td>a) wood block the size of a brick </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_30" value="b"></td><td>b) pillow or rolled hand towel </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_30" value="c"></td><td>c) medical neck brace </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_30" value="d"></td><td>d) thick turtleneck sweater </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What should you NEVER put beneath the bed linens? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_31" value="a"></td><td>a) plastic sheeting </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_31" value="b"></td><td>b) paper for hygienic protection </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_31" value="c"></td><td>c) electric blankets </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_31" value="d"></td><td>d) clients </td></tr>
+  		</table>
+    </p>
+
+    <p>32. How long, approximately, is required for pre-heating of towel warmers and steamers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_32" value="a"></td><td>a) five minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_32" value="b"></td><td>b) 15 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_32" value="c"></td><td>c) 30 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_32" value="d"></td><td>d) 60 minutes </td></tr>
+  		</table>
+    </p>
+
+    <p>33. When should you check the water level on the steamer?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_33" value="a"></td><td>a) before preheating and regularly thereafter </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_33" value="b"></td><td>b) only before preheating </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_33" value="c"></td><td>c) only regularly throughout the day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_33" value="d"></td><td>d) checking the water level is unnecessary </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What is true of distilled water? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_34" value="a"></td><td>a) it should never be used in steamers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_34" value="b"></td><td>b) it is the only type of water that should be used in steamers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_34" value="c"></td><td>c) it is no better for steamers than any other type of water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_34" value="d"></td><td>d) it should only be used in steamers if tap water is unavailable </td></tr>
+  		</table>
+    </p>
+
+    <p>35. Why should you place a blanket over the clean linens that you place on the treatment table? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_14_35" value="a"></td><td>a) only in order to keep the client warm </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_35" value="b"></td><td>b) in order to keep the client warm and comfortable </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_35" value="c"></td><td>c) only in order to keep the client comfortable </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_14_35" value="d"></td><td>d) in order to cut down how often linens must be cleaned </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<% provide(:title, @user.full_name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.full_name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<% if !school_user?(current_user) %>
+  <%= render :partial => "program1", :object => @study_programs %>
+<% elsif !enrolled?(current_user) %>
+  <%= render :partial => "program2", :object => @study_programs %>
+<% end %>

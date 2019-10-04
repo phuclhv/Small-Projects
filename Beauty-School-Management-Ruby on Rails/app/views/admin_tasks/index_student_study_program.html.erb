@@ -1,0 +1,79 @@
+<% provide(:title, 'Study Program Change') %>
+
+<h1>Study Program Change</h1>
+
+<%= form_tag do %>
+  <%= label_tag "school_user_id", "Student" %>
+  <%= select_tag "school_user_id", options_from_collection_for_select(@students, :id, :full_name, @students.first.id) %>
+  <%= label_tag "study_program_id", "Choose New Study Program:" %>
+  <%= select_tag "study_program_id", options_from_collection_for_select(@study_programs, :id, :title, @study_programs.first.id) %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" id="students-form"></div>
+</div>
+
+<div>
+  <a href='#' id='update-button' class='btn btn-primary btn-lg'>Update</a>
+</div>
+
+<hr>
+
+<script>
+
+  // Get the list of students & their timecards by study programs.
+  $("#school_user_id").on("change", function() {
+    // Get the student's info
+    var studentObj = {};  // hash or object to store study_program_id and other info
+    var $selectFields = $('select option:selected');
+    var studentID = $selectFields[0].value;
+    var studyProgramID = $selectFields[1].value;
+    studentObj[0] = studentID;
+    studentObj[1] = studyProgramID;
+    $.ajax({
+      type: 'GET',
+      url: '/admin_tasks/get_enrollment_info',
+      data: { studentObj: JSON.stringify(studentObj) },
+      success:function(result){
+        var id;
+        var full_name;
+        var i;
+        var x = result;
+        $("#school_user_id").empty();
+        $("#students-form").empty();
+        for (i = 0; i < x.length; i++) {
+          id = x[i].id;
+          full_name = x[i].full_name;
+          study_program_id = x[i].study_program_id;
+          // Dropdown select:
+          $("#school_user_id").append($('<option></option>').attr("value", id).text(full_name));
+ 
+          // List the students in the form
+          $("#students-form").append($("<label for='"+full_name+"'>"+full_name+" is currently enrolled in program #"+study_program_id+"</label>"));
+        }
+      }
+    });
+  });
+
+  // Rollback the chosen month's hours for a single student.
+  $("#update-button").on("click", function(){
+    var i;
+    var studentObj = {};  // hash or object of studentID and StudyProgramID
+    var studentID;
+    var studyProgramID;
+    var $selectFields = $('select option:selected');
+    
+    studentID = $selectFields[0].value;
+    studentObj[0] = studentID;
+    
+    studyProgramID =  $selectFields[1].value;
+    studentObj[1] = studyProgramID;
+
+    $.ajax({
+      type:'POST',
+      url:'/admin_tasks/update_study_program',
+      data: { studentObj: JSON.stringify(studentObj) }
+    });
+  });
+
+</script>

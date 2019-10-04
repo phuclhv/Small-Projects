@@ -1,0 +1,40 @@
+<% provide(:title, 'Payment History') %>
+
+<h1>Payment History</h1>
+
+<%= form_tag("/admin_tasks/payment_history") do %>
+  <%= label_tag "school_user_id", "Student" %>
+  <%= select_tag "school_user_id", options_from_collection_for_select(@students, :id, :full_name) %>
+
+<% end %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" id="payments"></div>
+</div>
+
+<script>
+  // Get the list of lessons.
+  $("#school_user_id").on("change", function() {
+    $.ajax({
+      type: 'GET',
+      url: '/get_payments',
+      data: { school_user_id: this.value },
+      success:function(result){
+        var i;
+        var out = "<table class=\"table table-striped\">";
+        out += "<th>ID</th><th>Amount</th><th>Payment Date</th><th>Payment Type</th>";
+        x = result;
+        $("#payments").empty();
+        for (i = 0; i < x.length; i++) {
+          out +=  "<tr><td>"  +  x[i].id + 
+                  "</td><td>" +  x[i].amount +
+                  "</td><td>" +  x[i].created_at + 
+                  "</td><td>" + x[i].description + "</td></tr>";
+        }
+        out += "</table>";
+        $("#payments").append(out);
+        //console.log(out);
+      }
+    });
+  });
+</script>

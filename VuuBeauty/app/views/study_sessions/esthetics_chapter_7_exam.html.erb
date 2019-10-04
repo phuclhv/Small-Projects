@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 7 -- Basics Of Chemistry</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  What has physical properties that we can see, smell, taste, and touch?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  radiation</td><td><input type="radio" name="esthetics_7_1" value="a"></td></tr>
+  		  <tr><td>b)  matter</td><td><input type="radio" name="esthetics_7_1" value="b"></td></tr>
+  		  <tr><td>c)  energy</td><td><input type="radio" name="esthetics_7_1" value="c"></td></tr>
+  		  <tr><td>d)  electricity</td><td><input type="radio" name="esthetics_7_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  What causes oxidation?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  addition of oxygen or the loss of hydrogen</td><td><input type="radio" name="esthetics_7_2" value="a"></td></tr>
+  		  <tr><td>b)  addition of hydrogen or the loss of oxygen</td><td><input type="radio" name="esthetics_7_2" value="b"></td></tr>
+  		  <tr><td>c)  addition of both oxygen and hydrogen</td><td><input type="radio" name="esthetics_7_2" value="c"></td></tr>
+  		  <tr><td>d)  loss of both oxygen and hydrogen</td><td><input type="radio" name="esthetics_7_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  What is an ion?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  atom or molecule that carries an electrical charge</td><td><input type="radio" name="esthetics_7_3" value="a"></td></tr>
+  		  <tr><td>b)  atom or molecule without an electrical charge</td><td><input type="radio" name="esthetics_7_3" value="b"></td></tr>
+  		  <tr><td>c)  dust particle left over after the ionization process</td><td><input type="radio" name="esthetics_7_3" value="c"></td></tr>
+  		  <tr><td>d)  spark discharged during the ionization process</td><td><input type="radio" name="esthetics_7_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  What is an atom with a positive electrical charge?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  neutron</td><td><input type="radio" name="esthetics_7_4" value="a"></td></tr>
+  		  <tr><td>b)  anion</td><td><input type="radio" name="esthetics_7_4" value="b"></td></tr>
+  		  <tr><td>c)  cation</td><td><input type="radio" name="esthetics_7_4" value="c"></td></tr>
+  		  <tr><td>d)  molecule</td><td><input type="radio" name="esthetics_7_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  What is an ion with a negative charge?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  anion</td><td><input type="radio" name="esthetics_7_5" value="a"></td></tr>
+  		  <tr><td>b)  cation</td><td><input type="radio" name="esthetics_7_5" value="b"></td></tr>
+  		  <tr><td>c)  molecule</td><td><input type="radio" name="esthetics_7_5" value="c"></td></tr>
+  		  <tr><td>d)  neutron</td><td><input type="radio" name="esthetics_7_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  What does the term miscible mean?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  incapable of being mixed</td><td><input type="radio" name="esthetics_7_6" value="a"></td></tr>
+  		  <tr><td>b)  capable of being mixed</td><td><input type="radio" name="esthetics_7_6" value="b"></td></tr>
+  		  <tr><td>c)  incapable of being ionized</td><td><input type="radio" name="esthetics_7_6" value="c"></td></tr>
+  		  <tr><td>d)  capable of being ionized</td><td><input type="radio" name="esthetics_7_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  What is united with the aid of an emulsifier to create an emulsion?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  two or more miscible substances</td><td><input type="radio" name="esthetics_7_7" value="a"></td></tr>
+  		  <tr><td>b)  two or more immiscible substances</td><td><input type="radio" name="esthetics_7_7" value="b"></td></tr>
+  		  <tr><td>c)  a reduction and a solution</td><td><input type="radio" name="esthetics_7_7" value="c"></td></tr>
+  		  <tr><td>d)  a surfactant and a liquid</td><td><input type="radio" name="esthetics_7_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  What is a solution?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  unstable mixture of the largest particles</td><td><input type="radio" name="esthetics_7_8" value="a"></td></tr>
+  		  <tr><td>b)  unstable mixture of an emulsion and a reduction</td><td><input type="radio" name="esthetics_7_8" value="b"></td></tr>
+  		  <tr><td>c)  uniform mixture of two or more mutually immiscible substances</td><td><input type="radio" name="esthetics_7_8" value="c"></td></tr>
+  		  <tr><td>d)  uniform mixture of two or more mutually miscible substances</td><td><input type="radio" name="esthetics_7_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  What is air?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  shell of radiation surrounding Earth</td><td><input type="radio" name="esthetics_7_9" value="a"></td></tr>
+  		  <tr><td>b)  gaseous mixture that makes up the Earth's atmosphere</td><td><input type="radio" name="esthetics_7_9" value="b"></td></tr>
+  		  <tr><td>c)  common name for the chemical that makes the sky appear blue</td><td><input type="radio" name="esthetics_7_9" value="c"></td></tr>
+  		  <tr><td>d)  water vapor that forms clouds</td><td><input type="radio" name="esthetics_7_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  What is true of liquid?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is matter with fixed volume and definite shape</td><td><input type="radio" name="esthetics_7_10" value="a"></td></tr>
+  		  <tr><td>b)  it is matter with no fixed volume and no definite shape</td><td><input type="radio" name="esthetics_7_10" value="b"></td></tr>
+  		  <tr><td>c)  it is matter with fixed volume but no definite shape</td><td><input type="radio" name="esthetics_7_10" value="c"></td></tr>
+  		  <tr><td>d)  it is matter with no fixed volume but definite shape</td><td><input type="radio" name="esthetics_7_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  What is NOT true of atoms?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  all matter is composed of atoms</td><td><input type="radio" name="esthetics_7_11" value="a"></td></tr>
+  		  <tr><td>b)  they are small particles of elements</td><td><input type="radio" name="esthetics_7_11" value="b"></td></tr>
+  		  <tr><td>c)  all atoms are identical</td><td><input type="radio" name="esthetics_7_11" value="c"></td></tr>
+  		  <tr><td>d)  atoms consist of smaller particles</td><td><input type="radio" name="esthetics_7_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  What is true of oxygen?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is the most abundant element on Earth</td><td><input type="radio" name="esthetics_7_12" value="a"></td></tr>
+  		  <tr><td>b)  it is the least abundant element on Earth</td><td><input type="radio" name="esthetics_7_12" value="b"></td></tr>
+  		  <tr><td>c)  it should not be ingested because it is poisonous to humans</td><td><input type="radio" name="esthetics_7_12" value="c"></td></tr>
+  		  <tr><td>d)  contrary to popular belief, there is no oxygen in the air</td><td><input type="radio" name="esthetics_7_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  What is true of water?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is the most abundant of all substances on Earth</td><td><input type="radio" name="esthetics_7_13" value="a"></td></tr>
+  		  <tr><td>b)  it is a relatively scarce substance</td><td><input type="radio" name="esthetics_7_13" value="b"></td></tr>
+  		  <tr><td>c)  water comprises a very small portion of the human body</td><td><input type="radio" name="esthetics_7_13" value="c"></td></tr>
+  		  <tr><td>d)  the human body is made entirely of water</td><td><input type="radio" name="esthetics_7_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  What is true of elements?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  there are only five basic elements in the universe</td><td><input type="radio" name="esthetics_7_14" value="a"></td></tr>
+  		  <tr><td>b)  in chemistry, the main elements are sunshine, clouds, rain, and snow</td><td><input type="radio" name="esthetics_7_14" value="b"></td></tr>
+  		  <tr><td>c)  elements are the most complex form of matter</td><td><input type="radio" name="esthetics_7_14" value="c"></td></tr>
+  		  <tr><td>d)  elements are the simplest form of matter</td><td><input type="radio" name="esthetics_7_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  What is light a form of?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  energy</td><td><input type="radio" name="esthetics_7_15" value="a"></td></tr>
+  		  <tr><td>b)  matter</td><td><input type="radio" name="esthetics_7_15" value="b"></td></tr>
+  		  <tr><td>c)  gas</td><td><input type="radio" name="esthetics_7_15" value="c"></td></tr>
+  		  <tr><td>d)  liquid</td><td><input type="radio" name="esthetics_7_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  What is true of each of the approximately 90 naturally occuring elements?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  though chemical properties vary, all have the same physical properties</td><td><input type="radio" name="esthetics_7_16" value="a"></td></tr>
+  		  <tr><td>b)  though physical properties vary, all have the same chemical properties</td><td><input type="radio" name="esthetics_7_16" value="b"></td></tr>
+  		  <tr><td>c)  all share the same physical and chemical properties</td><td><input type="radio" name="esthetics_7_16" value="c"></td></tr>
+  		  <tr><td>d)  each has its own distinctive physical and chemical properties</td><td><input type="radio" name="esthetics_7_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  What term refers to molecules that contain two or more atoms of the same element?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  atomic molecules</td><td><input type="radio" name="esthetics_7_17" value="a"></td></tr>
+  		  <tr><td>b)  chemical molecules</td><td><input type="radio" name="esthetics_7_17" value="b"></td></tr>
+  		  <tr><td>c)  radiological molecules</td><td><input type="radio" name="esthetics_7_17" value="c"></td></tr>
+  		  <tr><td>d)  elemental molecules</td><td><input type="radio" name="esthetics_7_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  What business primarily use oil-in-water emulsions?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  auto repair shops</td><td><input type="radio" name="esthetics_7_18" value="a"></td></tr>
+  		  <tr><td>b)  bakeries</td><td><input type="radio" name="esthetics_7_18" value="b"></td></tr>
+  		  <tr><td>c)  salons and spas</td><td><input type="radio" name="esthetics_7_18" value="c"></td></tr>
+  		  <tr><td>d)  fast-food restaurants</td><td><input type="radio" name="esthetics_7_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  What is true of moisturizer?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  it is an oil-in-water emulsion</td><td><input type="radio" name="esthetics_7_19" value="a"></td></tr>
+  		  <tr><td>b)  it is a water-in-oil emulsion</td><td><input type="radio" name="esthetics_7_19" value="b"></td></tr>
+  		  <tr><td>c)  it is an oil-in-water reduction</td><td><input type="radio" name="esthetics_7_19" value="c"></td></tr>
+  		  <tr><td>d)  it is a water-in-oil reduction</td><td><input type="radio" name="esthetics_7_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  What is a difference between water-in-oil (W/O) emulsions and oil-in-water (O/W) emulsions?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  O/W emulsions are greasier</td><td><input type="radio" name="esthetics_7_20" value="a"></td></tr>
+  		  <tr><td>b)  W/O emulsions are greasier</td><td><input type="radio" name="esthetics_7_20" value="b"></td></tr>
+  		  <tr><td>c)  O/W emulsion are not easily rinsed away with water</td><td><input type="radio" name="esthetics_7_20" value="c"></td></tr>
+  		  <tr><td>d)  W/O emulsions are easily rinsed away with water</td><td><input type="radio" name="esthetics_7_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  What are most skin care products?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  reductions of oil and water</td><td><input type="radio" name="esthetics_7_21" value="a"></td></tr>
+  		  <tr><td>b)  emulsions of oid and water</td><td><input type="radio" name="esthetics_7_21" value="b"></td></tr>
+  		  <tr><td>c)  solutions of oil and water</td><td><input type="radio" name="esthetics_7_21" value="c"></td></tr>
+  		  <tr><td>d)  suspensions of oil and water</td><td><input type="radio" name="esthetics_7_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  What term means "water-loving"?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  hydrocentric</td><td><input type="radio" name="esthetics_7_22" value="a"></td></tr>
+  		  <tr><td>b)  hydroactive</td><td><input type="radio" name="esthetics_7_22" value="b"></td></tr>
+  		  <tr><td>c)  hydrophobic</td><td><input type="radio" name="esthetics_7_22" value="c"></td></tr>
+  		  <tr><td>d)  hydrophilic</td><td><input type="radio" name="esthetics_7_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  What term means "oil-loving"?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lipophilic</td><td><input type="radio" name="esthetics_7_23" value="a"></td></tr>
+  		  <tr><td>b)  lipocentric</td><td><input type="radio" name="esthetics_7_23" value="b"></td></tr>
+  		  <tr><td>c)  lipoactive</td><td><input type="radio" name="esthetics_7_23" value="c"></td></tr>
+  		  <tr><td>d)  lipophobic</td><td><input type="radio" name="esthetics_7_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  How much of the air is made up of nitrogen?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  one-quarter</td><td><input type="radio" name="esthetics_7_24" value="a"></td></tr>
+  		  <tr><td>b)  three-eighths</td><td><input type="radio" name="esthetics_7_24" value="b"></td></tr>
+  		  <tr><td>c)  two-thirds</td><td><input type="radio" name="esthetics_7_24" value="c"></td></tr>
+  		  <tr><td>d)  four-fifths</td><td><input type="radio" name="esthetics_7_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  What is the science that deals with the composition, structure, and properties of matter
+            and how matter changes under different conditions?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  physiology</td><td><input type="radio" name="esthetics_7_25" value="a"></td></tr>
+  		  <tr><td>b)  ergonomics</td><td><input type="radio" name="esthetics_7_25" value="b"></td></tr>
+  		  <tr><td>c)  biology</td><td><input type="radio" name="esthetics_7_25" value="c"></td></tr>
+  		  <tr><td>d)  chesmistry</td><td><input type="radio" name="esthetics_7_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  What are the two branches of chemistry?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  alkaline and acidic</td><td><input type="radio" name="esthetics_7_26" value="a"></td></tr>
+  		  <tr><td>b)  organic and inorganic</td><td><input type="radio" name="esthetics_7_26" value="b"></td></tr>
+  		  <tr><td>c)  anagen and catagen</td><td><input type="radio" name="esthetics_7_26" value="c"></td></tr>
+  		  <tr><td>d)  artificial and natural</td><td><input type="radio" name="esthetics_7_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  What element is absent from the compounds studied in inorganic chemistry?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  nitrogen</td><td><input type="radio" name="esthetics_7_27" value="a"></td></tr>
+  		  <tr><td>b)  oxygen</td><td><input type="radio" name="esthetics_7_27" value="b"></td></tr>
+  		  <tr><td>c)  carbon</td><td><input type="radio" name="esthetics_7_27" value="c"></td></tr>
+  		  <tr><td>d)  helium</td><td><input type="radio" name="esthetics_7_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  What is the study of substances that contain carbon?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  carbon chemistry</td><td><input type="radio" name="esthetics_7_28" value="a"></td></tr>
+  		  <tr><td>b)  carbon dating</td><td><input type="radio" name="esthetics_7_28" value="b"></td></tr>
+  		  <tr><td>c)  organic chemistry</td><td><input type="radio" name="esthetics_7_28" value="c"></td></tr>
+  		  <tr><td>d)  organic dating</td><td><input type="radio" name="esthetics_7_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  What element is found in all living things, whether thay are plants or animals?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  zinc</td><td><input type="radio" name="esthetics_7_29" value="a"></td></tr>
+  		  <tr><td>b)  helium</td><td><input type="radio" name="esthetics_7_29" value="b"></td></tr>
+  		  <tr><td>c)  radon</td><td><input type="radio" name="esthetics_7_29" value="c"></td></tr>
+  		  <tr><td>d)  carbon</td><td><input type="radio" name="esthetics_7_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  What is any substance that is dissolved by a solvent to form a solution?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  suspension</td><td><input type="radio" name="esthetics_7_30" value="a"></td></tr>
+  		  <tr><td>b)  matter</td><td><input type="radio" name="esthetics_7_30" value="b"></td></tr>
+  		  <tr><td>c)  solute</td><td><input type="radio" name="esthetics_7_30" value="c"></td></tr>
+  		  <tr><td>d)  emulsion</td><td><input type="radio" name="esthetics_7_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  What do antioxidants prevent by neutralizing free radicals?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  radicalization</td><td><input type="radio" name="esthetics_7_31" value="a"></td></tr>
+  		  <tr><td>b)  oxidation</td><td><input type="radio" name="esthetics_7_31" value="b"></td></tr>
+  		  <tr><td>c)  oxygenation</td><td><input type="radio" name="esthetics_7_31" value="c"></td></tr>
+  		  <tr><td>d)  ionization</td><td><input type="radio" name="esthetics_7_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  What type of neutralization reaction forms water and salt?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  reduction-compound</td><td><input type="radio" name="esthetics_7_32" value="a"></td></tr>
+  		  <tr><td>b)  atom-alkali</td><td><input type="radio" name="esthetics_7_32" value="b"></td></tr>
+  		  <tr><td>c)  acid-alkali</td><td><input type="radio" name="esthetics_7_32" value="c"></td></tr>
+  		  <tr><td>d)  solution-compound</td><td><input type="radio" name="esthetics_7_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  What is the natural pH of the skin?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  3.5</td><td><input type="radio" name="esthetics_7_33" value="a"></td></tr>
+  		  <tr><td>b)  5.5</td><td><input type="radio" name="esthetics_7_33" value="b"></td></tr>
+  		  <tr><td>c)  7.0</td><td><input type="radio" name="esthetics_7_33" value="c"></td></tr>
+  		  <tr><td>d)  7.5</td><td><input type="radio" name="esthetics_7_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  What term refers to substances with a pH below 7.0?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  acids</td><td><input type="radio" name="esthetics_7_34" value="a"></td></tr>
+  		  <tr><td>b)  alkalis</td><td><input type="radio" name="esthetics_7_34" value="b"></td></tr>
+  		  <tr><td>c)  bases</td><td><input type="radio" name="esthetics_7_34" value="c"></td></tr>
+  		  <tr><td>d)  solutes</td><td><input type="radio" name="esthetics_7_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  What are substances with a pH above 7.0?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  acids</td><td><input type="radio" name="esthetics_7_35" value="a"></td></tr>
+  		  <tr><td>b)  alkalis</td><td><input type="radio" name="esthetics_7_35" value="b"></td></tr>
+  		  <tr><td>c)  reductions</td><td><input type="radio" name="esthetics_7_35" value="c"></td></tr>
+  		  <tr><td>d)  solutions</td><td><input type="radio" name="esthetics_7_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  What type of substance has a pH level of 7.0?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  alkaline</td><td><input type="radio" name="esthetics_7_36" value="a"></td></tr>
+  		  <tr><td>b)  acidic</td><td><input type="radio" name="esthetics_7_36" value="b"></td></tr>
+  		  <tr><td>c)  neutral</td><td><input type="radio" name="esthetics_7_36" value="c"></td></tr>
+  		  <tr><td>d)  toxic</td><td><input type="radio" name="esthetics_7_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  What are suspensions?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  chemical compounds made from a reduction and a solution</td><td><input type="radio" name="esthetics_7_37" value="a"></td></tr>
+  		  <tr><td>b)  chemical compounds made from a reduction and a suspension</td><td><input type="radio" name="esthetics_7_37" value="b"></td></tr>
+  		  <tr><td>c)  unstable mixtures of two or more immiscible substances</td><td><input type="radio" name="esthetics_7_37" value="c"></td></tr>
+  		  <tr><td>d)  stable mixtures of two or more immiscible substances</td><td><input type="radio" name="esthetics_7_37" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>38.  What is reduction?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  loss of both oxygen and hydrogen</td><td><input type="radio" name="esthetics_7_38" value="a"></td></tr>
+  		  <tr><td>b)  addition of both oxygen and hydrogen</td><td><input type="radio" name="esthetics_7_38" value="b"></td></tr>
+  		  <tr><td>c)  loss of oxygen or the addition of hydrogen</td><td><input type="radio" name="esthetics_7_38" value="c"></td></tr>
+  		  <tr><td>d)  addition of oxygen or the loss of hydrogen</td><td><input type="radio" name="esthetics_7_38" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>39.  What is the term that refers to matter in its three physical forms (liquid, solid, gas)?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  states of matter</td><td><input type="radio" name="esthetics_7_39" value="a"></td></tr>
+  		  <tr><td>b)  physical properties</td><td><input type="radio" name="esthetics_7_39" value="b"></td></tr>
+  		  <tr><td>c)  appearances of matter</td><td><input type="radio" name="esthetics_7_39" value="c"></td></tr>
+  		  <tr><td>d)  chemical properties</td><td><input type="radio" name="esthetics_7_39" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>40.  How much of the Earth's surface, approximately, is water?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  10 percent</td><td><input type="radio" name="esthetics_7_40" value="a"></td></tr>
+  		  <tr><td>b)  25 percent</td><td><input type="radio" name="esthetics_7_40" value="b"></td></tr>
+  		  <tr><td>c)  75 percent</td><td><input type="radio" name="esthetics_7_40" value="c"></td></tr>
+  		  <tr><td>d)  100 percent</td><td><input type="radio" name="esthetics_7_40" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

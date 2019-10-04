@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 17: Facial Machines </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. How does dehydrated skin appear under a Wood's Lamp?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_17_1" value="a"></td><td>a) light violet/purple </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_1" value="b"></td><td>b) deep crimson/red </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_1" value="c"></td><td>c) light turquoise/blue </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_1" value="d"></td><td>d) deep emerald/green </td></tr>
+		</table>
+    </p>
+
+    <p>2. What is NOT one of the colors comedones will assume when viewed under a Wood's Lamp?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_2" value="a"></td><td>a) yellow </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_2" value="b"></td><td>b) pink </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_2" value="c"></td><td>c) orange </td></tr>
+		  <tr><td><input type="radio" name="esthetics_17_2" value="d"></td><td>d) green </td></tr>
+  		</table>
+    </p>
+
+    <p>3. How will hypopigmentation appear under a Wood's Lamp? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_3" value="a"></td><td>a) red-purple or beige-brown </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_3" value="b"></td><td>b) blue-white or yellow-green </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_3" value="c"></td><td>c) orange-yellow or gray-black </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_3" value="d"></td><td>d) black-red or brown-gray </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What machine helps address excess cell buildup, excess dirt, and excess oil? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_4" value="a"></td><td>a) steamer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_4" value="b"></td><td>b) rotary brush </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_4" value="c"></td><td>c) galvanic current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_4" value="d"></td><td>d) electric mitts </td></tr>
+  		</table>
+    </p>
+
+    <p>5. When in the rotary-brush rocedure should you lightly cleanse the client's skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_5" value="a"></td><td>a) before the service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_5" value="b"></td><td>b) halfway through the service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_5" value="c"></td><td>c) after the service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_5" value="d"></td><td>d) throughout the entire service </td></tr>
+  		</table>
+    </p>
+
+    <p>6. How long should a rotary brush be used on each area during each of your three passes? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_6" value="a"></td><td>a) three to five seconds </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_6" value="b"></td><td>b) seven to 10 seconds </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_6" value="c"></td><td>c) 12 to 15 seconds </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_6" value="d"></td><td>d) 17 to 20 seconds </td></tr>
+  		</table>
+    </p>
+
+    <p>7. How often should you remove brushes from the rotary brush machine, wash them with soap and water, and immerse them in disinfectant per manufacturer recommendations? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_7" value="a"></td><td>a) once per day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_7" value="b"></td><td>b) once per week </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_7" value="c"></td><td>c) after every client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_7" value="d"></td><td>d) after every few clients </td></tr>
+  		</table>
+    </p>
+
+    <p>8. Why should you avoid using tap water in steamers? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_8" value="a"></td><td>a) calcium buildups in tap water necessitate extra cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_8" value="b"></td><td>b) mineral deposits in tap water give steam an unpleasant odor </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_8" value="c"></td><td>c) calcium and mineral deposits in tap water might damage machinery </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_8" value="d"></td><td>d) tap water is not thick enough to be used ith a steamer </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. What is the ordinary steam-treatment time during a facial?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_9" value="a"></td><td>a) between eight and 10 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_9" value="b"></td><td>b) between 10 and 20 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_9" value="c"></td><td>c) between 30 and 35 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_9" value="d"></td><td>d) about one hour </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What function does the rotary brush perform? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_10" value="a"></td><td>a) aggressive extraction </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_10" value="b"></td><td>b) gentle extraction </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_10" value="c"></td><td>c) light exfoliation and stimulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_10" value="d"></td><td>d) heavy exfoliation and stimulation </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What is sebum tranformed into via the chemical reaction of saponification?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_11" value="a"></td><td>a) lymph </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_11" value="b"></td><td>b) soap </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_11" value="c"></td><td>c) oil </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_11" value="d"></td><td>d) cold cream </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What is NOT true of sinusoidal current? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_12" value="a"></td><td>a) it is a smooth, repetitive current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_12" value="b"></td><td>b) it is an alternating current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_12" value="c"></td><td>c) it produces heat effects </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_12" value="d"></td><td>d) use on the scalp is contraindicated </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. What is a misting device used for facial treatments? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_13" value="a"></td><td>a) spray machine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_13" value="b"></td><td>b) vacumm machine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_13" value="c"></td><td>c) high-frequency machine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_13" value="d"></td><td>d) steamer </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What is a heat effect that is used for permanent hair removal? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_14" value="a"></td><td>a) saponification </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_14" value="b"></td><td>b) desincrustation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_14" value="c"></td><td>c) anaphoresis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_14" value="d"></td><td>d) thermolysis </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. What is the purpose of a cacuum machine? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_15" value="a"></td><td>a) cleaning debris after facial treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_15" value="b"></td><td>b) removing imurities and stimulating circulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_15" value="c"></td><td>c) quickly removing makeu before a facial treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_15" value="d"></td><td>d) extracting fine facial hairs left behind after shaving </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What type of light does a Wood's Lamp use?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_16" value="a"></td><td>a) white light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_16" value="b"></td><td>b) blue light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_16" value="c"></td><td>c) red light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_16" value="d"></td><td>d) black light </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. When should you ask a client to get a doctor's note?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_17" value="a"></td><td>a) prior to any facial services </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_17" value="b"></td><td>b) prior to using facial machines </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_17" value="c"></td><td>c) if you have doubts about whether the client can have electrotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_17" value="d"></td><td>d) if you have doubts about whether the client practices good home care </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. When in the process of using electrical devices should you ask clients to remove jewelry? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_18" value="a"></td><td>a) when you get close to working in the area of the jewelry </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_18" value="b"></td><td>b) only if the jewelry is large and cumbersome </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_18" value="c"></td><td>c) before beginning the procedure </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_18" value="d"></td><td>d) after completing the procedure </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is forced into tissues during anaphoresis? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_19" value="a"></td><td>a) positive liquids </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_19" value="b"></td><td>b) negative liquids </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_19" value="c"></td><td>c) positive gases </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_19" value="d"></td><td>d) negative gases </td></tr>
+  		</table>
+    </p>
+
+    <p>20. What device is used for cataphoresis? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_21" value="a"></td><td>a) tesla highfrequency current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_21" value="b"></td><td>b) galvanic current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_21" value="c"></td><td>c) violet ray </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_21" value="d"></td><td>d) steamer </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What is emulsified or liquefied during desincrustation?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="a"></td><td>a) sebum and debris </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="b"></td><td>b) lymph and debris </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="c"></td><td>c) oil and water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="d"></td><td>d) lymph and water </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What is the term for the use of electronic devices for therapeutic benefits? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="a"></td><td>a) electrified therapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="b"></td><td>b) electrolysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="c"></td><td>c) electrotherapy </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_22" value="d"></td><td>d) electronic therapy </td></tr>
+  		</table>
+    </p>
+
+    <p>23. What is NOT true of galvanic current? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_23" value="a"></td><td>a) it is a constant current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_23" value="b"></td><td>b) it is a direct current </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_23" value="c"></td><td>c) it produces chemical reactions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_23" value="d"></td><td>d) it is contraindicated for the face </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What sort of effect is generated by a high-frequency machine?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_24" value="a"></td><td>a) gentle warming </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_24" value="b"></td><td>b) strong heat </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_24" value="c"></td><td>c) gentle cooling </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_24" value="d"></td><td>d) strong cold </td></tr>
+  		</table>
+    </p>
+
+    <p>25. What are ions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_25" value="a"></td><td>a) atoms or molecules carrying a negative electrical charge </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_25" value="b"></td><td>b) atoms or molecules carrying a positive electrical charge </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_25" value="c"></td><td>c) atoms or molecules carrying any lectrical charge </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_25" value="d"></td><td>d)  atoms or molecules that cannot carry an lectrical charge </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What is ionization?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_26" value="a"></td><td>a) process of fortifying a substance with additional ions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_26" value="b"></td><td>b) process of separating a substance into ions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_26" value="c"></td><td>c) process of identifying and cataloguing ions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_26" value="d"></td><td>d) process of merging ions to form a new substance </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What does cataphoresis create? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_27" value="a"></td><td>a) acidic reaction that contracts the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_27" value="b"></td><td>b) acidic reaction that relaxes the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_27" value="c"></td><td>c) alkaline reaction that contracts the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_27" value="d"></td><td>d) alkaline reaction that relaxes the skin </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What term refers to an atomizer designed to apply plant extracts and other ingredients to the skin?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_28" value="a"></td><td>a) botanic sprayer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_28" value="b"></td><td>b) spritzing mister </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_28" value="c"></td><td>c) steamer plug </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_28" value="d"></td><td>d) Lucas sprayer </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What should you do with your steamer once steam is visible? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_29" value="a"></td><td>a) begin the treatment without any further steps </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_29" value="b"></td><td>b) turn on the second switch (the ozone or vaporizer) </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_29" value="c"></td><td>c) turn off the second switch (the ozone or vaporizer) </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_29" value="d"></td><td>d) turn the device offto prevent it from overheating </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What should you do with your steamer after each use? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_30" value="a"></td><td>a) turn it off for one hour </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_30" value="b"></td><td>b) clean and disinfect it </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_30" value="c"></td><td>c) top off the water in the reservoir </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_30" value="d"></td><td>d) add bleach to the water in the reservoir to prevent bacterial growth </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What is NOT true about essential oils as they relate to the process of using a steamer? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_31" value="a"></td><td>a) they should be placed in a wick-like apparatus near the nozzle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_31" value="b"></td><td>b) they should be deposited directly into the steamer's water supply </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_31" value="c"></td><td>c) essential oils should be treated the same way as herbs </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_31" value="d"></td><td>d) essential oils can be a helpful addition to a steam treatment </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What treatment can be relaced with the use of a vacuum machine? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_32" value="a"></td><td>a) product application </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_32" value="b"></td><td>b) steam treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_32" value="c"></td><td>c) massage </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_32" value="d"></td><td>d) extractions </td></tr>
+  		</table>
+    </p>
+
+    <p>33. What purpose does a piece of cotton serve when inserted into the hand piece of a vacuum machine?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_33" value="a"></td><td>a) temperature regulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_33" value="b"></td><td>b) speed regulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_33" value="c"></td><td>c) filtration </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_33" value="d"></td><td>d) disinfection </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What can you avoid by lifting your finger off the hold of a vacuum machine before lifting the device off the face? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_34" value="a"></td><td>a) infecting the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_34" value="b"></td><td>b) burning the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_34" value="c"></td><td>c) cutting the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_34" value="d"></td><td>d) pulling the skin </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What sort of storage is appropriate for vacuum-machine tips? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_35" value="a"></td><td>a) heated </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_35" value="b"></td><td>b) refrigerated </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_35" value="c"></td><td>c) covered container </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_35" value="d"></td><td>d) uncovered container </td></tr>
+  		</table>
+    </p>
+
+    <p>36. What type of skin is helped by desincrustaton because the rocess hels soften and relax the debris in follicles? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_36" value="a"></td><td>a) normal </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_36" value="b"></td><td>b) mature </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_36" value="c"></td><td>c) paraffin wax heater </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_36" value="d"></td><td>d) towel warmer </td></tr>
+  		</table>
+    </p>
+
+    <p>37. Where is an appropriate place to warm cotton pads and products? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_37" value="a"></td><td>a) microwave </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_37" value="b"></td><td>b) hot plate </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_37" value="c"></td><td>c) paraffin wax heater </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_37" value="d"></td><td>d) towel warmer </td></tr>
+  		</table>
+    </p>
+
+    <p>38. How often should you clean the inside of the hot-towel cabinet with a topical disinfectant? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_38" value="a"></td><td>a) once per day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_38" value="b"></td><td>b) once per week </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_38" value="c"></td><td>c) once every hour </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_38" value="d"></td><td>d) after each client session </td></tr>
+  		</table>
+    </p>
+
+    <p>39. What should you do to the water catchment tray underneath the hot-towel cabinet's caddy on a daily basis? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_39" value="a"></td><td>a) simply wipe it down with a daily basis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_39" value="b"></td><td>b) rinse it with water and let it air dry </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_39" value="c"></td><td>c) empty, clean, and disinfect it </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_39" value="d"></td><td>d) discard and replace it </td></tr>
+  		</table>
+    </p>
+
+    <p>40. What is the most common magnification for magnifying lamps, measured in diopters? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_40" value="a"></td><td>a) five </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_40" value="b"></td><td>b) 10 </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_40" value="c"></td><td>c) 15 </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_40" value="d"></td><td>d) 20 </td></tr>
+  		</table>
+    </p>
+
+    <p>41. What is NOT a common cause of eyestrain? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_41" value="a"></td><td>a) steam in the treatment room </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_41" value="b"></td><td>b) inproper illumination </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_41" value="c"></td><td>c) distortion on the magnifying lamp </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_41" value="d"></td><td>d) insufficient illumination </td></tr>
+  		</table>
+    </p>
+
+    <p>42. What is sometimes known as a "loupe"? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_42" value="a"></td><td>a) tweezers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_42" value="b"></td><td>b) Wood's Lamp </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_42" value="c"></td><td>c) magnifying lamp </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_42" value="d"></td><td>d) steamer </td></tr>
+  		</table>
+    </p>
+
+    <p>43. What should you loosen the adjustment knobs on your magnifying lamp? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_43" value="a"></td><td>a) at the start of every day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_43" value="b"></td><td>b) at the end of every day </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_43" value="c"></td><td>c) never </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_43" value="d"></td><td>d) whatever you move the arms </td></tr>
+  		</table>
+    </p>
+
+    <p>44. What shoud you AVOID using on the lens of your magnifying lamp? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_44" value="a"></td><td>a) lens tissue </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_44" value="b"></td><td>b) lens-cleasing fluid </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_44" value="c"></td><td>c) paper products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_44" value="d"></td><td>d) soft cloth </td></tr>
+  		</table>
+    </p>
+
+
+    <p>45. How will a thick corneum layer appear under a Wood's Lamp? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_17_45" value="a"></td><td>a) red blotches </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_45" value="b"></td><td>b) black blotches </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_45" value="c"></td><td>c) white fluorescence </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_17_45" value="d"></td><td>d) blue fluorescence </td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

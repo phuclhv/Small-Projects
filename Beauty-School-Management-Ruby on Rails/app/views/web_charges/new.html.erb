@@ -1,0 +1,33 @@
+<% provide(:title, "Microblading Tuition Payment") %>
+<h1>Microblading Tuition Payment</h1>
+
+
+<%= form_tag charges_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+
+    <div>
+      <label>
+        <span>Tuition balance: <%= number_to_currency(@tuition_balance) %></span>
+      </label>
+    </div>
+
+    <label class="amount">
+      <span>Amount due now: <%= number_to_currency(@tuition_balance) %> </span>
+    </label>
+    
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Vuu's Microblading Academy"
+          data-amount= <%= @stripe_amount.to_s %>
+          data-locale="auto"
+          data-billing-address="true"
+          data-zip-code="true">
+  </script>
+<% end %>

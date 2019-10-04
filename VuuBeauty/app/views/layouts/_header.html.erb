@@ -1,0 +1,154 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Beauty Training System", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Vuu's Microblading Academy <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to "Pay Tuition", web_charge_path %>
+            </li>
+          </ul>
+        </li>
+        <li><%= link_to "Help", new_contact_path %></li>
+        <% if !logged_in? %>
+          <li><%= link_to "About Us",   about_path %></li>
+          <li><%= link_to "Contact", new_contact_path %></li>
+        <% end %>
+        <% if logged_in? %>
+          <% if school_admin?(current_user) %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Classroom <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Assign Lesson", student_lessons_path %>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Lessons", lessons_path %>
+                </li>
+                <li>
+                  <%= link_to "Exams", exams_path %>
+                </li>
+                <li>
+                  <%= link_to "Questions & Answers", questions_path %>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Attendance <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Attendance Index", admin_tasks_timecard_index_path %>
+                </li>
+                <li>
+                  <%= link_to "Clock out students", admin_tasks_clock_out_path %>
+                </li>
+                <li>
+                  <%= link_to "Show reports", admin_tasks_show_monthly_student_report_path %>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Student Hour Summary", student_hour_summaries_path %>
+                </li>
+                <li>
+                  <%= link_to "Get Monthly Reports", student_hours_path %>
+                </li>
+                <li>
+                  <%= link_to "Graduate Students", admin_tasks_graduate_students_path %>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Admin <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "School Info", schools_path %>
+                </li>
+                <li>
+                  <%= link_to "Enroll Student", admin_tasks_enrollment_path %>
+                </li>
+                <li><%= link_to "List Students", controller: "school_users", 
+                                            action: "index", id: current_school_user.school_id %></li>
+                <li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Account Change", admin_tasks_user_index_path %>
+                </li>
+                <li>
+                  <%= link_to "Adjust Tuition", admin_tasks_student_index_path %>
+                </li>
+                <li>
+                  <%= link_to "Change Program", admin_tasks_student_study_program_index_path %>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Record payment", admin_tasks_payment_path %>
+                </li>
+                <li>
+                  <%= link_to "Payment history", admin_tasks_payment_history_path%>
+                </li>
+              </ul>
+            </li>
+          <% elsif student?(current_user) %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Student <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "School Info", schools_path %></li>
+                <% if enrolled?(current_user) %>
+                  <li>
+                    <%= link_to "Enrolled Program",
+                                study_program_path(current_school_user.program_enrollments.first.study_program_id) %>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Pay tuition", new_charge_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Tuition history", payments_path %>
+                  </li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Timecard", timecards_path %></li>
+                  <li><%= link_to "Study", study_path %></li>
+                  <li><%= link_to "Exam Results", exam_results_path %></li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <% if has_address?(current_user) %>
+                <li><%= link_to "My contact", edit_address_path(@address) %></li>
+              <% else %>
+                <li><%= link_to "My contact", contact_info_path %></li>
+              <% end %>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: "delete" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Log in", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

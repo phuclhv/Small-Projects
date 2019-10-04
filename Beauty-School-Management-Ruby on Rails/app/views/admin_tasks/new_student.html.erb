@@ -1,0 +1,78 @@
+<% provide(:title, 'Enroll Student') %>
+
+<h1>Student Enrollment</h1>
+  <!-- See: http://www.saalonmuyo.com/2010/01/27/using-form_tag-in-ruby-on-rails/ -->
+  
+<%= form_tag(admin_tasks_enrollment_path, method: 'post', multipart: false) do %>
+  <!-- User section -->
+  <%= label_tag "first_name" %>
+  <%= text_field_tag "first_name" %>
+
+  <%= label_tag "last_name" %>
+  <%= text_field_tag "last_name" %>
+  
+  <%= label_tag "email" %>
+  <%= text_field_tag "email" %>
+  
+  <%= label_tag "password" %>
+  <%= password_field_tag "password" %>
+
+  <%= label_tag "password_confirmation" %>
+  <%= password_field_tag "password_confirmation" %>
+
+  <!-- School user section -->
+  <%= label_tag "dob", "DOB" %>
+  <%= text_field_tag "dob" %>
+
+  <%= label_tag "ssn", "SSN" %>
+  <%= text_field_tag "ssn" %>
+  
+  <%= label_tag "gender" %>
+  <%= select_tag("gender", options_for_select([['Female', 1], ['Male', 2]])) %>
+
+  <%= label_tag "race" %>
+  <%= select_tag("race_id", options_for_select([['White/Caucasian', 1], ['Black/African American', 2], ['Hispanic', 3],
+                                                ['American Indian or Alaska Native', 4], ['Asian', 5],
+                                                ['Hawaiian Native or other Pacific Islander', 6], ['Multi-racial', 7], ['Other', 8]], ['Asian', 5])) %>
+  
+  <%= label_tag "education_level", "Education" %>
+  <%= select_tag("education_level_id", options_for_select([['Less than high school graduation', 11], ['GED', 12], ['High school graduate', 13],
+                                                ['Some post high school, no degree or certificate', 14], ['Certificate (less than two years)', 15],
+                                                ['Associate Degree', 16], ['Bachelors Degree', 17], ['Masters Degree', 18], ['Doctoral Degree or above', 19],
+                                                ['Other', 90]
+                                                ], ['Other', 90])) %>
+
+  <%= label_tag "school" %>
+  <%= select_tag("school_id", options_for_select([['Vuu Beauty School', 1], ['Tim Beauty School', 2]])) %>
+
+  <%= label_tag "study_program", "Study Program" %>
+  <%= select_tag("study_program", options_for_select([['Cosmetology', "Cosmetology"], ['Manicurist', "Manicurist"], ['Esthetician', "Esthetician"],
+                                                      ['Barber', "Barber"], ['Instructor', "Instructor"]], ['Manicurist', "Manicurist"])) %>
+
+  <%= label_tag "tuition" %>
+  <%= number_field_tag "tuition", nil, min: 0, max: 20000, step: 100 %>
+
+  <%= label_tag "enrollment_date", "Enrollment Date" %>
+  <%= select_tag("enrollment_date", options_for_select([[0.day.ago, 0], [1.day.ago, 1], [2.day.ago, 2], [3.day.ago, 3], [4.day.ago, 4],
+                                                [5.day.ago, 5], [6.day.ago, 6], [7.day.ago, 7], [8.day.ago, 8], [9.day.ago, 9],
+                  [10.day.ago, 10], [11.day.ago, 11], [12.day.ago, 12], [13.day.ago, 13], [14.day.ago, 14], [15.day.ago, 15], [16.day.ago, 16], [17.day.ago, 17], [18.day.ago, 18], [19.day.ago, 19],
+                  [20.day.ago, 20], [21.day.ago, 21], [22.day.ago, 22], [23.day.ago, 23], [24.day.ago, 24], [25.day.ago, 25], [26.day.ago, 26], [27.day.ago, 27], [28.day.ago, 28], [29.day.ago, 29],
+                  [30.day.ago, 30], [31.day.ago, 31], [32.day.ago, 32], [33.day.ago, 33], [34.day.ago, 34], [35.day.ago, 35], [36.day.ago, 36], [37.day.ago, 37], [38.day.ago, 38], [39.day.ago, 39],
+                  [40.day.ago, 40], [41.day.ago, 41], [42.day.ago, 42], [43.day.ago, 43], [44.day.ago, 44], [45.day.ago, 45], [46.day.ago, 46], [47.day.ago, 47], [48.day.ago, 48], [49.day.ago, 49],
+                  [50.day.ago, 50], [51.day.ago, 51], [52.day.ago, 52], [53.day.ago, 53], [54.day.ago, 54], [55.day.ago, 55], [56.day.ago, 56], [57.day.ago, 57], [58.day.ago, 58], [59.day.ago, 59],
+                  [60.day.ago, 60], [61.day.ago, 61], [62.day.ago, 62], [63.day.ago, 63], [64.day.ago, 64], [65.day.ago, 65], [66.day.ago, 66], [67.day.ago, 67], [68.day.ago, 68], [69.day.ago, 69],
+                  [70.day.ago, 70], [71.day.ago, 71], [72.day.ago, 72], [73.day.ago, 73], [74.day.ago, 74], [75.day.ago, 75], [76.day.ago, 76], [77.day.ago, 77], [78.day.ago, 78], [79.day.ago, 79],
+                  [80.day.ago, 80], [81.day.ago, 81], [82.day.ago, 82], [83.day.ago, 83], [84.day.ago, 84], [85.day.ago, 85], [86.day.ago, 86], [87.day.ago, 87], [88.day.ago, 88], [89.day.ago, 89],
+                  [90.day.ago, 90], [91.day.ago, 91], [92.day.ago, 92], [93.day.ago, 93], [94.day.ago, 94], [95.day.ago, 95], [96.day.ago, 96], [97.day.ago, 97], [98.day.ago, 98], [99.day.ago, 99],
+                  [100.day.ago, 100]], [0.day.ago, 0])) %>
+  
+  <%= label_tag "contract_agreement", "Contract Agreement" %>
+  <%= check_box_tag(:contract_agreement, value="true", checked = true) %>
+
+  <%= label_tag "assign_lessons", "Assign Lessons" %>
+  <%= check_box_tag(:assign_lessons, value="true", checked = true) %>
+  
+  <%= submit_tag "Create Student", class: "btn btn-primary" %>
+
+<% end %>
+

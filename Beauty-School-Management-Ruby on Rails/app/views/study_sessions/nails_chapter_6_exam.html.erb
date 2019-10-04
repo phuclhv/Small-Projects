@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 6 -- General Anatomy and Physiology</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  The study of the tiny structures found in tissue is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  anatomy</td><td><input type="radio" name="nails_6_1" value="a"></td></tr>
+  		  <tr><td>b)  histology</td><td><input type="radio" name="nails_6_1" value="b"></td></tr>
+  		  <tr><td>c)  physiology</td><td><input type="radio" name="nails_6_1" value="c"></td></tr>
+  		  <tr><td>d)  psychology</td><td><input type="radio" name="nails_6_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  The cells of all living things are composed of a substance called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  protoplasm</td><td><input type="radio" name="nails_6_2" value="a"></td></tr>
+  		  <tr><td>b)  cytoplasm</td><td><input type="radio" name="nails_6_2" value="b"></td></tr>
+  		  <tr><td>c)  nuclei</td><td><input type="radio" name="nails_6_2" value="c"></td></tr>
+  		  <tr><td>d)  membranes</td><td><input type="radio" name="nails_6_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  Mitosis occurs when _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the daughter cells are dissolved</td><td><input type="radio" name="nails_6_3" value="a"></td></tr>
+  		  <tr><td>b)  one cell splits into two identical cells</td><td><input type="radio" name="nails_6_3" value="b"></td></tr>
+  		  <tr><td>c)  two cells join to become one</td><td><input type="radio" name="nails_6_3" value="c"></td></tr>
+  		  <tr><td>d)  one cell splits into two cells</td><td><input type="radio" name="nails_6_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Unfavorable conditions that will inhibit a cell's growth and reproduction include all but which of the following?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Excess toxins</td><td><input type="radio" name="nails_6_4" value="a"></td></tr>
+  		  <tr><td>b)  Lack of oxygen</td><td><input type="radio" name="nails_6_4" value="b"></td></tr>
+  		  <tr><td>c)  Restricted blood flow</td><td><input type="radio" name="nails_6_4" value="c"></td></tr>
+  		  <tr><td>d)  Adequate food</td><td><input type="radio" name="nails_6_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  The process of building up larger molecules from smaller ones is called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  metabolism</td><td><input type="radio" name="nails_6_5" value="a"></td></tr>
+  		  <tr><td>b)  anabolism</td><td><input type="radio" name="nails_6_5" value="b"></td></tr>
+  		  <tr><td>c)  catabolism</td><td><input type="radio" name="nails_6_5" value="c"></td></tr>
+  		  <tr><td>d)  botulism</td><td><input type="radio" name="nails_6_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  Which type of tissue binds together, protects, and supports the various parts of the body?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Epithelial tissue</td><td><input type="radio" name="nails_6_6" value="a"></td></tr>
+  		  <tr><td>b)  Liquid tissue</td><td><input type="radio" name="nails_6_6" value="b"></td></tr>
+  		  <tr><td>c)  Connective tissue</td><td><input type="radio" name="nails_6_6" value="c"></td></tr>
+  		  <tr><td>d)  Muscular tissue</td><td><input type="radio" name="nails_6_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  Which type of tissue lines the respiratory organs?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Epithelial tissue</td><td><input type="radio" name="nails_6_7" value="a"></td></tr>
+  		  <tr><td>b)  Nerve tissue</td><td><input type="radio" name="nails_6_7" value="b"></td></tr>
+  		  <tr><td>c)  Muscular tissue</td><td><input type="radio" name="nails_6_7" value="c"></td></tr>
+  		  <tr><td>d)  Liquid tissue</td><td><input type="radio" name="nails_6_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  Which organ supplies oxygen to the blood?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Brain</td><td><input type="radio" name="nails_6_8" value="a"></td></tr>
+  		  <tr><td>b)  Heart</td><td><input type="radio" name="nails_6_8" value="b"></td></tr>
+  		  <tr><td>c)  Liver</td><td><input type="radio" name="nails_6_8" value="c"></td></tr>
+  		  <tr><td>d)  Lungs</td><td><input type="radio" name="nails_6_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  The _____ system purifies the body by eliminating waster matter.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  excretory</td><td><input type="radio" name="nails_6_9" value="a"></td></tr>
+  		  <tr><td>b)  circulatory</td><td><input type="radio" name="nails_6_9" value="b"></td></tr>
+  		  <tr><td>c)  lymphatic</td><td><input type="radio" name="nails_6_9" value="c"></td></tr>
+  		  <tr><td>d)  skeletal</td><td><input type="radio" name="nails_6_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  The human skeleton eventually has _____ bones after some have fused together.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  130</td><td><input type="radio" name="nails_6_10" value="a"></td></tr>
+  		  <tr><td>b)  206</td><td><input type="radio" name="nails_6_10" value="b"></td></tr>
+  		  <tr><td>c)  234</td><td><input type="radio" name="nails_6_10" value="c"></td></tr>
+  		  <tr><td>d)  412</td><td><input type="radio" name="nails_6_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  About one-third of bone is organic matter, and the other two-thirds are primarily composed of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  phosphate compounds</td><td><input type="radio" name="nails_6_11" value="a"></td></tr>
+  		  <tr><td>b)  lead compounds</td><td><input type="radio" name="nails_6_11" value="b"></td></tr>
+  		  <tr><td>c)  minerals</td><td><input type="radio" name="nails_6_11" value="c"></td></tr>
+  		  <tr><td>d)  iron compounds</td><td><input type="radio" name="nails_6_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  Which of the following is an example of an immovable joint?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Skull</td><td><input type="radio" name="nails_6_12" value="a"></td></tr>
+  		  <tr><td>b)  Knees</td><td><input type="radio" name="nails_6_12" value="b"></td></tr>
+  		  <tr><td>c)  Hips</td><td><input type="radio" name="nails_6_12" value="c"></td></tr>
+  		  <tr><td>d)  Elbows</td><td><input type="radio" name="nails_6_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  The _____ is the inner and larger bone of the forearm, attached to the wrist, and located on the side of the little finger.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  carpus</td><td><input type="radio" name="nails_6_13" value="a"></td></tr>
+  		  <tr><td>b)  metacarpus</td><td><input type="radio" name="nails_6_13" value="b"></td></tr>
+  		  <tr><td>c)  radius</td><td><input type="radio" name="nails_6_13" value="c"></td></tr>
+  		  <tr><td>d)  ulna</td><td><input type="radio" name="nails_6_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  The phalanges are the bones of the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  forearm and hand</td><td><input type="radio" name="nails_6_14" value="a"></td></tr>
+  		  <tr><td>b)  fingers and toes</td><td><input type="radio" name="nails_6_14" value="b"></td></tr>
+  		  <tr><td>c)  arm and fingers</td><td><input type="radio" name="nails_6_14" value="c"></td></tr>
+  		  <tr><td>d)  toes and feet</td><td><input type="radio" name="nails_6_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  The _____, also called the accessory bone, forms the kneecap joint.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  patella</td><td><input type="radio" name="nails_6_15" value="a"></td></tr>
+  		  <tr><td>b)  fibula</td><td><input type="radio" name="nails_6_15" value="b"></td></tr>
+  		  <tr><td>c)  femur</td><td><input type="radio" name="nails_6_15" value="c"></td></tr>
+  		  <tr><td>d)  tibia</td><td><input type="radio" name="nails_6_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  Which of the following is a tarsal bone?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Tibia</td><td><input type="radio" name="nails_6_16" value="a"></td></tr>
+  		  <tr><td>b)  Navicular</td><td><input type="radio" name="nails_6_16" value="b"></td></tr>
+  		  <tr><td>c)  Fibula</td><td><input type="radio" name="nails_6_16" value="c"></td></tr>
+  		  <tr><td>d)  Femur</td><td><input type="radio" name="nails_6_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  How many muscles are there in the human body?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  About 800</td><td><input type="radio" name="nails_6_17" value="a"></td></tr>
+  		  <tr><td>b)  More than 600</td><td><input type="radio" name="nails_6_17" value="b"></td></tr>
+  		  <tr><td>c)  Fewer than 200</td><td><input type="radio" name="nails_6_17" value="c"></td></tr>
+  		  <tr><td>d)  About 900</td><td><input type="radio" name="nails_6_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  Which type of muscle tissue is found in the internal organs of the body, such as the digestive system?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Striated muscle</td><td><input type="radio" name="nails_6_18" value="a"></td></tr>
+  		  <tr><td>b)  Cardiac muscle</td><td><input type="radio" name="nails_6_18" value="b"></td></tr>
+  		  <tr><td>c)  Nonstriated muscle</td><td><input type="radio" name="nails_6_18" value="c"></td></tr>
+  		  <tr><td>d)  Skeletal muscle</td><td><input type="radio" name="nails_6_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  Which of the following is not one of the three parts of a muscle?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Nucleus</td><td><input type="radio" name="nails_6_19" value="a"></td></tr>
+  		  <tr><td>b)  Origin</td><td><input type="radio" name="nails_6_19" value="b"></td></tr>
+  		  <tr><td>c)  Insertion</td><td><input type="radio" name="nails_6_19" value="c"></td></tr>
+  		  <tr><td>d)  Belly</td><td><input type="radio" name="nails_6_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  Muscular tissue can be stimulated by massage which is pressure and friction created by hand, electric vibrator, or _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  moist heat</td><td><input type="radio" name="nails_6_20" value="a"></td></tr>
+  		  <tr><td>b)  electrical current</td><td><input type="radio" name="nails_6_20" value="b"></td></tr>
+  		  <tr><td>c)  nerve impulses</td><td><input type="radio" name="nails_6_20" value="c"></td></tr>
+  		  <tr><td>d)  water jets</td><td><input type="radio" name="nails_6_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  Where is the latissimus dorsi located?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  The lower back</td><td><input type="radio" name="nails_6_21" value="a"></td></tr>
+  		  <tr><td>b)  The upper back</td><td><input type="radio" name="nails_6_21" value="b"></td></tr>
+  		  <tr><td>c)  The chest</td><td><input type="radio" name="nails_6_21" value="c"></td></tr>
+  		  <tr><td>d)  the abdomen</td><td><input type="radio" name="nails_6_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  The _____ is the large muscle that covers the entire back of the upper arm and extends the forearm.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  deltoid</td><td><input type="radio" name="nails_6_22" value="a"></td></tr>
+  		  <tr><td>b)  tricep</td><td><input type="radio" name="nails_6_22" value="b"></td></tr>
+  		  <tr><td>c)  bicep</td><td><input type="radio" name="nails_6_22" value="c"></td></tr>
+  		  <tr><td>d)  pronator</td><td><input type="radio" name="nails_6_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  The _____ are the muscles that separate the fingers.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  abductors</td><td><input type="radio" name="nails_6_23" value="a"></td></tr>
+  		  <tr><td>b)  adductors</td><td><input type="radio" name="nails_6_23" value="b"></td></tr>
+  		  <tr><td>c)  pronators</td><td><input type="radio" name="nails_6_23" value="c"></td></tr>
+  		  <tr><td>d)  extensors</td><td><input type="radio" name="nails_6_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  The _____ originates at the upper portion of the fibula and bends the foot down.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  gastrocnemius</td><td><input type="radio" name="nails_6_24" value="a"></td></tr>
+  		  <tr><td>b)  tibialis anterior</td><td><input type="radio" name="nails_6_24" value="b"></td></tr>
+  		  <tr><td>c)  soleus</td><td><input type="radio" name="nails_6_24" value="c"></td></tr>
+  		  <tr><td>d)  peroneus longus</td><td><input type="radio" name="nails_6_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  The _____ moves the lesser toes and helps maintain balance while walking.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  abductor hallucis</td><td><input type="radio" name="nails_6_25" value="a"></td></tr>
+  		  <tr><td>b)  flexor digitorum brevis</td><td><input type="radio" name="nails_6_25" value="b"></td></tr>
+  		  <tr><td>c)  extensor digitorum longus</td><td><input type="radio" name="nails_6_25" value="c"></td></tr>
+  		  <tr><td>d)  flexor digiti minimi</td><td><input type="radio" name="nails_6_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  The scientific study of the structure, function, and pathology of the nervous system is known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  psychology</td><td><input type="radio" name="nails_6_26" value="a"></td></tr>
+  		  <tr><td>b)  neurology</td><td><input type="radio" name="nails_6_26" value="b"></td></tr>
+  		  <tr><td>c)  anatomy</td><td><input type="radio" name="nails_6_26" value="c"></td></tr>
+  		  <tr><td>d)  physiology</td><td><input type="radio" name="nails_6_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  The principal components of the nervous system include all but which of the following?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Brain</td><td><input type="radio" name="nails_6_27" value="a"></td></tr>
+  		  <tr><td>b)  Spinal cord</td><td><input type="radio" name="nails_6_27" value="b"></td></tr>
+  		  <tr><td>c)  Carpus</td><td><input type="radio" name="nails_6_27" value="c"></td></tr>
+  		  <tr><td>d)  Nerves</td><td><input type="radio" name="nails_6_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  The spinal cord originates in the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  brain</td><td><input type="radio" name="nails_6_28" value="a"></td></tr>
+  		  <tr><td>b)  spinal column</td><td><input type="radio" name="nails_6_28" value="b"></td></tr>
+  		  <tr><td>c)  vertebrae</td><td><input type="radio" name="nails_6_28" value="c"></td></tr>
+  		  <tr><td>d)  trunk</td><td><input type="radio" name="nails_6_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  There are how many pairs of cranial nerves?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  4</td><td><input type="radio" name="nails_6_29" value="a"></td></tr>
+  		  <tr><td>b)  12</td><td><input type="radio" name="nails_6_29" value="b"></td></tr>
+  		  <tr><td>c)  16</td><td><input type="radio" name="nails_6_29" value="c"></td></tr>
+  		  <tr><td>d)  22</td><td><input type="radio" name="nails_6_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  The treelike branches of nerve fibers extending from the nerve cell that carry impulses toward the cell and 
+            receive impulses from other nerve cells are called _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  dendrites</td><td><input type="radio" name="nails_6_30" value="a"></td></tr>
+  		  <tr><td>b)  axons</td><td><input type="radio" name="nails_6_30" value="b"></td></tr>
+  		  <tr><td>c)  neurons</td><td><input type="radio" name="nails_6_30" value="c"></td></tr>
+  		  <tr><td>d)  valves</td><td><input type="radio" name="nails_6_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  Which type of nerves carries impulses from the sense organs to the brain?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Motor</td><td><input type="radio" name="nails_6_31" value="a"></td></tr>
+  		  <tr><td>b)  Receptor</td><td><input type="radio" name="nails_6_31" value="b"></td></tr>
+  		  <tr><td>c)  Afferent</td><td><input type="radio" name="nails_6_31" value="c"></td></tr>
+  		  <tr><td>d)  Digital</td><td><input type="radio" name="nails_6_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  The _____ nerve, with its branches, supplies the fingers.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  radial</td><td><input type="radio" name="nails_6_32" value="a"></td></tr>
+  		  <tr><td>b)  median</td><td><input type="radio" name="nails_6_32" value="b"></td></tr>
+  		  <tr><td>c)  ulnar</td><td><input type="radio" name="nails_6_32" value="c"></td></tr>
+  		  <tr><td>d)  digital</td><td><input type="radio" name="nails_6_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  The _____ nerve extends from behind the knee to wind around the head of the fibula to the front of the leg,
+            where it divides into two branches.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  deep peroneal</td><td><input type="radio" name="nails_6_33" value="a"></td></tr>
+  		  <tr><td>b)  anterior tibial</td><td><input type="radio" name="nails_6_33" value="b"></td></tr>
+  		  <tr><td>c)  common peroneal</td><td><input type="radio" name="nails_6_33" value="c"></td></tr>
+  		  <tr><td>d)  musculocutaneous</td><td><input type="radio" name="nails_6_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34. The sural nerve supplies impulses to the skin on the _____. 
+  		<table class="table table-condensed">
+  		  <tr><td>a)  shoulders and back</td><td><input type="radio" name="nails_6_34" value="a"></td></tr>
+  		  <tr><td>b)  foot and leg</td><td><input type="radio" name="nails_6_34" value="b"></td></tr>
+  		  <tr><td>c)  hands and arms</td><td><input type="radio" name="nails_6_34" value="c"></td></tr>
+  		  <tr><td>d)  neck and chest</td><td><input type="radio" name="nails_6_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  The lymphatics are also known as _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lymph spaces</td><td><input type="radio" name="nails_6_35" value="a"></td></tr>
+  		  <tr><td>b)  lymph nodes</td><td><input type="radio" name="nails_6_35" value="b"></td></tr>
+  		  <tr><td>c)  lymph cells</td><td><input type="radio" name="nails_6_35" value="c"></td></tr>
+  		  <tr><td>d)  lymph vessels</td><td><input type="radio" name="nails_6_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  What is the primary function of lymph?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  To carry waste and impurities away from the cells</td><td><input type="radio" name="nails_6_36" value="a"></td></tr>
+  		  <tr><td>b)  To deliver oxygen and deliver nutrients to the cells</td><td><input type="radio" name="nails_6_36" value="b"></td></tr>
+  		  <tr><td>c)  To collect oxygen from the lungs and deliver it to the blood</td><td><input type="radio" name="nails_6_36" value="c"></td></tr>
+  		  <tr><td>d)  To iniiate clotting when the skin is cut</td><td><input type="radio" name="nails_6_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  About how much does a human head weigh?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  9 ounces</td><td><input type="radio" name="nails_6_37" value="a"></td></tr>
+  		  <tr><td>b)  16 ounces</td><td><input type="radio" name="nails_6_37" value="b"></td></tr>
+  		  <tr><td>c)  2 pounds</td><td><input type="radio" name="nails_6_37" value="c"></td></tr>
+  		  <tr><td>d)  4 pounds</td><td><input type="radio" name="nails_6_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  The chambers of the heart include _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  the atria and the vesicles</td><td><input type="radio" name="nails_6_38" value="a"></td></tr>
+  		  <tr><td>b)  the aorta and the ventricles</td><td><input type="radio" name="nails_6_38" value="b"></td></tr>
+  		  <tr><td>c)  the atria and the ventricles</td><td><input type="radio" name="nails_6_38" value="c"></td></tr>
+  		  <tr><td>d)  the aorta and the vesicles</td><td><input type="radio" name="nails_6_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  When oxygen-rich blood returns to the heart, it enters the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  right atrium</td><td><input type="radio" name="nails_6_39" value="a"></td></tr>
+  		  <tr><td>b)  left atrium</td><td><input type="radio" name="nails_6_39" value="b"></td></tr>
+  		  <tr><td>c)  right ventricle</td><td><input type="radio" name="nails_6_39" value="c"></td></tr>
+  		  <tr><td>d)  left ventricle</td><td><input type="radio" name="nails_6_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  When blood leaves the heart to flow throughout the body, it exits from the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  right atrium</td><td><input type="radio" name="nails_6_40" value="a"></td></tr>
+  		  <tr><td>b)  left atrium</td><td><input type="radio" name="nails_6_40" value="b"></td></tr>
+  		  <tr><td>c)  right ventricle</td><td><input type="radio" name="nails_6_40" value="c"></td></tr>
+  		  <tr><td>d)  left ventricle</td><td><input type="radio" name="nails_6_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  Compared to arteries, veins are located _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  farther from the outer skin surface</td><td><input type="radio" name="nails_6_41" value="a"></td></tr>
+  		  <tr><td>b)  closer to the outer skin surface</td><td><input type="radio" name="nails_6_41" value="b"></td></tr>
+  		  <tr><td>c)  the same distance from the outer skin surface</td><td><input type="radio" name="nails_6_41" value="c"></td></tr>
+  		  <tr><td>d)  very deep within the body</td><td><input type="radio" name="nails_6_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  Blood comprises about _____ of the body's total weight.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  1/3</td><td><input type="radio" name="nails_6_42" value="a"></td></tr>
+  		  <tr><td>b)  3/16</td><td><input type="radio" name="nails_6_42" value="b"></td></tr>
+  		  <tr><td>c)  1/20</td><td><input type="radio" name="nails_6_42" value="c"></td></tr>
+  		  <tr><td>d)  1/50</td><td><input type="radio" name="nails_6_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  Blood is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  98% water</td><td><input type="radio" name="nails_6_43" value="a"></td></tr>
+  		  <tr><td>b)  sweet</td><td><input type="radio" name="nails_6_43" value="b"></td></tr>
+  		  <tr><td>c)  sticky</td><td><input type="radio" name="nails_6_43" value="c"></td></tr>
+  		  <tr><td>d)  alkaline</td><td><input type="radio" name="nails_6_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  Blood in the arteries is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  bright red</td><td><input type="radio" name="nails_6_44" value="a"></td></tr>
+  		  <tr><td>b)  dark red</td><td><input type="radio" name="nails_6_44" value="b"></td></tr>
+  		  <tr><td>c)  blue</td><td><input type="radio" name="nails_6_44" value="c"></td></tr>
+  		  <tr><td>d)  purple</td><td><input type="radio" name="nails_6_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  What are leukocytes?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Red blood cells</td><td><input type="radio" name="nails_6_45" value="a"></td></tr>
+  		  <tr><td>b)  White blood cells</td><td><input type="radio" name="nails_6_45" value="b"></td></tr>
+  		  <tr><td>c)  A type of hemoglobin</td><td><input type="radio" name="nails_6_45" value="c"></td></tr>
+  		  <tr><td>d)  A type of platelet</td><td><input type="radio" name="nails_6_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>46.  Platelets are _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  responsible for destroying disease</td><td><input type="radio" name="nails_6_46" value="a"></td></tr>
+  		  <tr><td>b)  responsible for carrying food to cells</td><td><input type="radio" name="nails_6_46" value="b"></td></tr>
+  		  <tr><td>c)  larger than red blood cells</td><td><input type="radio" name="nails_6_46" value="c"></td></tr>
+  		  <tr><td>d)  smaller than red blood cells</td><td><input type="radio" name="nails_6_46" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>47.  Blood helps to equalize the body's temperature; seals leaks found in injured blood vessels; carries water, oxygen,
+            and food to all cells; carries away carbon dioxide and other waste products; and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  helps equalize the body's weight</td><td><input type="radio" name="nails_6_47" value="a"></td></tr>
+  		  <tr><td>b)  closes openings found in the epidermis</td><td><input type="radio" name="nails_6_47" value="b"></td></tr>
+  		  <tr><td>c)  works with the immune system to protect the body</td><td><input type="radio" name="nails_6_47" value="c"></td></tr>
+  		  <tr><td>d)  combines protein and sugar to make platelets</td><td><input type="radio" name="nails_6_47" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>48.  What is the most complex organ of the endocrine system?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Pineal gland</td><td><input type="radio" name="nails_6_48" value="a"></td></tr>
+  		  <tr><td>b)  Pancreas</td><td><input type="radio" name="nails_6_48" value="b"></td></tr>
+  		  <tr><td>c)  Pituitary gland</td><td><input type="radio" name="nails_6_48" value="c"></td></tr>
+  		  <tr><td>d)  Thyroid gland</td><td><input type="radio" name="nails_6_48" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>49.  The organ that eliminates waste containing perspiration is the _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  kidneys</td><td><input type="radio" name="nails_6_49" value="a"></td></tr>
+  		  <tr><td>b)  skin</td><td><input type="radio" name="nails_6_49" value="b"></td></tr>
+  		  <tr><td>c)  lungs</td><td><input type="radio" name="nails_6_49" value="c"></td></tr>
+  		  <tr><td>d)  liver</td><td><input type="radio" name="nails_6_49" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>50.  If deprived of oxygen, a person will die in within _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  minutes</td><td><input type="radio" name="nails_6_50" value="a"></td></tr>
+  		  <tr><td>b)  seconds</td><td><input type="radio" name="nails_6_50" value="b"></td></tr>
+  		  <tr><td>c)  hours</td><td><input type="radio" name="nails_6_50" value="c"></td></tr>
+  		  <tr><td>d)  days</td><td><input type="radio" name="nails_6_50" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

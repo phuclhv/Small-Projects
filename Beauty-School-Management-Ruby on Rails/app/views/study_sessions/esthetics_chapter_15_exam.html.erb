@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 15: Facial Treatments </h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1. What is a food or drink that does NOT aggravate rosacea?
+		<table class="table table-condensed">
+		  <tr><td><input type="radio" name="esthetics_15_1" value="a"></td><td>a) milk </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_1" value="b"></td><td>b) wine </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_1" value="c"></td><td>c) beer </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_1" value="d"></td><td>d) heavily spiced food </td></tr>
+		</table>
+    </p>
+
+    <p>2. What skin condition can be prevented by staying out of the sun an wearing protective clothing and sunscreen daily?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_2" value="a"></td><td>a) vitiligo </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_2" value="b"></td><td>b) hyperpigmentation </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_2" value="c"></td><td>c) hypopigmentation </td></tr>
+		  <tr><td><input type="radio" name="esthetics_15_2" value="d"></td><td>d) albinism </td></tr>
+  		</table>
+    </p>
+
+    <p>3. What does it mean if a client says that extractions are painful? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_3" value="a"></td><td>a) client needs to get over his or her low pain threshold </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_3" value="b"></td><td>b) extractions should never be performed on this client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_3" value="c"></td><td>c) you should immediately as a manager to review your technique </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_3" value="d"></td><td>d) extraction method being used is probadly too rough and forceful </td></tr>
+  		</table>
+    </p>
+
+    <p>4. What is NOT among the environmental aggravators that clients with acne should avoid? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_4" value="a"></td><td>a) dirt </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_4" value="b"></td><td>b) grease </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_4" value="c"></td><td>c) humidity </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_4" value="d"></td><td>d) water </td></tr>
+  		</table>
+    </p>
+
+    <p>5. What proceduce should you recommend that clients with acne add to their home care twice per week? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_5" value="a"></td><td>a) enzym peel </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_5" value="b"></td><td>b) clay mask </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_5" value="c"></td><td>c) therapeutic sun exposure </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_5" value="d"></td><td>d) aggressive massage </td></tr>
+  		</table>
+    </p>
+
+    <p>6. What arem finger cots? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_6" value="a"></td><td>a) strays filled with lotion for softening the skin of the fingertips </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_6" value="b"></td><td>b) wood slats strapped to the fingers to hold them regid during treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_6" value="c"></td><td>c) an industry term referring to each individual "sleeve" of a glove </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_6" value="d"></td><td>d) individual finger "glove" used for extractions </td></tr>
+  		</table>
+    </p>
+
+    <p>7. What will you be able to erform easily and efficiently once you understand the angle of the various follicles in the different locations on the skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_7" value="a"></td><td>a) enzym peel </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_7" value="b"></td><td>b) extractions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_7" value="c"></td><td>c) clay mask </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_7" value="d"></td><td>d) product application </td></tr>
+  		</table>
+    </p>
+
+    <p>8. When in the extraction process is a healing mask beneficial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_8" value="a"></td><td>a) before any extractions begin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_8" value="b"></td><td>b) midway through the extractions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_8" value="c"></td><td>c) after all extractions are done </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_8" value="d"></td><td>d) the day after extractions </td></tr>
+  		</table>
+    </p>
+    
+    <p>9. What is NOT one of the beneficial effects that warmth has on skin?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_9" value="a"></td><td>a) softens the follicles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_9" value="b"></td><td>b) romotes effective cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_9" value="c"></td><td>c) decreases circulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_9" value="d"></td><td>d) repares sin for extractions </td></tr>
+  		</table>
+    </p>
+    
+    <p>10. What is NOT a risk associated with keeing hot towels on the sin for too long? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_10" value="a"></td><td>a) overmoisturization </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_10" value="b"></td><td>b) overstimulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_10" value="c"></td><td>c) redness </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_10" value="d"></td><td>d) irritation </td></tr>
+  		</table>
+    </p>
+    
+    <p>11. What is extraction?
+ 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_11" value="a"></td><td>a) plucking hair with tweeers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_11" value="b"></td><td>b) manually removing impurities and comedones from follicles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_11" value="c"></td><td>c) reducing excess hair from nostrils with a nose trimmer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_11" value="d"></td><td>d) chemically extracting pigment </td></tr>
+  		</table>
+    </p>
+    
+    <p>12. What is NOT one of the functions of a treatment mask? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_12" value="a"></td><td>a) hydrating the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_12" value="b"></td><td>b) rejuvenating the skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_12" value="c"></td><td>c) drawing out impurities </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_12" value="d"></td><td>d) loosening the skin </td></tr>
+  		</table>
+    </p>
+    
+    <p>13. When in the facial process should a calming, hydratin mask be applied? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_13" value="a"></td><td>a) anytime </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_13" value="b"></td><td>b) only at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_13" value="c"></td><td>c) only at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_13" value="d"></td><td>d) never </td></tr>
+  		</table>
+    </p>
+    
+    <p>14. What becomes trapped under a paraffin mask and promotes penetration of ingredients depper into the skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_14" value="a"></td><td>a) heat </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_14" value="b"></td><td>b) moisture </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_14" value="c"></td><td>c) hydrogen </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_14" value="d"></td><td>d) nitrogen </td></tr>
+  		</table>
+    </p>
+    
+    <p>15. Why should you offer clients water after performing serivces? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_15" value="a"></td><td>a) to advertise the brand of water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_15" value="b"></td><td>b) to add an item to the client's bill </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_15" value="c"></td><td>c) to increase your tip </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_15" value="d"></td><td>d) to facialate rehydration </td></tr>
+  		</table>
+    </p>
+    
+    <p>16. What should you do at the end of the service?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_16" value="a"></td><td>a) perform a skin analysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_16" value="b"></td><td>b) book the client's next appointment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_16" value="c"></td><td>c) perform the client consulation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_16" value="d"></td><td>d) show the client around the salon </td></tr>
+  		</table>
+    </p>
+    
+    <p>17. Why should you apply product moderately?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_17" value="a"></td><td>a) any excess roduct you use is deducted from your paycheck </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_17" value="b"></td><td>b) you don't want to be the reason the salon runs out of a product </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_17" value="c"></td><td>c) most products are superconcentrated </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_17" value="d"></td><td>d) too much of a good thing can counteract benefits </td></tr>
+  		</table>
+    </p>
+    
+    <p>18. What should you do if you are having a bad day? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_18" value="a"></td><td>a) call in sick to work </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_18" value="b"></td><td>b) keep it to yourself </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_18" value="c"></td><td>c) avoid needy clients </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_18" value="d"></td><td>d) vent to our coworkers </td></tr>
+  		</table>
+    </p>
+
+    <p>19. What is NOT among the reasons clients should arrive 15 minutes prior to appointments? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_19" value="a"></td><td>a) fill out the consultation form </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_19" value="b"></td><td>b) get into a robe </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_19" value="c"></td><td>c) help you prep the treatment room </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_19" value="d"></td><td>d) prepare for their treatment </td></tr>
+  		</table>
+    </p>
+
+    <p>20. When should the client be shown the area where he or she can change clothes and store any belongings? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_21" value="a"></td><td>a) only when client ass to see the area </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_21" value="b"></td><td>b) only if the treatment room is too small for these purposes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_21" value="c"></td><td>c) at the end of the appointment  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_21" value="d"></td><td>d) immediately upon arrival in the salon </td></tr>
+  		</table>
+    </p>
+
+    <p>21. What should female clients be instructed to remove before a facial treatment?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="a"></td><td>a) panties </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="b"></td><td>b) bra </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="c"></td><td>c) garter belt </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="d"></td><td>d) stockings </td></tr>
+  		</table>
+    </p>
+
+    <p>22. What sort of a fabric is MOST liely to collect lint from sheets? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="a"></td><td>a) light </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="b"></td><td>b) dark </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="c"></td><td>c) silk </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_22" value="d"></td><td>d) satin </td></tr>
+  		</table>
+    </p>
+
+    <p>23. Who is responsible for instructing the client how to get comfortable on the facial bed? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_23" value="a"></td><td>a) client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_23" value="b"></td><td>b) receptionist </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_23" value="c"></td><td>c) manager </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_23" value="d"></td><td>d) esthetician </td></tr>
+  		</table>
+    </p>
+
+    <p>24. What aspect of services is affected by the considerations of efficiency and laundry costs?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_24" value="a"></td><td>a) product application </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_24" value="b"></td><td>b) massage technique </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_24" value="c"></td><td>c) draping </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_24" value="d"></td><td>d) hot-towel temperature </td></tr>
+  		</table>
+    </p>
+
+    <p>25. When in the process of draping the hair do you place the towel on the headrest? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_25" value="a"></td><td>a) at any time througout the process </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_25" value="b"></td><td>b) whenever the client specifically request you to do so </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_25" value="c"></td><td>c) at the beginning of the process </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_25" value="d"></td><td>d) at the end of the process </td></tr>
+  		</table>
+    </p>
+
+    <p>26. What service should you recommended that all clients receive once a month?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_26" value="a"></td><td>a) facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_26" value="b"></td><td>b) Botox injection </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_26" value="c"></td><td>c) Proactiv treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_26" value="d"></td><td>d) acupuncture </td></tr>
+  		</table>
+    </p>
+
+    <p>27. What step you can be dropped when a client is receiving a mini-facial instead of a basic facial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_27" value="a"></td><td>a) moisturizer </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_27" value="b"></td><td>b) extractions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_27" value="c"></td><td>c) product application </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_27" value="d"></td><td>d) drapping </td></tr>
+  		</table>
+    </p>
+
+    <p>28. What is true of home care?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_28" value="a"></td><td>a) it is probadly the least important factor in successful skin care </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_28" value="b"></td><td>b) it is probadly the most important factor in successful skin care </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_28" value="c"></td><td>c) home care has no impact whatsoever on overall skin care  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_28" value="d"></td><td>d) very few clients perform any type of home care on their skin </td></tr>
+  		</table>
+    </p>
+
+    <p>29. What should you do for about 15 minutes after the first treatment with a new client? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_29" value="a"></td><td>a) demonstrate high-priced products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_29" value="b"></td><td>b) explain why tips affect your income </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_29" value="c"></td><td>c) explain proper home care </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_29" value="d"></td><td>d) perform a client consultation </td></tr>
+  		</table>
+    </p>
+  
+    <p>30. What is true of a mini-facial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_30" value="a"></td><td>a) it has fewer steps than a basic facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_30" value="b"></td><td>b) it has more steps than a basic facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_30" value="c"></td><td>c) it is the same as a basic facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_30" value="d"></td><td>d) it has no treatment benefits </td></tr>
+  		</table>
+    </p>
+
+    <p>31. What is the approximate length of a full, basic facial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_31" value="a"></td><td>a) 10 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_31" value="b"></td><td>b) 25 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_31" value="c"></td><td>c) 45 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_31" value="d"></td><td>d) 60 minutes </td></tr>
+  		</table>
+    </p>
+
+    <p>32. What skin type is associated with the treatment goal of stimulating sebum production? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_32" value="a"></td><td>a) oil skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_32" value="b"></td><td>b) couperose skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_32" value="c"></td><td>c) dry skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_32" value="d"></td><td>d) damaged skin </td></tr>
+  		</table>
+    </p>
+
+    <p>33. What type of enzyme peel should you use to exfoliate dry skin?
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_33" value="a"></td><td>a) gentle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_33" value="b"></td><td>b) medium </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_33" value="c"></td><td>c) harsh </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_33" value="d"></td><td>d) enzyme peels should not be used on dry skin </td></tr>
+  		</table>
+    </p>
+
+    <p>34. What is NOT a recommended treatment for dry skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_34" value="a"></td><td>a) moisturizing cream with an oil base </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_34" value="b"></td><td>b) antioxidants </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_34" value="c"></td><td>c) sunscreen finish </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_34" value="d"></td><td>d) harsh exfoliation </td></tr>
+  		</table>
+    </p>
+
+    <p>35. What can be used by exposure to extreme climates, extreme weight loss, and physiological disease? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_35" value="a"></td><td>a) hypopigmentation </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_35" value="b"></td><td>b) accelerated skin aging </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_35" value="c"></td><td>c) couperose skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_35" value="d"></td><td>d) albinism </td></tr>
+  		</table>
+    </p>
+
+    <p>36. What do facial treatments offer in addition to relaxation? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_36" value="a"></td><td>a) changes in skin type </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_36" value="b"></td><td>b) accelerated skin aging </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_36" value="c"></td><td>c) couperose skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_36" value="d"></td><td>d) albinism </td></tr>
+  		</table>
+    </p>
+
+    <p>37. What is true of facial treatments? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_37" value="a"></td><td>a) they are the core treatments that estheticians perform </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_37" value="b"></td><td>b) they are minor elements of the services performed by estheticians </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_37" value="c"></td><td>c) only clients with damaged skin truly benefit from facial treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_37" value="d"></td><td>d) clients with damaged sin are beyond the help of facial treatments </td></tr>
+  		</table>
+    </p>
+
+    <p>38. What is a facial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_38" value="a"></td><td>a) professional service designed to improve and rejuvenate the skin  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_38" value="b"></td><td>b) application of makeup to make the client's face more attractive </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_38" value="c"></td><td>c) medical procedure involving the use of injected chemicals </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_38" value="d"></td><td>d) surgical procedure more commonly known as a face lift </td></tr>
+  		</table>
+    </p>
+
+    <p>39. Where are cprrective treatments the focus? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_39" value="a"></td><td>a) nail salons  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_39" value="b"></td><td>b) beauty salon </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_39" value="c"></td><td>c) medical offices </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_39" value="d"></td><td>d) day spas </td></tr>
+  		</table>
+    </p>
+
+    <p>40. Who can issue prescriptions? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_40" value="a"></td><td>a) receptionist  </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_40" value="b"></td><td>b) physicians </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_40" value="c"></td><td>c) estheticians </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_40" value="d"></td><td>d) salon manager </td></tr>
+  		</table>
+    </p>
+
+    <p>41. How often should you attend an esthetics class or conference in order to improve your potential career success? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_41" value="a"></td><td>a) at least once a month </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_41" value="b"></td><td>b) at least once a year </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_41" value="c"></td><td>c) every few years </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_41" value="d"></td><td>d) never, because classes and conferences are only for beginners </td></tr>
+  		</table>
+    </p>
+
+    <p>42. What can you help clients do by speaking to them in a quite and professional manner? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_42" value="a"></td><td>a) believe everything you say </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_42" value="b"></td><td>b) take all of your advice </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_42" value="c"></td><td>c) relax </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_42" value="d"></td><td>d) sleep </td></tr>
+  		</table>
+    </p>
+
+    <p>43. What is a good description of the way you shoud work with clients? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_43" value="a"></td><td>a) fast and aggressive </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_43" value="b"></td><td>b) quitely and efficiently </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_43" value="c"></td><td>c) loudly and slowly </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_43" value="d"></td><td>d) casually and haphazardly </td></tr>
+  		</table>
+    </p>
+
+    <p>44. What is NOT among the reasons why you should remove rings, bracelets, and other jewelry before performing services? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_44" value="a"></td><td>a) your nice jewelry will make clients jealous </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_44" value="b"></td><td>b) jewelry might injure the client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_44" value="c"></td><td>c) jewelry might cause a distraction during the service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_44" value="d"></td><td>d) jewelry might inhibitit your movements during the service </td></tr>
+  		</table>
+    </p>
+
+    <p>45. What is the approximate length of a mini-facial? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_45" value="a"></td><td>a) five minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_45" value="b"></td><td>b) 10 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_45" value="c"></td><td>c) 20 minutes </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_45" value="d"></td><td>d) 30 minutes </td></tr>
+  		</table>
+    </p>
+
+    <p>46. What should you do after cleansing the client's skin? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_46" value="a"></td><td>a) show the client where to change into a robe for the service </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_46" value="b"></td><td>b) complete a thorough skin analysis with a magnifying lamp </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_46" value="c"></td><td>c) perform a client consultation to identify which services to perform </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_46" value="d"></td><td>d) 3get the client comfortable on the treatment table </td></tr>
+  		</table>
+    </p>
+
+    <p>47. When during the facial procedure should you perform the client consultation? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_47" value="a"></td><td>a) at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_47" value="b"></td><td>b) in the middle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_47" value="c"></td><td>c) at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_47" value="d"></td><td>d) anytime </td></tr>
+  		</table>
+    </p>
+
+    <p>48. When during the facial procedure should you apply moisturizer and/or suncreen? 
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_48" value="a"></td><td>a) at the beginning </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_48" value="b"></td><td>b) in the middle </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_48" value="c"></td><td>c) at the end </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_48" value="d"></td><td>d) anytime </td></tr>
+  		</table>
+    </p>
+
+    <p>49. What is true of skin irritation?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_49" value="a"></td><td>a) it is a contraindication for a facial </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_49" value="b"></td><td>b) it is always caused by an allergic reaction </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_49" value="c"></td><td>c) it is can quickly be eliminated by scrubbing the area with soap and water </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_49" value="d"></td><td>d) it is most commonly seen in people with oily skin </td></tr>
+  		</table>
+    </p>
+
+    <p>50. When should you apply warm towels?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_50" value="a"></td><td>a) before the dry skin analysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_50" value="b"></td><td>b) during the dry skin analysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_50" value="c"></td><td>c) after the dry skin analysis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_50" value="d"></td><td>d) at the end of facial treatment </td></tr>
+  		</table>
+    </p>
+
+    <p>51. Who should rinse and flush the client's eyes if product gets into the eyes?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_51" value="a"></td><td>a) client </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_51" value="b"></td><td>b) physician </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_51" value="c"></td><td>c) esthetician </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_51" value="d"></td><td>d) supervisor </td></tr>
+  		</table>
+    </p>
+
+    <p>52. What type of cleanser is difficult to quickly and efficiently remove?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_52" value="a"></td><td>a) milky </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_52" value="b"></td><td>b) foaming </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_52" value="c"></td><td>c) powdered</td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_52" value="d"></td><td>d) liquid </td></tr>
+  		</table>
+    </p>
+
+    <p>53. When is exfoliation most effective?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_53" value="a"></td><td>a) before cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_53" value="b"></td><td>b) during cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_53" value="c"></td><td>c) after cleansing </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_53" value="d"></td><td>d) instead of cleansing </td></tr>
+  		</table>
+    </p>
+
+    <p>54. What is NOT a common result of extreme weight loss?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_54" value="a"></td><td>a) loss of muscle tone </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_54" value="b"></td><td>b) lined skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_54" value="c"></td><td>c) sagging skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_54" value="d"></td><td>d) abnormal hair growth </td></tr>
+  		</table>
+    </p>
+
+
+    <p>55. What is NOT a beneficial treatment for mature skin?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_55" value="a"></td><td>a) UV lamp treatment </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_55" value="b"></td><td>b) deep-penetrating serum </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_55" value="c"></td><td>c) firming products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_55" value="d"></td><td>d) massage </td></tr>
+  		</table>
+    </p>
+
+    <p>56. What is NOT a beneficial treatment for sensitive skin?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_56" value="a"></td><td>a) frezze-dried collagen masks </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_56" value="b"></td><td>b) gentle cleansers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_56" value="c"></td><td>c) harsh cleansers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_56" value="d"></td><td>d) minimal steam </td></tr>
+  		</table>
+    </p>
+
+    <p>57. What are considered vasoconstricting?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_57" value="a"></td><td>a) hot towels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_57" value="b"></td><td>b) cold towels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_57" value="c"></td><td>c) steam treatments </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_57" value="d"></td><td>d) paraffin masks </td></tr>
+  		</table>
+    </p>
+
+    <p>58. What is NOT contraindicated for sensitive skin?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_58" value="a"></td><td>a) gentle cleansers </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_58" value="b"></td><td>b) microdermabrasion </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_58" value="c"></td><td>c) hot steam or towels </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_58" value="d"></td><td>d) vigorous massage </td></tr>
+  		</table>
+    </p>
+
+    <p>59. What is desincrustation?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_59" value="a"></td><td>a) process of removing the "crust" that gathers around the eyes during sleep </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_59" value="b"></td><td>b) process used to soften oil and comedones in follicles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_59" value="c"></td><td>c) another name for extractions </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_59" value="d"></td><td>d) another name for exfoliation </td></tr>
+  		</table>
+    </p>
+
+    <p>60. What is folliculitis?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_60" value="a"></td><td>a) excessive hair around the face </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_60" value="b"></td><td>b) goose bumps </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_60" value="c"></td><td>c) abnormally low number of hair follicles </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_60" value="d"></td><td>d) inflammation of the hair follicles </td></tr>
+  		</table>
+    </p>
+
+    <p>61. What is the common name for pseudofolliculitis?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_61" value="a"></td><td>a) goose bumps </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_61" value="b"></td><td>b) razor bumps </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_61" value="c"></td><td>c) wind burn </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_61" value="d"></td><td>d) sunburn </td></tr>
+  		</table>
+    </p>
+
+    <p>62. What causes pseudofolliculitis?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_62" value="a"></td><td>a) use of hair dye </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_62" value="b"></td><td>b) improper shaving </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_62" value="c"></td><td>c) use of Rogaine </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_62" value="d"></td><td>d) poor sleep habits </td></tr>
+  		</table>
+    </p>
+
+    <p>63. What is a use for cool towels?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_63" value="a"></td><td>a) preventing folliculitis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_63" value="b"></td><td>b) preventing pseudofolliculitis </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_63" value="c"></td><td>c) calming sensitive skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_63" value="d"></td><td>d) stimulating  sensitive skin </td></tr>
+  		</table>
+    </p>
+
+    <p>64. What skin type benefits from light, water-based products?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_64" value="a"></td><td>a) couperose skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_64" value="b"></td><td>b) oily skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_64" value="c"></td><td>c) damaged skin </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_64" value="d"></td><td>d) mature skin </td></tr>
+  		</table>
+    </p>
+
+    <p>65. Why should comedogenic products be avoided for clients with acne?  
+  		<table class="table table-condensed">
+  		  <tr><td><input type="radio" name="esthetics_15_65" value="a"></td><td>a) these products are typically water-based </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_65" value="b"></td><td>b) client with acne experience pain from comedogenic products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_65" value="c"></td><td>c) client with acne bleed easily after exposure to comedogenic products </td></tr>
+  		  <tr><td><input type="radio" name="esthetics_15_65" value="d"></td><td>d) these products tend to aggravate or produce acbe symtoms </td></tr>
+  		</table>
+    </p>
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

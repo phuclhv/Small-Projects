@@ -1,0 +1,75 @@
+<% provide(:title, 'Student Monthly Reports') %>
+
+<h1>Hour Summary</h1>
+
+<table class="table table-striped">
+  <th>Student ID</th>
+  <th>Monthly Total</th>
+  <% @student_hours_summaries.each do |shs| %>
+    <tr>
+      <td>
+        <%= shs.school_user_id %>
+      </td>
+      <td>
+        <%= shs.monthly_total %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<hr>
+<h1> Generate Report</h1>
+<%= form_tag("#") do %>
+  <%= label_tag "student", "Student" %>
+  <%= select_tag "school_user_id", options_from_collection_for_select(@students, :id, :full_name) %>
+  <%= label_tag "month_year", "Report Month" %>
+  <%= select_tag "month_year", options_from_collection_for_select(@calendars, :id, :month_year) %>
+<% end %>
+
+<div>
+<a href='#' id='submit-button' class='btn btn-primary btn-lg'>Submit</a>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-2" id="report-form"></div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  // Get monthly hours report.
+  $("#submit-button").on("click", function(){
+    var $selectFields = $('select option:selected');
+    var i;
+    var studentMonthYearObj = {};  // hash or object of ID and hours
+    var studentID;
+    var calendarID;
+    studentID =  $selectFields[0].value;
+    calendarID = $selectFields[1].value;
+    studentMonthYearObj[studentID] = calendarID;
+    $.ajax({
+      type:'GET',
+      url:'/student_hours/1',
+      data: { studentMonthYearObj: JSON.stringify(studentMonthYearObj) },
+      success:function(result){
+        var i;
+        var out = "<table class=\"table table-striped\">";
+        out += "<th>ID</th><th>Daily Hour</th><th>Clock_out</th><th>Processed?</th><th>Delete?</th>";
+        x = result;
+        $("#report-form").empty();
+        for (i = 0; i < x.length; i++) {
+          out +=  "<tr><td>"  +  x[i].daily_hour + 
+                  "</td><td>" +  x[i].daily_hour +
+                  "</td><td>" +  x[i].daily_hour + 
+                  "</td><td>" + x[i].daily_hour +
+                  "</td><td><input type='checkbox' name='"+x[i].id+"'/>" +
+                  "</td></tr>";
+        }
+        out += "</table>";
+        $("#report-form").append(out);
+      }
+    });
+  });
+});
+</script>

@@ -1,0 +1,39 @@
+<!-- Show header only @head is 1 -->
+<% @head = @head + 1 %>
+<% if @head == 1 %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tr>
+        <th>Exam ID</th>
+        <th>Study Program ID</th>
+        <th>Lesson ID</th>
+        <th>Chapter #</th>
+        <th>Chapter name</th>
+        <th>Document Path</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+<% end %>
+      <tr>
+        <td><%= exam.id %></td>
+        <td><%= exam.study_program_id %></td>
+        <td><%= exam.lesson_id %></td>
+        <td><%= exam.chapter_number %></td>
+        <td><%= exam.chapter_name %></td>
+        <td><%= exam.document_path %></td>
+        <td>
+          <%= link_to edit_exam_path(exam), remote: true do %>
+            <button class="class: "btn btn-lg btn-primary"">Edit</button>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to exam, remote: true, method: :delete,
+              data: { confirm: 'Are you sure?' } do %>
+            <button class="class: "btn btn-lg btn-primary"">Delete!</button>
+          <% end %>
+        </td>
+      </tr>
+<% if @tail == @head %>
+  </table>
+</div>
+<% end %>

@@ -1,0 +1,17 @@
+<%= form_for(@school_user) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :dob, "DOB" %>
+  <%= f.date_select :dob, {order: [:month, :day, :year], 
+      prompt: { day: 'Day', month: 'Month', year: 'Year' }, 
+      start_year: Date.today.year - 70, end_year: Date.today.year - 17 }, {required: true} %>
+
+  <%= f.label :gender %>
+  <%= f.select :gender, SchoolUser::GENDER_TYPES %>
+
+  <%= f.label :school_id, "School" %>
+  <%= f.collection_select(:school_id, School.all, :id, :name) %>
+
+  <%= f.submit "Next", class: "btn btn-primary" %>
+
+<% end %>

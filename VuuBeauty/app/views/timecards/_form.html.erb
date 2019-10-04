@@ -1,0 +1,15 @@
+<%= form_for(@timecard, remote: true) do |f| %>
+  <% if school_admin?(current_user) %>
+    <%= f.label :clock_in %>
+    <%= f.text_field :clock_in %>
+    <%= f.label :clock_out %>
+    <%= f.text_field :clock_out %>
+  <% else %>
+    <% if currently_clocked_in?(current_school_user) %>
+      <%= f.label :Click_save_to_clock_out %>
+    <% else %>
+      <%= f.label :Click_save_to_clock_in %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Save", class: "btn btn-lg btn-primary" %>
+<% end %>

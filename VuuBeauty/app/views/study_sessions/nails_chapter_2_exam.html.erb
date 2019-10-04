@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#submitExam").click(function(){
+      var questionAnswerObj = {};
+      $('#myForm input[type=radio]:checked').each(function(){
+  		  questionAnswerObj[this.name] = this.value;
+  	  }); 
+  
+      $.ajax({
+        type:'POST',
+        url:'/submit_Exam',
+        data: { questionAnswerObj: JSON.stringify(questionAnswerObj) },
+        success:function(result){
+          var i;
+          var out = "<table class=\"table table-striped\">";
+          out += "<th>Question #</th><th>Answer Key</th><th>Your Answer Is</th>";
+          x = result;
+          $("#answers").empty();
+          for (i = 0; i < x.length; i++) {
+            out +=  "<tr><td>"  +  x[i].question_number + 
+                    "</td><td>" +  x[i].answer_key +
+                    "</td><td>" + x[i].your_answer + "</td></tr>";
+          }
+          out += "</table>";
+          $("#answers").append(out);
+
+        }
+      }); // ajax
+    }); // #submitExam
+  });
+</script>
+</head>
+<body>
+
+  <h2>Chapter 2 -- Life Skills</h2>
+  <hr>
+
+  <form id="myForm" >
+
+    <p>1.  The salon is a highly social atmosphere that requires _____ and excellent people skills.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  frequent events</td><td><input type="radio" name="nails_2_1" value="a"></td></tr>
+  		  <tr><td>b)  lively music</td><td><input type="radio" name="nails_2_1" value="b"></td></tr>
+  		  <tr><td>c)  strong self-discipline</td><td><input type="radio" name="nails_2_1" value="c"></td></tr>
+  		  <tr><td>d)  television monitors</td><td><input type="radio" name="nails_2_1" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>2.  The ability to deal with difficult clients, coworkers, and even friends comes from having _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  positive goals</td><td><input type="radio" name="nails_2_2" value="a"></td></tr>
+  		  <tr><td>b)  assertiveness skills</td><td><input type="radio" name="nails_2_2" value="b"></td></tr>
+  		  <tr><td>c)  average communication skills</td><td><input type="radio" name="nails_2_2" value="c"></td></tr>
+  		  <tr><td>d)  well-developed life skills</td><td><input type="radio" name="nails_2_2" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>3.  Having good life skills builds _____, which helps you achieve your goals.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  high self-esteem</td><td><input type="radio" name="nails_2_3" value="a"></td></tr>
+  		  <tr><td>b)  strong assertiveness</td><td><input type="radio" name="nails_2_3" value="b"></td></tr>
+  		  <tr><td>c)  a winning personality</td><td><input type="radio" name="nails_2_3" value="c"></td></tr>
+  		  <tr><td>d)  leadership responsibility</td><td><input type="radio" name="nails_2_3" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>4.  Self-esteem is based on inner strength and begins with trusting your ability to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  communicate with others</td><td><input type="radio" name="nails_2_4" value="a"></td></tr>
+  		  <tr><td>b)  reach your goals</td><td><input type="radio" name="nails_2_4" value="b"></td></tr>
+  		  <tr><td>c)  become popular</td><td><input type="radio" name="nails_2_4" value="c"></td></tr>
+  		  <tr><td>d)  handle clients effectively</td><td><input type="radio" name="nails_2_4" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>5.  _____ or negative thoughts can work against your ability to succeed.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Unsure behavior</td><td><input type="radio" name="nails_2_5" value="a"></td></tr>
+  		  <tr><td>b)  Vigorous exercise</td><td><input type="radio" name="nails_2_5" value="b"></td></tr>
+  		  <tr><td>c)  Self-critical</td><td><input type="radio" name="nails_2_5" value="c"></td></tr>
+  		  <tr><td>d)  Frequent naps</td><td><input type="radio" name="nails_2_5" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>6.  To achieve success it is important to make a point of relating to others with a conscious feeling of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  respect</td><td><input type="radio" name="nails_2_6" value="a"></td></tr>
+  		  <tr><td>b)  criticism</td><td><input type="radio" name="nails_2_6" value="b"></td></tr>
+  		  <tr><td>c)  admiration</td><td><input type="radio" name="nails_2_6" value="c"></td></tr>
+  		  <tr><td>d)  confidence</td><td><input type="radio" name="nails_2_6" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>7.  Three bad habits that can keep you from maintaining peak performance include lack of a game plan,
+            seeking perfectionism, and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  annual planning</td><td><input type="radio" name="nails_2_7" value="a"></td></tr>
+  		  <tr><td>b)  making mistakes</td><td><input type="radio" name="nails_2_7" value="b"></td></tr>
+  		  <tr><td>c)  failing to prioritize</td><td><input type="radio" name="nails_2_7" value="c"></td></tr>
+  		  <tr><td>d)  procrastination</td><td><input type="radio" name="nails_2_7" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>8.  One recommended way to keep your energy up is to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  avoid spending a lot of time with family and friends</td><td><input type="radio" name="nails_2_8" value="a"></td></tr>
+  		  <tr><td>b)  eat, sleep, and drink beauty</td><td><input type="radio" name="nails_2_8" value="b"></td></tr>
+  		  <tr><td>c)  have hobbies and enjoy recreational activities</td><td><input type="radio" name="nails_2_8" value="c"></td></tr>
+  		  <tr><td>d)  take on as many responsibilities as possible</td><td><input type="radio" name="nails_2_8" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>9.  One guideline for success suggests that you practice doing whatever helps you maintain _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an elevated ego</td><td><input type="radio" name="nails_2_9" value="a"></td></tr>
+  		  <tr><td>b)  a positive self-image</td><td><input type="radio" name="nails_2_9" value="b"></td></tr>
+  		  <tr><td>c)  a friendly approach</td><td><input type="radio" name="nails_2_9" value="c"></td></tr>
+  		  <tr><td>d)  a comfortable demeanor</td><td><input type="radio" name="nails_2_9" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>10.  Procrastination may be a sumptom of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a characteristic of good study habits</td><td><input type="radio" name="nails_2_10" value="a"></td></tr>
+  		  <tr><td>b)  an unhealthy compulsion to do things perfectly</td><td><input type="radio" name="nails_2_10" value="b"></td></tr>
+  		  <tr><td>c)  a result of exceptional organization</td><td><input type="radio" name="nails_2_10" value="c"></td></tr>
+  		  <tr><td>d)  a sumptom of taking on too much</td><td><input type="radio" name="nails_2_10" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>11.  Perfectionism is _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a characteristic of good study habits</td><td><input type="radio" name="nails_2_11" value="a"></td></tr>
+  		  <tr><td>b)  an unhealthy compulsion to do things perfectly</td><td><input type="radio" name="nails_2_11" value="b"></td></tr>
+  		  <tr><td>c)  a result of exceptional organization</td><td><input type="radio" name="nails_2_11" value="c"></td></tr>
+  		  <tr><td>d)  a sumptom of taking on too much</td><td><input type="radio" name="nails_2_11" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>12.  Having a game plan is the conscious act of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  randomly accepting life</td><td><input type="radio" name="nails_2_12" value="a"></td></tr>
+  		  <tr><td>b)  planning today</td><td><input type="radio" name="nails_2_12" value="b"></td></tr>
+  		  <tr><td>c)  being a free spirit</td><td><input type="radio" name="nails_2_12" value="c"></td></tr>
+  		  <tr><td>d)  planning your life</td><td><input type="radio" name="nails_2_12" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>13.  _____ involves knowing what you want to achieve and keeping yourself on track so that you do
+            eventually achieve your goal.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Self-management</td><td><input type="radio" name="nails_2_13" value="a"></td></tr>
+  		  <tr><td>b)  Personal desire</td><td><input type="radio" name="nails_2_13" value="b"></td></tr>
+  		  <tr><td>c)  Personal motivation</td><td><input type="radio" name="nails_2_13" value="c"></td></tr>
+  		  <tr><td>d)  Self-indulgence</td><td><input type="radio" name="nails_2_13" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>14.  Which of the following blocks the creative mind from exploring ideas and discovering solutions to challenges?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Analisis</td><td><input type="radio" name="nails_2_14" value="a"></td></tr>
+  		  <tr><td>b)  Motivation</td><td><input type="radio" name="nails_2_14" value="b"></td></tr>
+  		  <tr><td>c)  Criticism</td><td><input type="radio" name="nails_2_14" value="c"></td></tr>
+  		  <tr><td>d)  Familial support</td><td><input type="radio" name="nails_2_14" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>15.  One of the recommended ways to manage your own success is to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  criticize yourself for your mistakes</td><td><input type="radio" name="nails_2_15" value="a"></td></tr>
+  		  <tr><td>b)  tap into your own criativity</td><td><input type="radio" name="nails_2_15" value="b"></td></tr>
+  		  <tr><td>c)  strike out and work alone</td><td><input type="radio" name="nails_2_15" value="c"></td></tr>
+  		  <tr><td>d)  look to others for motivation</td><td><input type="radio" name="nails_2_15" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>16.  To succeed in life, you need a well-thought-out sense of purpose and a _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  balanced checkbook</td><td><input type="radio" name="nails_2_16" value="a"></td></tr>
+  		  <tr><td>b)  reason for being</td><td><input type="radio" name="nails_2_16" value="b"></td></tr>
+  		  <tr><td>c)  memorized goals</td><td><input type="radio" name="nails_2_16" value="c"></td></tr>
+  		  <tr><td>d)  sense of adventure</td><td><input type="radio" name="nails_2_16" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>17.  How long should your personal mission statement be?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  A brief summary</td><td><input type="radio" name="nails_2_17" value="a"></td></tr>
+  		  <tr><td>b)  One or two sentences</td><td><input type="radio" name="nails_2_17" value="b"></td></tr>
+  		  <tr><td>c)  One or two paragraphs</td><td><input type="radio" name="nails_2_17" value="c"></td></tr>
+  		  <tr><td>d)  One or two pages</td><td><input type="radio" name="nails_2_17" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>18.  For reinforcement, keep a copy of your mission statement _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  where you can see and read it daily</td><td><input type="radio" name="nails_2_18" value="a"></td></tr>
+  		  <tr><td>b)  in a secure place, such as a safe</td><td><input type="radio" name="nails_2_18" value="b"></td></tr>
+  		  <tr><td>c)  in a file with your financial documents</td><td><input type="radio" name="nails_2_18" value="c"></td></tr>
+  		  <tr><td>d)  in a file with your educational transcripts</td><td><input type="radio" name="nails_2_18" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>19.  What is the primary purpose of goal setting?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  To outline your daily activities</td><td><input type="radio" name="nails_2_19" value="a"></td></tr>
+  		  <tr><td>b)  To help increase your self-esteem</td><td><input type="radio" name="nails_2_19" value="b"></td></tr>
+  		  <tr><td>c)  To identify the best places for employment</td><td><input type="radio" name="nails_2_19" value="c"></td></tr>
+  		  <tr><td>d)  To help you decide what you want to achieve in life</td><td><input type="radio" name="nails_2_19" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>20.  Which of the following is not a key question you should ask to determine if your goal-setting plan is a 
+            good one?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Am I always open to finding better ways of putting my plan into practice?</td><td><input type="radio" name="nails_2_20" value="a"></td></tr>
+  		  <tr><td>b)  Is goal-setting a practical way to spend my time at this point in my career?</td><td><input type="radio" name="nails_2_20" value="b"></td></tr>
+  		  <tr><td>c)  Is the information I need to reach my goals readily available?</td><td><input type="radio" name="nails_2_20" value="c"></td></tr>
+  		  <tr><td>d)  Would I be willing to seek out a mentor to enhance my learning?</td><td><input type="radio" name="nails_2_20" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>21.  What are the two basic types of goals?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Primary and secondary</td><td><input type="radio" name="nails_2_21" value="a"></td></tr>
+  		  <tr><td>b)  Relevant and irrelevant</td><td><input type="radio" name="nails_2_21" value="b"></td></tr>
+  		  <tr><td>c)  Long-term and short-term</td><td><input type="radio" name="nails_2_21" value="c"></td></tr>
+  		  <tr><td>d)  Professional and personal</td><td><input type="radio" name="nails_2_21" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>22.  Which of the following is an example of a long-term goal?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  I will work my way up to salon manager within 3 to 5 years</td><td><input type="radio" name="nails_2_22" value="a"></td></tr>
+  		  <tr><td>b)  I will finish the semester with at least a 3.5 GPA</td><td><input type="radio" name="nails_2_22" value="b"></td></tr>
+  		  <tr><td>c)  I will get a perfect score on my next exam</td><td><input type="radio" name="nails_2_22" value="c"></td></tr>
+  		  <tr><td>d)  I will devote the next week to sending out copies of my resume</td><td><input type="radio" name="nails_2_22" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>23.  The important thing to remember about goal setting is to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  lock yourself into a rigid plan</td><td><input type="radio" name="nails_2_23" value="a"></td></tr>
+  		  <tr><td>b)  have a plan and reexamine it often</td><td><input type="radio" name="nails_2_23" value="b"></td></tr>
+  		  <tr><td>c)  avoid adjusting goals and action plans</td><td><input type="radio" name="nails_2_23" value="c"></td></tr>
+  		  <tr><td>d)  focus on what feels good today</td><td><input type="radio" name="nails_2_23" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>24.  Time management experts agree that all of us have _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  an inner organizer</td><td><input type="radio" name="nails_2_24" value="a"></td></tr>
+  		  <tr><td>b)  artistic talent</td><td><input type="radio" name="nails_2_24" value="b"></td></tr>
+  		  <tr><td>c)  a strong drive to succeed</td><td><input type="radio" name="nails_2_24" value="c"></td></tr>
+  		  <tr><td>d)  a working system</td><td><input type="radio" name="nails_2_24" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>25.  When asked to make more work than you can handle, it is recommended that you _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  agree to take the work on and do your best to get it done</td><td><input type="radio" name="nails_2_25" value="a"></td></tr>
+  		  <tr><td>b)  state that you are not sure if you can get the work done</td><td><input type="radio" name="nails_2_25" value="b"></td></tr>
+  		  <tr><td>c)  agree, then apologize later for not getting the work done</td><td><input type="radio" name="nails_2_25" value="c"></td></tr>
+  		  <tr><td>d)  say "no" firmly but kindly and mean it</td><td><input type="radio" name="nails_2_25" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>26.  Time management experts recommend that you give yourself some downtime whenever you are frustrated, worried,
+            feeling guilty about something, or _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  can fit it in</td><td><input type="radio" name="nails_2_26" value="a"></td></tr>
+  		  <tr><td>b)  nervous</td><td><input type="radio" name="nails_2_26" value="b"></td></tr>
+  		  <tr><td>c)  feel optimistic</td><td><input type="radio" name="nails_2_26" value="c"></td></tr>
+  		  <tr><td>d)  overwhelmed</td><td><input type="radio" name="nails_2_26" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>27.  When you practice deep breathing, how many breaths does it typically take to restore your balance?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Just one</td><td><input type="radio" name="nails_2_27" value="a"></td></tr>
+  		  <tr><td>b)  2-3</td><td><input type="radio" name="nails_2_27" value="b"></td></tr>
+  		  <tr><td>c)  5-10</td><td><input type="radio" name="nails_2_27" value="c"></td></tr>
+  		  <tr><td>d)  15-20</td><td><input type="radio" name="nails_2_27" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>28.  Which of these is not a practice recommended by time management experts?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Plan your schedule around the times of day you are most and least energetic</td><td><input type="radio" name="nails_2_28" value="a"></td></tr>
+  		  <tr><td>b)  Fill every slot in your schedule with some kind of task, no matter how small</td><td><input type="radio" name="nails_2_28" value="b"></td></tr>
+  		  <tr><td>c)  Avoid neglecting physical activity</td><td><input type="radio" name="nails_2_28" value="c"></td></tr>
+  		  <tr><td>d)  Understand the value of to-do lists for the day and week</td><td><input type="radio" name="nails_2_28" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>29.  If your mind tends to wander in class, you should _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  write down key words and phrases</td><td><input type="radio" name="nails_2_29" value="a"></td></tr>
+  		  <tr><td>b)  spend lecture time rereading the chapter being discussed</td><td><input type="radio" name="nails_2_29" value="b"></td></tr>
+  		  <tr><td>c)  attend class only on days when exams are given</td><td><input type="radio" name="nails_2_29" value="c"></td></tr>
+  		  <tr><td>d)  hire a tutor to help you learn the material</td><td><input type="radio" name="nails_2_29" value="d"></td></tr>
+  		</table>
+    </p>
+  
+    <p>30.  Before you begin studying, you should find a comfortable, quiet spot with sufficient lighting and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a place to recline</td><td><input type="radio" name="nails_2_30" value="a"></td></tr>
+  		  <tr><td>b)  loud music to block distractions</td><td><input type="radio" name="nails_2_30" value="b"></td></tr>
+  		  <tr><td>c)  your smartphone and other communication devices</td><td><input type="radio" name="nails_2_30" value="c"></td></tr>
+  		  <tr><td>d)  all the tools you need such as books, pens, paper, and computer</td><td><input type="radio" name="nails_2_30" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>31.  When studying, it is recommended that you study one chapter section at a time, noting key words and phrases,
+            and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  politely accept interruptions as they occur</td><td><input type="radio" name="nails_2_31" value="a"></td></tr>
+  		  <tr><td>b)  test yourself on each section to ensure comprehension</td><td><input type="radio" name="nails_2_31" value="b"></td></tr>
+  		  <tr><td>c)  refrain from highlighting the material</td><td><input type="radio" name="nails_2_31" value="c"></td></tr>
+  		  <tr><td>d)  forge ahead even when you can no longer focus</td><td><input type="radio" name="nails_2_31" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>32.  Which term refers to the moral principles by which we live and work?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Integrity</td><td><input type="radio" name="nails_2_32" value="a"></td></tr>
+  		  <tr><td>b)  Self-image</td><td><input type="radio" name="nails_2_32" value="b"></td></tr>
+  		  <tr><td>c)  Ethics</td><td><input type="radio" name="nails_2_32" value="c"></td></tr>
+  		  <tr><td>d)  Perfectionism</td><td><input type="radio" name="nails_2_32" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>33.  When you make sure that your behavior and actions match your values, you maintain your _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  integrity</td><td><input type="radio" name="nails_2_33" value="a"></td></tr>
+  		  <tr><td>b)  discretion</td><td><input type="radio" name="nails_2_33" value="b"></td></tr>
+  		  <tr><td>c)  ability to communicate</td><td><input type="radio" name="nails_2_33" value="c"></td></tr>
+  		  <tr><td>d)  personality</td><td><input type="radio" name="nails_2_33" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>34.  By not sharing your personal problems with your clients and never breaching confidentiality 
+            you demonstrate that you are _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  independent</td><td><input type="radio" name="nails_2_34" value="a"></td></tr>
+  		  <tr><td>b)  discreet</td><td><input type="radio" name="nails_2_34" value="b"></td></tr>
+  		  <tr><td>c)  self-centered</td><td><input type="radio" name="nails_2_34" value="c"></td></tr>
+  		  <tr><td>d)  communicative</td><td><input type="radio" name="nails_2_34" value="d"></td></tr>
+  		</table>
+    </p>
+
+
+    <p>35.  Practicing ethics in the salon every day is manifested by being _____, courteous, and sincere.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  timely</td><td><input type="radio" name="nails_2_35" value="a"></td></tr>
+  		  <tr><td>b)  happy</td><td><input type="radio" name="nails_2_35" value="b"></td></tr>
+  		  <tr><td>c)  hygienic</td><td><input type="radio" name="nails_2_35" value="c"></td></tr>
+  		  <tr><td>d)  honest</td><td><input type="radio" name="nails_2_35" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>36.  The ingredients of a healthy, well-developed attitude include all BUT which of the following?
+  		<table class="table table-condensed">
+  		  <tr><td>a)  Tact and diplomacy</td><td><input type="radio" name="nails_2_36" value="a"></td></tr>
+  		  <tr><td>b)  Emotional stability</td><td><input type="radio" name="nails_2_36" value="b"></td></tr>
+  		  <tr><td>c)  Striving for perfection</td><td><input type="radio" name="nails_2_36" value="c"></td></tr>
+  		  <tr><td>d)  Pleasing tone of voice</td><td><input type="radio" name="nails_2_36" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>37.  To be truly helpful to others, you must remember to take time every single day to _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  take care of yourself</td><td><input type="radio" name="nails_2_37" value="a"></td></tr>
+  		  <tr><td>b)  practice your skills</td><td><input type="radio" name="nails_2_37" value="b"></td></tr>
+  		  <tr><td>c)  revise your schedule</td><td><input type="radio" name="nails_2_37" value="c"></td></tr>
+  		  <tr><td>d)  reexamine your goals</td><td><input type="radio" name="nails_2_37" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>38.  In order to help people understand your position, it can be a good thing to be _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  aggressive</td><td><input type="radio" name="nails_2_38" value="a"></td></tr>
+  		  <tr><td>b)  assertive</td><td><input type="radio" name="nails_2_38" value="b"></td></tr>
+  		  <tr><td>c)  antagonistic</td><td><input type="radio" name="nails_2_38" value="c"></td></tr>
+  		  <tr><td>d)  a procrastinator</td><td><input type="radio" name="nails_2_38" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>39.  Diplomacy involves being _____, which is the ability to deliver truthful, even sometimes critical 
+            or difficult messages in a kind way.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  arrogant</td><td><input type="radio" name="nails_2_39" value="a"></td></tr>
+  		  <tr><td>b)  apprehensive</td><td><input type="radio" name="nails_2_39" value="b"></td></tr>
+  		  <tr><td>c)  tactful</td><td><input type="radio" name="nails_2_39" value="c"></td></tr>
+  		  <tr><td>d)  inconsiderate</td><td><input type="radio" name="nails_2_39" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>40.  Having _____ helps you deliver your words more pleasantly.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  a positive attitude</td><td><input type="radio" name="nails_2_40" value="a"></td></tr>
+  		  <tr><td>b)  a well-defined set of goals</td><td><input type="radio" name="nails_2_40" value="b"></td></tr>
+  		  <tr><td>c)  a skilled mentor</td><td><input type="radio" name="nails_2_40" value="c"></td></tr>
+  		  <tr><td>d)  an aggressive personality</td><td><input type="radio" name="nails_2_40" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>41.  A person's personality includes inborn characteristics, attitudes, and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  appearance</td><td><input type="radio" name="nails_2_41" value="a"></td></tr>
+  		  <tr><td>b)  actions</td><td><input type="radio" name="nails_2_41" value="b"></td></tr>
+  		  <tr><td>c)  behavioral traits</td><td><input type="radio" name="nails_2_41" value="c"></td></tr>
+  		  <tr><td>d)  moods</td><td><input type="radio" name="nails_2_41" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>42.  Learning how to handle a confrontation and being able to share how you feel without going 
+            overboard are indicators of _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  talent</td><td><input type="radio" name="nails_2_42" value="a"></td></tr>
+  		  <tr><td>b)  creativity</td><td><input type="radio" name="nails_2_42" value="b"></td></tr>
+  		  <tr><td>c)  maturity</td><td><input type="radio" name="nails_2_42" value="c"></td></tr>
+  		  <tr><td>d)  perseverance</td><td><input type="radio" name="nails_2_42" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>43.  Sensitivity is a combination of understanding, empathy, and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  pity</td><td><input type="radio" name="nails_2_43" value="a"></td></tr>
+  		  <tr><td>b)  acceptance</td><td><input type="radio" name="nails_2_43" value="b"></td></tr>
+  		  <tr><td>c)  sympathy</td><td><input type="radio" name="nails_2_43" value="c"></td></tr>
+  		  <tr><td>d)  willingness</td><td><input type="radio" name="nails_2_43" value="d"></td></tr>
+  		</table>
+    </p>
+    
+    <p>44.  Values and goals are _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  inborn characteristics</td><td><input type="radio" name="nails_2_44" value="a"></td></tr>
+  		  <tr><td>b)  acquired as a person moves through life</td><td><input type="radio" name="nails_2_44" value="b"></td></tr>
+  		  <tr><td>c)  irrelevant aspects of one's personality</td><td><input type="radio" name="nails_2_44" value="c"></td></tr>
+  		  <tr><td>d)  unchangeable once acquired</td><td><input type="radio" name="nails_2_44" value="d"></td></tr>
+  		</table>
+    </p>
+
+    <p>45.  To be receptive means to be interested in other people and _____.
+  		<table class="table table-condensed">
+  		  <tr><td>a)  be responsive to their opinions, feelings, and ideas</td><td><input type="radio" name="nails_2_45" value="a"></td></tr>
+  		  <tr><td>b)  refuse to consider the beliefs and values of others</td><td><input type="radio" name="nails_2_45" value="b"></td></tr>
+  		  <tr><td>c)  listen primarily to only what interests you</td><td><input type="radio" name="nails_2_45" value="c"></td></tr>
+  		  <tr><td>d)  have excellent communication skills</td><td><input type="radio" name="nails_2_45" value="d"></td></tr>
+  		</table>
+    </p>
+
+  </form>
+  
+  <button id="submitExam" class="btn btn-lg btn-primary">Submit</button>
+
+</body>
+</html>

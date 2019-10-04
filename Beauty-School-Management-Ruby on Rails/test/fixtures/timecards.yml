@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clock_in: <%= 8.hours.ago %>
+  clock_out: <%= 7.hours.ago %>
+  processed: false
+  school_user: example
+
+two:
+  clock_in: <%= 6.hours.ago %>
+  clock_out: <%= 5.hours.ago %>
+  processed: false
+  school_user: example
+
+most_recent:
+  clock_in: <%= 1.hours.ago %>
+  clock_out: <%= 30.minutes.ago %>
+  processed: false
+  school_user: example

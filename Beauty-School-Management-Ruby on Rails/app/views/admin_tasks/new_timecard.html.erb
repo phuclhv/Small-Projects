@@ -1,0 +1,19 @@
+<% provide(:title, 'Tuition Payment') %>
+
+<h1>Tuition Payment</h1>
+
+<%= form_tag("/admin_tasks/payment") do %>
+
+  <%= label_tag "school_user_id", "Student" %>
+  <%= select_tag "school_user_id", options_from_collection_for_select(@students, :id, :full_name) %>
+  
+  <%= label_tag "amount", "Amount:" %>
+  <%= number_field_tag "amount", nil, min: 1, max: 7000 %>
+
+  <%= label_tag "payment_type", "Payment type:" %>
+  <%= select_tag "payment_type_id", options_from_collection_for_select(PaymentType.all, :id, :description) %>
+
+  <%= submit_tag "Create payment", class: "btn btn-primary" %>
+
+<% end %>
+

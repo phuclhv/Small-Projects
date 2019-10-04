@@ -1,0 +1,20 @@
+<%= form_for(@lesson, remote: true, authenticity_token: true) do |f| %>
+  <%= f.label :study_program %>
+  <%= f.collection_select(:study_program_id, current_school_user.school.study_programs, :id, :title) %>
+  <%= f.label :chapter_number %>
+  <%= f.text_field :chapter_number %>
+  <%= f.label :chapter_name %>
+  <%= f.text_field :chapter_name %>
+  <%= f.label :lesson_number %>
+  <%= f.text_field :lesson_number %>
+  <%= f.label :lesson_name %>
+  <%= f.text_field :lesson_name %>
+  <%= f.label :book_name %>
+  <%= f.text_field :book_name %>
+  <%= f.label :page_number %>
+  <%= f.text_field :page_number %>
+  <%= f.label :document_name, "Select HTML doc to upload:" %>
+  <%# = f.file_field(:document_name, accept: 'text/html') %>
+  <%= f.file_field(:document_name, accept: 'text') %>
+  <%= f.submit "Save", class: "btn btn-lg btn-primary" %>
+<% end %>

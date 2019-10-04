@@ -1,0 +1,40 @@
+<%= form_for(@student_lesson, remote: true) do |f| %>
+  <%= f.label     :Student %>
+  <%= f.collection_select(:school_user_id, @students, :id, :name) %>
+  <%= f.label     :Lesson %>
+  <%= f.collection_select(:lesson_id, @lessons, :id, :lesson_name) %>
+  <%= f.label     :visible %>
+  <%= f.check_box :visible %>
+  <%= f.label     :enabled %>
+  <%= f.check_box :enabled %>
+  <%= f.label     :completed %>
+  <%= f.check_box :completed %>
+  <%= f.label     :taken_order %>
+  <%= f.select    :taken_order, (1..40) %>
+  <%= f.submit "Save", class: "btn btn-lg btn-primary" %>
+<% end %>
+
+<script>
+  // Get the list of lessons.
+  $("#student_lesson_school_user_id").on("change", function() {
+    $.ajax({
+      type: 'GET',
+      url: '/load_lesson',
+      data: { school_user_id: this.value },
+      success:function(result){
+        var id;
+        var lesson_name;
+        var i;
+        var xmlDoc = result;
+        var x = xmlDoc.getElementsByTagName("lesson");
+        $("#student_lesson_lesson_id").empty();
+        for (i = 0; i < x.length; i++) {
+          id=x[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+          lesson_name=x[i].getElementsByTagName("lesson_name")[0].childNodes[0].nodeValue;
+          $("#student_lesson_lesson_id").append($('<option></option>').attr("value", id).text(lesson_name));
+        }
+        //console.log("Dynamic lesson select OK!");
+      }
+    });
+  });
+</script>

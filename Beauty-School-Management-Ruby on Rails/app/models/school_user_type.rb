@@ -1,0 +1,2 @@
+class SchoolUserType < ApplicationRecord
+end

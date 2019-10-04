@@ -1,0 +1,18 @@
+<tr>
+    <td><%= student_hour_summary.school_user_id %></td>
+  <td><%= student_hour_summary.activity_id %></td>
+  <td><%= student_hour_summary.month %></td>
+  <td><%= student_hour_summary.year %></td>
+  <td><%= student_hour_summary.monthly_total %></td>
+  <td><%= student_hour_summary.to_date_total %></td>
+  <td><%= student_hour_summary.remaining_required %></td>
+  <td><%= student_hour_summary.previous_to_date_total %></td>
+  <td><%= link_to edit_student_hour_summary_path(student_hour_summary), remote: true do %>
+      <button class="class: "btn btn-lg btn-primary"">Edit</button>
+    <% end %></td>
+  <td>
+    <%= link_to student_hour_summary, remote: true, method: :delete,
+        data: { confirm: 'Are you sure?' } do %>
+      <button class="class: "btn btn-lg btn-primary"">Delete!</button>
+    <% end %></td>
+</tr>
