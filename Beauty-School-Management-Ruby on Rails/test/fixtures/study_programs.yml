@@ -1,6 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-cosmo:
-  title:  "Cosmo"
-  months: 12
-  tuition: 6500

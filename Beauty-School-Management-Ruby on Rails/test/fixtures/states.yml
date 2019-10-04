@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-wa:
-  state: WA
-  description: Washington
-
-ca:
-  state: CA
-  description: California

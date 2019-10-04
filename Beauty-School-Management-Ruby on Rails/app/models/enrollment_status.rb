@@ -1,2 +1,0 @@
-class EnrollmentStatus < ApplicationRecord
-end
